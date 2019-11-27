@@ -8,14 +8,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="text-adventure-game" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -25,11 +31,14 @@
     </option>
   </component>
   <component name="ProjectId" id="1QOnUBUhN7bwq5cUdmC1nMatyGH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="last.edited.regexp" value=" " />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.gunruh.textgame" />
       <recent name="" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
@@ -48,17 +57,109 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.Main Game">
+    <configuration name="Main Game" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.Main" />
       <module name="text-adventure-game" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="IOUtilsTest.testError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testError" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testGetInputTextList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testGetInputTextList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testInputListFromTextShouldntHave3rdIndex" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testIsArticleAdjective" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testIsArticleAdjective" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testParseDirection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testParseDirection" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main Game" />
+      <item itemvalue="JUnit.IOUtilsTest.testError" />
+      <item itemvalue="JUnit.IOUtilsTest.testGetInputTextList" />
+      <item itemvalue="JUnit.IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" />
+      <item itemvalue="JUnit.IOUtilsTest.testIsArticleAdjective" />
+      <item itemvalue="JUnit.IOUtilsTest.testParseDirection" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.IOUtilsTest.testParseDirection" />
+        <item itemvalue="JUnit.IOUtilsTest.testIsArticleAdjective" />
+        <item itemvalue="JUnit.IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" />
+        <item itemvalue="JUnit.IOUtilsTest.testError" />
+        <item itemvalue="JUnit.IOUtilsTest.testGetInputTextList" />
       </list>
     </recent_temporary>
   </component>
@@ -75,18 +176,30 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input.&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input.&quot;" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/objects/Room.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java</url>
           <line>46</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/utils/IOUtils.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

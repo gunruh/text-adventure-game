@@ -1,8 +1,8 @@
-package objects;
+package com.gunruh.textgame.objects;
 
-import utils.Constants;
+import com.gunruh.textgame.utils.Constants;
 
-public abstract class Room implements GameObject {
+public abstract class Room extends GameObject {
     private final String name;
     private final String description;
     private boolean isNewPlace = true;

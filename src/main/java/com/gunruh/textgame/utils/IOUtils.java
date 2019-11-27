@@ -1,7 +1,9 @@
-package utils;
+package com.gunruh.textgame.utils;
 
-import objects.Direction;
+import com.gunruh.textgame.objects.Direction;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class IOUtils {
@@ -12,11 +14,21 @@ public class IOUtils {
         System.out.println(""); // Spacing
     }
 
-    public static String getInput() {
+    public static String getInputText() {
         System.out.print("> ");
         String input = scanner.nextLine();
         System.out.println(""); // spacing
         return input;
+    }
+
+    public static List<String> getInputListFromText(String userInput) {
+        String[] inputList = userInput.trim().split("[\\s]+"); // split on groups of one or more white space.
+
+        return Arrays.asList(inputList);
+    }
+
+    public static boolean isArticleAdjective(String inputString) {
+        return "a".equalsIgnoreCase(inputString) || "an".equalsIgnoreCase(inputString) || "the".equalsIgnoreCase(inputString);
     }
 
     public static Direction parseDirection(String input) {

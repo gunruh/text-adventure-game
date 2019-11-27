@@ -1,4 +1,4 @@
-package utils;
+package com.gunruh.textgame.utils;
 
 public class Constants {
     public static final String CANT_GO_THAT_WAY = "Can't go that way.";

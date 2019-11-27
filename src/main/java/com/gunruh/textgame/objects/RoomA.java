@@ -1,6 +1,6 @@
-package objects;
+package com.gunruh.textgame.objects;
 
-import utils.IOUtils;
+import com.gunruh.textgame.utils.IOUtils;
 
 public class RoomA extends Room {
     private RoomA() {

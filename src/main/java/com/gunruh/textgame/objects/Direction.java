@@ -1,4 +1,4 @@
-package objects;
+package com.gunruh.textgame.objects;
 
 public enum Direction {
     North,

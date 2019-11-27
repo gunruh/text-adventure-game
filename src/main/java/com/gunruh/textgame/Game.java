@@ -1,9 +1,13 @@
-import objects.Direction;
-import objects.Room;
-import objects.RoomA;
-import utils.Constants;
+package com.gunruh.textgame;
 
-import static utils.IOUtils.*;
+import com.gunruh.textgame.objects.Direction;
+import com.gunruh.textgame.objects.Room;
+import com.gunruh.textgame.objects.RoomA;
+import com.gunruh.textgame.utils.Constants;
+import com.gunruh.textgame.utils.IOUtils;
+
+import static com.gunruh.textgame.utils.IOUtils.display;
+import static com.gunruh.textgame.utils.IOUtils.parseDirection;
 
 public class Game {
     private Room currentRoom;
@@ -16,7 +20,7 @@ public class Game {
 
         String input = null;
         while (!"quit".equalsIgnoreCase(input)) {
-            input = getInput();
+            input = IOUtils.getInputText();
 
             if (input.toLowerCase().trim().contains("quit")) {
                 continue;
@@ -68,6 +72,7 @@ public class Game {
             }
         }
 
+        // Exiting loop
         display("That's all folks.");
     }
 
