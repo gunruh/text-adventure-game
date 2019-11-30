@@ -29,6 +29,14 @@ public class Game {
             if (input.toLowerCase().trim().contains("look")) {
                 display(currentRoom.getName() + "\n" + currentRoom.getDescription());
             }
+            else if (input.toLowerCase().trim().contains("take")) {
+            	if (input.toLowerCase().trim().contains("blaster")) {
+            		display("picked up blaster...kind of...");
+            	}
+            	else {
+            		display("what's that sweet babe?");
+            	}
+            }
             else {
                 Direction direction = parseDirection(input);
                 switch (direction) {
