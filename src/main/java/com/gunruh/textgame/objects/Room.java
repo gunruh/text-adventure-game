@@ -3,14 +3,11 @@ package com.gunruh.textgame.objects;
 import com.gunruh.textgame.utils.Constants;
 
 public abstract class Room extends GameObject {
-    private final String name;
-    private final String description;
     private boolean isNewPlace = true;
     public static final Room ROOM_NOT_PRESENT = new Room(null, null) {};
 
     public Room(String name, String description) {
-        this.name = name;
-        this.description = description;
+        super(name, description);
     }
 
     public Room goNorth() {
@@ -53,16 +50,8 @@ public abstract class Room extends GameObject {
         return ROOM_NOT_PRESENT;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getRoomDisplay() {
-        return name + (isNewPlace? "\n" + getDescription() : "");
+        return getName() + (isNewPlace? "\n" + getDescription() : "");
     }
 
     public boolean isNewPlace() {

@@ -1,7 +1,15 @@
 package com.gunruh.textgame.utils;
 
+import com.gunruh.textgame.objects.Action;
 import com.gunruh.textgame.objects.Direction;
+import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Statement;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static junit.framework.TestCase.*;
 
@@ -26,6 +34,8 @@ public class IOUtilsTest {
         assertEquals("blaster", IOUtils.getInputListFromText("pick up    blaster").get(2));
         assertEquals("pick", IOUtils.getInputListFromText(" pick up blaster").get(0));
         assertEquals("blaster", IOUtils.getInputListFromText("pick up blaster ").get(2));
+
+        assertEquals("blaster", IOUtils.getInputListFromText("pick up blaster.").get(2));
     }
 
     @Test (expected = IndexOutOfBoundsException.class)
@@ -64,5 +74,80 @@ public class IOUtilsTest {
         assertEquals(Direction.SouthWest, IOUtils.parseDirection("sw"));
         assertEquals(Direction.West, IOUtils.parseDirection("w"));
         assertEquals(Direction.NorthWest, IOUtils.parseDirection("nw"));
+    }
+
+    @Test
+    public void testConvertInputListToAction_DefaultLook() {
+        String sampleInput = "Blaster.";
+        GameObject receivingObject = new GameObject("Blaster", "A laser gun.") {};
+        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
+        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(receivingObject));
+
+        assertEquals(Action.Look, statement.getAction());
+        assertEquals(receivingObject, statement.getReceivingObject());
+    }
+
+    @Test
+    public void testConvertInputListToStatement() {
+        String sampleInput = "pick up the blaster.";
+        GameObject receivingObject = new GameObject("Blaster", "A laser gun.") {};
+        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
+        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(receivingObject));
+
+        assertEquals(Action.Take, statement.getAction());
+        assertEquals(receivingObject, statement.getReceivingObject());
+    }
+
+    @Test
+    public void testConvertInputListToDirection() {
+        String sampleInput = "walk north.";
+        GameObject receivingObject = new GameObject("Blaster", "A laser gun.") {};
+        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
+        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(receivingObject));
+
+        assertEquals(Action.Move, statement.getAction());
+        assertEquals(Direction.North, statement.getDirection());
+    }
+
+    @Test
+    public void testConvertInputListToActionRightToLeft() {
+        String sampleInput = "shoot the rock with the blaster";
+        GameObject actingObject = new GameObject("Blaster", "A laser gun.") {};
+        GameObject receivingObject = new GameObject("Rock", "It's Just a rock.") {};
+        List<GameObject> availableObjects = new ArrayList<GameObject>(Arrays.asList(actingObject, receivingObject));
+
+        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
+        Statement statement = IOUtils.getStatementFromInputList(inputList, availableObjects);
+
+        assertEquals(Action.Shoot, statement.getAction());
+        assertNull(statement.getDirection());
+        assertEquals("acting object was wrong", actingObject, statement.getActingObject());
+        assertEquals("receiving object was wrong", receivingObject, statement.getReceivingObject());
+    }
+
+    @Test
+    public void testConvertInputListToActionLeftToRight() {
+        String sampleInput = "shoot the blaster at the rock";
+        GameObject actingObject = new GameObject("Blaster", "A laser gun.") {};
+        GameObject receivingObject = new GameObject("Rock", "It's Just a rock.") {};
+        List<GameObject> availableObjects = new ArrayList<GameObject>(Arrays.asList(actingObject, receivingObject));
+
+        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
+        Statement statement = IOUtils.getStatementFromInputList(inputList, availableObjects);
+
+        assertEquals(Action.Shoot, statement.getAction());
+        assertNull(statement.getDirection());
+        assertEquals("acting object was wrong", actingObject, statement.getActingObject());
+        assertEquals("receiving object was wrong", receivingObject, statement.getReceivingObject());
+    }
+
+    @Test
+    public void testIsNullOrEmpty() {
+        assertTrue(IOUtils.isNullOrEmpty(null));
+        assertTrue(IOUtils.isNullOrEmpty(""));
+
+        assertFalse(IOUtils.isNullOrEmpty(" "));
+        assertFalse(IOUtils.isNullOrEmpty("hello"));
+        assertFalse(IOUtils.isNullOrEmpty(" hello "));
     }
 }

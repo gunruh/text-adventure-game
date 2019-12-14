@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -35,8 +44,9 @@
   <component name="ProjectId" id="1QOnUBUhN7bwq5cUdmC1nMatyGH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last.edited.regexp" value=" " />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last.edited.regexp" value="" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -59,7 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main Game">
+  <component name="RunManager" selected="JUnit.IOUtilsTest">
     <configuration name="Main Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.Main" />
       <module name="text-adventure-game" />
@@ -67,81 +77,80 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testError" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testConvertInputListToActionLeftToRight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testConvertInputListToActionLeftToRight" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testGetInputTextList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.testConvertInputListToActionRightToLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testGetInputTextList" />
+      <option name="METHOD_NAME" value="testConvertInputListToActionRightToLeft" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.testConvertInputListToAction_DefaultLook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testInputListFromTextShouldntHave3rdIndex" />
+      <option name="METHOD_NAME" value="testConvertInputListToAction_DefaultLook" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testIsArticleAdjective" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.testConvertInputListToDirection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testIsArticleAdjective" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IOUtilsTest.testParseDirection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="text-adventure-game" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.objects.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testParseDirection" />
+      <option name="METHOD_NAME" value="testConvertInputListToDirection" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,19 +158,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main Game" />
-      <item itemvalue="JUnit.IOUtilsTest.testError" />
-      <item itemvalue="JUnit.IOUtilsTest.testGetInputTextList" />
-      <item itemvalue="JUnit.IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" />
-      <item itemvalue="JUnit.IOUtilsTest.testIsArticleAdjective" />
-      <item itemvalue="JUnit.IOUtilsTest.testParseDirection" />
+      <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToDirection" />
+      <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToAction_DefaultLook" />
+      <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToActionRightToLeft" />
+      <item itemvalue="JUnit.IOUtilsTest" />
+      <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToActionLeftToRight" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IOUtilsTest.testParseDirection" />
-        <item itemvalue="JUnit.IOUtilsTest.testIsArticleAdjective" />
-        <item itemvalue="JUnit.IOUtilsTest.testInputListFromTextShouldntHave3rdIndex" />
-        <item itemvalue="JUnit.IOUtilsTest.testError" />
-        <item itemvalue="JUnit.IOUtilsTest.testGetInputTextList" />
+        <item itemvalue="JUnit.IOUtilsTest" />
+        <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToActionLeftToRight" />
+        <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToAction_DefaultLook" />
+        <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToActionRightToLeft" />
+        <item itemvalue="JUnit.IOUtilsTest.testConvertInputListToDirection" />
       </list>
     </recent_temporary>
   </component>
@@ -203,16 +212,5 @@
     <MESSAGE value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input.&quot;" />
     <MESSAGE value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input." />
     <option name="LAST_COMMIT_MESSAGE" value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
