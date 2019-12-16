@@ -1,75 +1,111 @@
 package com.gunruh.textgame;
 
-import com.gunruh.textgame.objects.Direction;
-import com.gunruh.textgame.objects.Room;
-import com.gunruh.textgame.objects.RoomA;
+import com.gunruh.textgame.enumerations.Action;
+import com.gunruh.textgame.objects.*;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
+import com.gunruh.textgame.utils.InputMaps;
 
-import static com.gunruh.textgame.utils.IOUtils.display;
-import static com.gunruh.textgame.utils.IOUtils.parseDirection;
+import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
-    private Room currentRoom;
+    Player player = new Player("Kevin", "A man on a mission.");
 
     public void run() {
         initializeGame();
-
-        display(Constants.INTRO_TEXT);
-        enterRoom(currentRoom);
 
         String input = null;
         while (!"quit".equalsIgnoreCase(input)) {
             input = IOUtils.getInputText();
 
+            if (isNullOrEmpty(input)) {
+                continue;
+            }
+
             if (input.toLowerCase().trim().contains("quit")) {
                 continue;
             }
 
-            if (input.toLowerCase().trim().contains("look")) {
-                display(currentRoom.getName() + "\n" + currentRoom.getDescription());
+            Statement statement = IOUtils.getStatementFromInputList(IOUtils.getInputListFromText(input), player.getInventory(), player.getCurrentRoom().getAvailableObjects());
+
+            if (Action.Take == statement.getAction()) {
+                if (statement.getReceivingObject() == null) {
+                    display("Take what?");
+                    String takeInput = IOUtils.getInputText();
+                    statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, player.getCurrentRoom().getAvailableObjects()));
+                }
+
+                if (statement.getReceivingObject() == null) {
+                    display("Sorry - I can't find that object.");
+                    continue;
+                }
+
+                int roomObjectIndex = player.getCurrentRoom().getAvailableObjects().indexOf(statement.getReceivingObject());
+                if (roomObjectIndex != -1) {
+                    GameObject takenObject = player.getCurrentRoom().getAvailableObjects().remove(roomObjectIndex);
+                    player.getInventory().add(takenObject);
+                    displayWithinAsterisks("Picks up " + (!isNullOrEmpty(takenObject.getNickName()) ? takenObject.getNickName() : takenObject.getName()));
+                }
+                else {
+                    int playerInventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
+                    if (playerInventoryIndex != -1) {
+                        display("You already have " + (!isNullOrEmpty(statement.getReceivingObject().getNickName()) ? statement.getReceivingObject().getNickName() : ("the " + statement.getReceivingObject().getName())));
+                    }
+                }
             }
-            else if (input.toLowerCase().trim().contains("take")) {
-            	if (input.toLowerCase().trim().contains("blaster")) {
-            		display("picked up blaster...kind of...");
-            	}
-            	else {
-            		display("what's that sweet babe?");
-            	}
+
+            else if (Action.Look == statement.getAction()) {
+                if (statement.getReceivingObject() != null) {
+                    displayGameObject(statement.getReceivingObject());
+                }
+                else {
+                    displayGameObject(player.getCurrentRoom());
+                }
             }
-            else {
-                Direction direction = parseDirection(input);
-                switch (direction) {
+
+            else if (Action.Move == statement.getAction()) {
+                if (statement.getDirection() == null) {
+                    display("Which direction?");
+                    String directionInput = IOUtils.getInputText();
+                    statement.setDirection(InputMaps.directionMap.get(directionInput));
+                }
+
+                if (statement.getDirection() == null) {
+                    display("Sorry - I don't know that direction.");
+                    continue;
+                }
+
+                switch (statement.getDirection()) {
                     case North: {
-                        enterRoom(currentRoom.goNorth());
+                        player.enterRoom(player.getCurrentRoom().goNorth());
                         break;
                     }
                     case NorthEast: {
-                        enterRoom(currentRoom.goNorthEast());
+                        player.enterRoom(player.getCurrentRoom().goNorthEast());
                         break;
                     }
                     case East: {
-                        enterRoom(currentRoom.goEast());
+                        player.enterRoom(player.getCurrentRoom().goEast());
                         break;
                     }
                     case SouthEast: {
-                        enterRoom(currentRoom.goSouthEast());
+                        player.enterRoom(player.getCurrentRoom().goSouthEast());
                         break;
                     }
                     case South: {
-                        enterRoom(currentRoom.goSouth());
+                        player.enterRoom(player.getCurrentRoom().goSouth());
                         break;
                     }
                     case SouthWest: {
-                        enterRoom(currentRoom.goSouthWest());
+                        player.enterRoom(player.getCurrentRoom().goSouthWest());
                         break;
                     }
                     case West: {
-                        enterRoom(currentRoom.goWest());
+                        player.enterRoom(player.getCurrentRoom().goWest());
                         break;
                     }
                     case NorthWest: {
-                        enterRoom(currentRoom.goNorthWest());
+                        player.enterRoom(player.getCurrentRoom().goNorthWest());
                         break;
                     }
                     default: {
@@ -78,24 +114,21 @@ public class Game {
                     }
                 }
             }
+
+            else {
+                display("I don't know that action.");
+            }
         }
 
         // Exiting loop
         display("That's all folks.");
     }
 
-    private void enterRoom(Room room) {
-        if (room.equals(Room.ROOM_NOT_PRESENT)) {
-            // do nothing
-        }
-        else {
-            currentRoom = room;
-            display(room.getRoomDisplay());
-            room.setIsNewPlace(false);
-        }
-    }
-
     private void initializeGame() {
-        currentRoom = RoomA.getInstance();
+        // Initialize Room Objects
+        RoomB.getInstance().getAvailableObjects().add(new Blaster());
+
+        display(Constants.INTRO_TEXT);
+        player.enterRoom(RoomA.getInstance());
     }
 }

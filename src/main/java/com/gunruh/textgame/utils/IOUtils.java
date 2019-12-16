@@ -1,16 +1,30 @@
 package com.gunruh.textgame.utils;
 
-import com.gunruh.textgame.objects.Action;
-import com.gunruh.textgame.objects.Direction;
+import com.gunruh.textgame.enumerations.Action;
+import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Statement;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class IOUtils {
     private static Scanner scanner = new Scanner(System.in);
+
+    public static void displayWithinAsterisks(String displayText) {
+        display("*" + displayText + "*");
+    }
+
+    public static void displayGameObject(GameObject gameObject) {
+        if (!isNullOrEmpty(gameObject.getNickName())) {
+            display(gameObject.getNickName() + " (" + gameObject.getName() + ")\n" + gameObject.getDescription());
+        }
+        else {
+            display(gameObject.getName() + "\n" + gameObject.getDescription());
+        }
+    }
 
     public static void display(String text) {
         System.out.println(text);
@@ -36,8 +50,18 @@ public class IOUtils {
         return "a".equalsIgnoreCase(inputString) || "an".equalsIgnoreCase(inputString) || "the".equalsIgnoreCase(inputString);
     }
 
+    public static String normalizeInput (String inputString) {
+        String normalizedInput = inputString;
+
+        if (!isNullOrEmpty(inputString)) {
+            normalizedInput = inputString.toLowerCase().trim();
+        }
+
+        return normalizedInput;
+    }
+
     public static Direction parseDirection(String input) {
-        String cleanedInput = input.toLowerCase().trim();
+        String cleanedInput = normalizeInput(input);
 
         if (cleanedInput.contains("northeast") || cleanedInput.contains("ne")) {
             return Direction.NorthEast;
@@ -68,7 +92,7 @@ public class IOUtils {
         }
     }
 
-    public static Statement getStatementFromInputList(List<String> inputList, List<GameObject> availableObjects) {
+    public static Statement getStatementFromInputList(List<String> inputList, List<GameObject> playerInventory, List<GameObject> roomObjects) {
         if (inputList == null || inputList.isEmpty()) {
             return Statement.EMPTY_STATEMENT;
         }
@@ -155,18 +179,21 @@ public class IOUtils {
                 }
             }
 
-            // Lastly check for matching available GameObject
-            for (GameObject gameObject : availableObjects) {
-                if (currentWord.equalsIgnoreCase(gameObject.getNickName()) || currentWord.equalsIgnoreCase(gameObject.getName())) {
-                    if (firstObjectIndex == -1) {
-                        firstObjectIndex = i;
-                        firstObject = gameObject;
-                    }
-                    else if (secondObjectIndex == -1) {
-                        secondObjectIndex = i;
-                        secondObject = gameObject;
-                    }
-                    break;
+            if (firstObjectIndex == -1) {
+                List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
+                firstObject = getMatchingGameObjectFromList(currentWord, allAvailableObjects);
+                if (firstObject != null) {
+                    firstObjectIndex = i;
+                    continue;
+                }
+            }
+
+            if (secondObjectIndex == -1) {
+                List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
+                secondObject = getMatchingGameObjectFromList(currentWord, allAvailableObjects);
+                if (secondObject != null && !secondObject.equals(firstObject)) {
+                    secondObjectIndex = i;
+                    continue;
                 }
             }
         }
@@ -202,6 +229,40 @@ public class IOUtils {
         }
 
         return statement;
+    }
+
+    public static List<GameObject> getCombinedGameObjectsList(List<GameObject>... lists) {
+        List<GameObject> combinedGameObjectList = new ArrayList<GameObject>();
+
+        for (List<GameObject> gameObjectList : lists) {
+            if (gameObjectList != null) {
+                for (GameObject gameObject : gameObjectList) {
+                    if (gameObject != null) {
+                        combinedGameObjectList.add(gameObject);
+                    }
+                }
+            }
+        }
+
+        return combinedGameObjectList;
+    }
+
+    public static GameObject getMatchingGameObjectFromList(String searchText, List<GameObject> availableObjects) {
+        if (availableObjects == null || isNullOrEmpty(searchText)) {
+            return null;
+        }
+
+        GameObject matchingObject = null;
+        String cleanedSearchText = normalizeInput(searchText);
+
+        for (GameObject gameObject : availableObjects) {
+            if (cleanedSearchText.equalsIgnoreCase(gameObject.getNickName()) || cleanedSearchText.equalsIgnoreCase(gameObject.getName())) {
+                matchingObject = gameObject;
+                break;
+            }
+        }
+
+        return matchingObject;
     }
 
     private static boolean isRightToLeftRelationalWord(String currentWord) {

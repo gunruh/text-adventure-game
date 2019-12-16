@@ -1,7 +1,7 @@
 package com.gunruh.textgame.utils;
 
-import com.gunruh.textgame.objects.Action;
-import com.gunruh.textgame.objects.Direction;
+import com.gunruh.textgame.enumerations.Action;
+import com.gunruh.textgame.enumerations.Direction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +31,11 @@ public class InputMaps {
         actionMap.put("shoot", Action.Shoot);
         actionMap.put("blast", Action.Shoot);
         actionMap.put("fire", Action.Shoot);
+
+        actionMap.put("look", Action.Look);
+        actionMap.put("observe", Action.Look);
+        actionMap.put("see", Action.Look);
+        actionMap.put("describe", Action.Look);
 
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);

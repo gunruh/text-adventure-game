@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Blaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Direction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,6 +50,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="com.gunruh.textgame.utils.IOUtils" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.gunruh.textgame" />
       <recent name="" />
@@ -69,7 +73,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.IOUtilsTest">
+  <component name="RunManager" selected="Application.Main Game">
     <configuration name="Main Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.Main" />
       <module name="text-adventure-game" />
@@ -192,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574839601596</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding Look and Shoot Actions. Moving some methods up to abstract GameObject class. Adding Direction to the Statement. Adding InputMaps class. Adding 'getStatementFromInputList()' method for parsing input String lists. Updating gitignore.">
+      <created>1576318965153</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576318965153</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,6 +222,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input.&quot;" />
     <MESSAGE value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Action enum, refactoring package name to com.gunruh.textgame, making GameObject an abstract class. Working on IOUtils, wrote method for isArticleAdjective, and getting list of Strings from user input." />
+    <MESSAGE value="Adding Look and Shoot Actions. Moving some methods up to abstract GameObject class. Adding Direction to the Statement. Adding InputMaps class. Adding 'getStatementFromInputList()' method for parsing input String lists. Updating gitignore." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Look and Shoot Actions. Moving some methods up to abstract GameObject class. Adding Direction to the Statement. Adding InputMaps class. Adding 'getStatementFromInputList()' method for parsing input String lists. Updating gitignore." />
   </component>
 </project>

@@ -1,5 +1,8 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.enumerations.Action;
+import com.gunruh.textgame.enumerations.Direction;
+
 public class Statement {
     public static final Statement EMPTY_STATEMENT = new Statement(null, null, null);
 

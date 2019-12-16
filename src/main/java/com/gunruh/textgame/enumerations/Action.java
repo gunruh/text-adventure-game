@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects;
+package com.gunruh.textgame.enumerations;
 
 public enum Action {
     Move,

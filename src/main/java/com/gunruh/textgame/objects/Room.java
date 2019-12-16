@@ -2,9 +2,13 @@ package com.gunruh.textgame.objects;
 
 import com.gunruh.textgame.utils.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Room extends GameObject {
     private boolean isNewPlace = true;
     public static final Room ROOM_NOT_PRESENT = new Room(null, null) {};
+    List<GameObject> availableObjects = new ArrayList<GameObject>();
 
     public Room(String name, String description) {
         super(name, description);
@@ -60,5 +64,13 @@ public abstract class Room extends GameObject {
 
     public void setIsNewPlace(boolean newPlace) {
         isNewPlace = newPlace;
+    }
+
+    public List<GameObject> getAvailableObjects() {
+        return availableObjects;
+    }
+
+    public void setAvailableObjects(List<GameObject> availableObjects) {
+        this.availableObjects = availableObjects;
     }
 }
