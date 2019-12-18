@@ -3,6 +3,7 @@ package com.gunruh.textgame.utils;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Room;
 import com.gunruh.textgame.objects.Statement;
 import org.junit.Test;
 
@@ -146,5 +147,85 @@ public class IOUtilsTest {
         assertFalse(IOUtils.isNullOrEmpty(" "));
         assertFalse(IOUtils.isNullOrEmpty("hello"));
         assertFalse(IOUtils.isNullOrEmpty(" hello "));
+    }
+
+    @Test
+    public void testGetAorAn() {
+        assertEquals("a", IOUtils.getAorAnForString("grape"));
+        assertEquals("a", IOUtils.getAorAnForString("ball"));
+        assertEquals("a", IOUtils.getAorAnForString("Cactus"));
+        assertEquals("a", IOUtils.getAorAnForString(" young man"));
+        assertEquals("a", IOUtils.getAorAnForString("yule tide"));
+        assertEquals("a", IOUtils.getAorAnForString("western movie"));
+        assertEquals("a", IOUtils.getAorAnForString("Duckling"));
+        assertEquals("a", IOUtils.getAorAnForString("pineapple "));
+        assertEquals("a", IOUtils.getAorAnForString("flute"));
+        assertEquals("a", IOUtils.getAorAnForString("Quick brown fox"));
+        assertEquals("a", IOUtils.getAorAnForString("carwash"));
+
+        assertEquals("an", IOUtils.getAorAnForString("apple"));
+        assertEquals("an", IOUtils.getAorAnForString("Android"));
+        assertEquals("an", IOUtils.getAorAnForString("Elephant"));
+        assertEquals("an", IOUtils.getAorAnForString(" ink pen"));
+        assertEquals("an", IOUtils.getAorAnForString("Octopus "));
+        assertEquals("an", IOUtils.getAorAnForString("Human"));
+        assertEquals("an", IOUtils.getAorAnForString("old goose"));
+        assertEquals("an", IOUtils.getAorAnForString("uncle"));
+    }
+
+    @Test
+    public void testGetAvailableObjectsText_ThreeItems() {
+        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
+
+        // A Blaster nicknamed "Mike"
+        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        mike.setNickName("Mike");
+        GameObject bike = new GameObject("Bike", "A blue bicycle.") {};
+        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+
+        room.getAvailableObjects().add(mike);
+        room.getAvailableObjects().add(bike);
+        room.getAvailableObjects().add(apple);
+
+        assertEquals("Mike, a Bike, and an Apple", room.getAvailableObjectsString());
+    }
+
+    @Test
+    public void testGetAvailableObjectsText_TwoItems() {
+        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
+
+        // A Blaster nicknamed "Mike"
+        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        mike.setNickName("Mike");
+        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+
+        room.getAvailableObjects().add(mike);
+        room.getAvailableObjects().add(apple);
+
+        assertEquals("Mike and an Apple", room.getAvailableObjectsString());
+    }
+
+    @Test
+    public void testGetAvailableObjectsText_OneItemWithNickName() {
+        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
+
+        // A Blaster nicknamed "Mike"
+        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        mike.setNickName("Mike");
+
+        room.getAvailableObjects().add(mike);
+
+        assertEquals("Mike", room.getAvailableObjectsString());
+    }
+
+    @Test
+    public void testGetAvailableObjectsText_OneItemNoNickname() {
+        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
+
+        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+
+        room.getAvailableObjects().add(apple);
+
+        assertEquals("an Apple", room.getAvailableObjectsString());
     }
 }

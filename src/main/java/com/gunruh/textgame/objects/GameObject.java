@@ -26,4 +26,8 @@ public abstract class GameObject {
     public String getDescription() {
         return description;
     }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 }

@@ -289,4 +289,17 @@ public class IOUtils {
     public static boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty();
     }
+
+    public static String getAorAnForString(String word) {
+        String articleAdjective = "a";
+
+        if (!isNullOrEmpty(word)) {
+            // Use 'an' if first letter is vowel or 'h'.
+            if (word.toLowerCase().trim().matches("[aeiouh].*")) {
+                articleAdjective = "an";
+            }
+        }
+
+        return articleAdjective;
+    }
 }

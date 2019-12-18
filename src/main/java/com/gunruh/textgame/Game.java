@@ -32,7 +32,7 @@ public class Game {
                 if (statement.getReceivingObject() == null) {
                     display("Take what?");
                     String takeInput = IOUtils.getInputText();
-                    statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, player.getCurrentRoom().getAvailableObjects()));
+                    statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
                 }
 
                 if (statement.getReceivingObject() == null) {
