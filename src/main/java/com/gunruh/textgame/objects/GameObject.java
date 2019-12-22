@@ -6,6 +6,10 @@ public abstract class GameObject {
     private final String description;
     private String nickName;
 
+    public int getEffectivenessAsBlaster() {
+        return 0;
+    }
+
     protected GameObject(String name, String description) {
         this.name = name;
         this.description = description;

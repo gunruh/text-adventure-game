@@ -64,6 +64,24 @@ public abstract class Room extends GameObject {
         return isNewPlace;
     }
 
+    @Override
+    public String getDescription() {
+        StringBuilder descriptionBuilder = new StringBuilder(super.getDescription());
+
+        if (getAvailableObjects() != null && !getAvailableObjects().isEmpty()) {
+            descriptionBuilder.append("\n");
+            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(getAvailableObjectsString()));
+            if (getAvailableObjects().size() == 1) {
+                descriptionBuilder.append(" is here.");
+            }
+            else {
+                descriptionBuilder.append(" are here.");
+            }
+        }
+
+        return descriptionBuilder.toString();
+    }
+
     public void setIsNewPlace(boolean newPlace) {
         isNewPlace = newPlace;
     }

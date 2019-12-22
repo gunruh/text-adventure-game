@@ -228,4 +228,35 @@ public class IOUtilsTest {
 
         assertEquals("an Apple", room.getAvailableObjectsString());
     }
+
+    @Test
+    public void testCapitlizeFirstLetter() {
+        assertEquals("An apricot.", IOUtils.capitalizeFirstLetter("an apricot."));
+        assertEquals("An apricot.", IOUtils.capitalizeFirstLetter("An apricot."));
+        assertEquals("A", IOUtils.capitalizeFirstLetter("a"));
+        assertEquals("The", IOUtils.capitalizeFirstLetter("the"));
+        assertEquals("Blaster", IOUtils.capitalizeFirstLetter("blaster"));
+        assertEquals("", IOUtils.capitalizeFirstLetter(""));
+        assertEquals(null, IOUtils.capitalizeFirstLetter(null));
+    }
+
+    @Test
+    public void testRoomDescriptionMultipleItems() {
+        Room room = new Room("Test Room", "A room to test.") {};
+
+        room.getAvailableObjects().add(new GameObject("blaster", "A blasting device.") {});
+        room.getAvailableObjects().add(new GameObject("rock", "Just an old rock.") {});
+        room.getAvailableObjects().add(new GameObject("apple", "Tasty fruit.") {});
+
+        assertEquals("A room to test.\nA blaster, a rock, and an apple are here.", room.getDescription());
+    }
+
+    @Test
+    public void testRoomDescriptionSingleItem() {
+        Room room = new Room("Test Room", "A room to test.") {};
+
+        room.getAvailableObjects().add(new GameObject("blaster", "A blasting device.") {});
+
+        assertEquals("A room to test.\nA blaster is here.", room.getDescription());
+    }
 }

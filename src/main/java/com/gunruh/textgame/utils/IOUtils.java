@@ -302,4 +302,21 @@ public class IOUtils {
 
         return articleAdjective;
     }
+
+    public static String capitalizeFirstLetter(String text) {
+        String capitalizedString = text; // default to input
+
+        if (!isNullOrEmpty(text)) {
+            String firstLetter = text.substring(0,1);
+
+            String restOfText = "";
+            if (text.length() > 1) {
+                restOfText = text.substring(1);
+            }
+
+            capitalizedString = firstLetter.toUpperCase() + restOfText;
+        }
+
+        return capitalizedString;
+    }
 }
