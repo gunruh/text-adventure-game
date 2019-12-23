@@ -85,7 +85,20 @@ public class Game {
                     displayGameObject(player.getCurrentRoom());
                 }
             }
-
+            
+            else if (Action.Name == statement.getAction()) {
+            	if (statement.getReceivingObject() == null) {
+            		display("Name what?");
+            		String nameInput = IOUtils.getInputText();
+            		statement.setReceivingObject(getMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            	}
+            	
+            	if (statement.getReceivingObject() == null) {
+                    display("Sorry - I can't find that object.");
+                    continue;
+                }
+            }
+            
             else if (Action.Move == statement.getAction()) {
                 if (statement.getDirection() == null) {
                     display("Which direction?");

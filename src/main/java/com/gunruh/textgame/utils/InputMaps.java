@@ -20,6 +20,7 @@ public class InputMaps {
         actionMap.put("crawl", Action.Move);
 
         actionMap.put("take", Action.Take);
+        actionMap.put("t", Action.Take);
         actionMap.put("pick up", Action.Take);
         actionMap.put("pick", Action.Take);
         actionMap.put("grab", Action.Take);
@@ -29,6 +30,7 @@ public class InputMaps {
         actionMap.put("find", Action.Take);
 
         actionMap.put("drop", Action.Drop);
+        actionMap.put("d", Action.Drop);
         actionMap.put("leave", Action.Drop);
         actionMap.put("let go", Action.Drop);
         actionMap.put("set", Action.Drop);
@@ -43,6 +45,10 @@ public class InputMaps {
         actionMap.put("observe", Action.Look);
         actionMap.put("see", Action.Look);
         actionMap.put("describe", Action.Look);
+        
+        actionMap.put("name", Action.Name);
+        actionMap.put("rename", Action.Name);
+        actionMap.put("call", Action.Name);
 
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);
