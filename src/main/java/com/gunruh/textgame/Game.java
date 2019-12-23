@@ -54,7 +54,7 @@ public class Game {
                 }
             }
 
-            if (Action.Drop == statement.getAction()) {
+            else if (Action.Drop == statement.getAction()) {
                 if (statement.getReceivingObject() == null) {
                     display("Drop what?");
                     String takeInput = IOUtils.getInputText();
@@ -73,7 +73,7 @@ public class Game {
                     displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
                 }
                 else {
-                    display("you don't have that.");
+                    display("You don't have that.");
                 }
             }
 
