@@ -28,6 +28,12 @@ public class InputMaps {
         actionMap.put("collect", Action.Take);
         actionMap.put("find", Action.Take);
 
+        actionMap.put("drop", Action.Drop);
+        actionMap.put("leave", Action.Drop);
+        actionMap.put("let go", Action.Drop);
+        actionMap.put("set", Action.Drop);
+        actionMap.put("dump", Action.Drop);
+
         actionMap.put("shoot", Action.Shoot);
         actionMap.put("blast", Action.Shoot);
         actionMap.put("fire", Action.Shoot);

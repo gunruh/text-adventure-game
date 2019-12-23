@@ -54,6 +54,29 @@ public class Game {
                 }
             }
 
+            if (Action.Drop == statement.getAction()) {
+                if (statement.getReceivingObject() == null) {
+                    display("Drop what?");
+                    String takeInput = IOUtils.getInputText();
+                    statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, player.getInventory()));
+                }
+
+                if (statement.getReceivingObject() == null) {
+                    display("Sorry - I can't find that object.");
+                    continue;
+                }
+
+                int inventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
+                if (inventoryIndex != -1) {
+                    GameObject droppedObject = player.getInventory().remove(inventoryIndex);
+                    player.getCurrentRoom().getAvailableObjects().add(droppedObject);
+                    displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
+                }
+                else {
+                    display("you don't have that.");
+                }
+            }
+
             else if (Action.Look == statement.getAction()) {
                 if (statement.getReceivingObject() != null) {
                     displayGameObject(statement.getReceivingObject());

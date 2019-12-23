@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Blaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Blaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/RoomA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/RoomA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/RoomB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/RoomB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
