@@ -227,6 +227,11 @@ public class IOUtils {
                 }
             }
         }
+        
+        // if theres a direction but no action and no objects, go ahead and assume the move action
+        if (statement.getDirection() != null && (statement.getAction() == null && statement.getReceivingObject() == null)) {
+        	statement.setAction(Action.Move);
+        }
 
         return statement;
     }
