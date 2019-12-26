@@ -97,6 +97,9 @@ public class Game {
                     display("Sorry - I can't find that object.");
                     continue;
                 }
+                
+                statement.getReceivingObject().setNickName(statement.getRemainingString());
+                displayWithinAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString());
             }
             
             else if (Action.Move == statement.getAction()) {

@@ -232,6 +232,18 @@ public class IOUtils {
         if (statement.getDirection() != null && (statement.getAction() == null && statement.getReceivingObject() == null)) {
         	statement.setAction(Action.Move);
         }
+        
+        // if it's the name action, set the text field to the remaining text
+        if (statement.getAction() == Action.Name && firstObjectIndex != -1) {
+        	int index = firstObjectIndex + 1;
+        	StringBuilder stringBuilder = new StringBuilder();
+        	
+        	while (index < inputList.size()) {
+        		stringBuilder.append(inputList.get(index++));
+        	}
+        	
+        	statement.setRemainingString(stringBuilder.toString());
+        }
 
         return statement;
     }

@@ -10,12 +10,14 @@ public class Statement {
     private GameObject actingObject;
     private GameObject receivingObject;
     private Direction direction;
+    private String remainingString;
 
     public Statement(GameObject actingObject, Action action, GameObject receivingObject) {
         this.actingObject = actingObject;
         this.action = action;
         this.receivingObject = receivingObject;
         this.direction = null;
+        this.remainingString = null;
     }
 
     public Statement(GameObject actingObject, Action action, GameObject receivingObject, Direction direction) {
@@ -23,6 +25,7 @@ public class Statement {
         this.action = action;
         this.receivingObject = receivingObject;
         this.direction = direction;
+        this.remainingString = null;
     }
 
     public Action getAction() {
@@ -51,6 +54,14 @@ public class Statement {
 
     public Direction getDirection() {
         return direction;
+    }
+    
+    public String getRemainingString() {
+    	return remainingString;
+    }
+    
+    public void setRemainingString(String remainingString) {
+    	this.remainingString = remainingString;
     }
 
     public void setDirection(Direction direction) {
