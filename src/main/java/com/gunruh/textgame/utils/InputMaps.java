@@ -28,6 +28,7 @@ public class InputMaps {
         actionMap.put("snatch", Action.Take);
         actionMap.put("collect", Action.Take);
         actionMap.put("find", Action.Take);
+        actionMap.put("get", Action.Take);
 
         actionMap.put("drop", Action.Drop);
         actionMap.put("d", Action.Drop);
