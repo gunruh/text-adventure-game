@@ -186,7 +186,7 @@ public class Game {
     private void initializeGame() {
         // Initialize Room Objects
         RoomA.getInstance().getAvailableObjects().add(new Blaster());
-        RoomB.getInstance().getAvailableObjects().add(new Blaster());
+        RoomB.getInstance().getAvailableObjects().add(new GameObject("Troll", "Big, smelly, hometown of \"cave\".") {});
 
         display(Constants.INTRO_TEXT);
         player.enterRoom(RoomA.getInstance());
