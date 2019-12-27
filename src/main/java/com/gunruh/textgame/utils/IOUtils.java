@@ -92,7 +92,9 @@ public class IOUtils {
         }
     }
 
-    public static Statement getStatementFromInputList(List<String> inputList, List<GameObject> playerInventory, List<GameObject> roomObjects) {
+    public static Statement getStatementFromInputText(String inputText, List<GameObject> playerInventory, List<GameObject> roomObjects) {
+        List<String> inputList = IOUtils.getInputListFromText(inputText);
+
         if (inputList == null || inputList.isEmpty()) {
             return Statement.EMPTY_STATEMENT;
         }
@@ -148,19 +150,21 @@ public class IOUtils {
 
             currentWord = inputList.get(i);
 
-            if (isArticleAdjective(currentWord)) {
+            String currentWordNormalized = normalizeInput(currentWord);
+
+            if (isArticleAdjective(currentWordNormalized)) {
                 // do nothing
                 continue;
             }
 
-            Action action = InputMaps.actionMap.get(currentWord);
+            Action action = InputMaps.actionMap.get(currentWordNormalized);
             if (action != null) {
                 actionIndex = i;
                 statement.setAction(action);
                 continue;
             }
 
-            Direction direction = InputMaps.directionMap.get(currentWord);
+            Direction direction = InputMaps.directionMap.get(currentWordNormalized);
             if (direction != null) {
                 directionIndex = i;
                 statement.setDirection(direction);
@@ -168,11 +172,11 @@ public class IOUtils {
             }
 
             if (relationalWordIndex == -1) {
-                if (isLeftToRightRelationalWord(currentWord)) {
+                if (isLeftToRightRelationalWord(currentWordNormalized)) {
                     relationalWordIndex = i;
                     continue;
                 }
-                else if (isRightToLeftRelationalWord(currentWord)) {
+                else if (isRightToLeftRelationalWord(currentWordNormalized)) {
                     relationalWordIndex = i;
                     isActionLeftToRight = false;
                     continue;
@@ -181,7 +185,7 @@ public class IOUtils {
 
             if (firstObjectIndex == -1) {
                 List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
-                firstObject = getMatchingGameObjectFromList(currentWord, allAvailableObjects);
+                firstObject = getMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (firstObject != null) {
                     firstObjectIndex = i;
                     continue;
@@ -190,7 +194,7 @@ public class IOUtils {
 
             if (secondObjectIndex == -1) {
                 List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
-                secondObject = getMatchingGameObjectFromList(currentWord, allAvailableObjects);
+                secondObject = getMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (secondObject != null && !secondObject.equals(firstObject)) {
                     secondObjectIndex = i;
                     continue;
@@ -228,21 +232,50 @@ public class IOUtils {
             }
         }
         
-        // if theres a direction but no action and no objects, go ahead and assume the move action
+        // if there's a direction but no action and no objects, go ahead and assume the move action
         if (statement.getDirection() != null && (statement.getAction() == null && statement.getReceivingObject() == null)) {
         	statement.setAction(Action.Move);
         }
         
         // if it's the name action, set the text field to the remaining text
         if (statement.getAction() == Action.Name && firstObjectIndex != -1) {
-        	int index = firstObjectIndex + 1;
-        	StringBuilder stringBuilder = new StringBuilder();
-        	
-        	while (index < inputList.size()) {
-        		stringBuilder.append(inputList.get(index++));
-        	}
-        	
-        	statement.setRemainingString(stringBuilder.toString());
+            String firstObjectString = inputList.get(firstObjectIndex);
+
+            // Since inputList doesn't include spaces, find the index within the actual input.
+            int firstObjectIndexWithinInputText = inputText.indexOf(firstObjectString);
+            if (firstObjectIndexWithinInputText == -1) {
+                // couldn't find the word in the actual input - something's up
+                throw new IllegalArgumentException("Could not find the index of a word in the actual input from the generated inputList.");
+            }
+
+            // Now get the index of the last character of the full String that the user typed to match the object, so we don't put any of that into the new name.
+            StringBuilder objectNameBuilder = new StringBuilder();
+            String normalizedInputText = normalizeInput(inputText);
+            String normalizedNickNameNotNull = firstObject.getNickName() == null ? "" : normalizeInput(firstObject.getNickName());
+            String normalizedNameNotNull = firstObject.getName() == null ? "" : normalizeInput(firstObject.getName());
+            int lastIndexOfObjectIdentifierFromInputText = firstObjectIndexWithinInputText;
+            int appendIndex = firstObjectIndexWithinInputText;
+            while (appendIndex < normalizedInputText.length()) {
+                String currentNamePlusNextChar = objectNameBuilder.toString() + normalizedInputText.charAt(appendIndex);
+                if ((normalizedNickNameNotNull.contains(currentNamePlusNextChar) || normalizedNameNotNull.contains(currentNamePlusNextChar))) {
+                    objectNameBuilder.append(normalizedInputText.charAt(appendIndex));
+                    lastIndexOfObjectIdentifierFromInputText = appendIndex;
+                    appendIndex++;
+                }
+                else {
+                    break;
+                }
+            }
+
+            int indexOfFollowingSpace = inputText.indexOf(" ", lastIndexOfObjectIdentifierFromInputText);
+            if (indexOfFollowingSpace == -1) {
+                // There's no following space... so there's no remainingString to use
+                // do nothing.
+            }
+            else {
+                int indexOfRemainingStringStart = indexOfFollowingSpace + 1;
+                statement.setRemainingString(inputText.substring(indexOfRemainingStringStart));
+            }
         }
 
         return statement;
@@ -273,7 +306,7 @@ public class IOUtils {
         String cleanedSearchText = normalizeInput(searchText);
 
         for (GameObject gameObject : availableObjects) {
-            if (cleanedSearchText.equalsIgnoreCase(gameObject.getNickName()) || cleanedSearchText.equalsIgnoreCase(gameObject.getName())) {
+            if ((!isNullOrEmpty(gameObject.getNickName()) && normalizeInput(gameObject.getNickName()).contains(cleanedSearchText)) || (!isNullOrEmpty(gameObject.getName()) && normalizeInput(gameObject.getName()).contains(cleanedSearchText))) {
                 matchingObject = gameObject;
                 break;
             }

@@ -26,7 +26,7 @@ public class Game {
                 continue;
             }
 
-            Statement statement = IOUtils.getStatementFromInputList(IOUtils.getInputListFromText(input), player.getInventory(), player.getCurrentRoom().getAvailableObjects());
+            Statement statement = IOUtils.getStatementFromInputText(input, player.getInventory(), player.getCurrentRoom().getAvailableObjects());
 
             if (Action.Take == statement.getAction()) {
                 if (statement.getReceivingObject() == null) {
@@ -97,7 +97,16 @@ public class Game {
                     display("Sorry - I can't find that object.");
                     continue;
                 }
-                
+
+            	if (isNullOrEmpty(statement.getRemainingString())) {
+            	    display("What did you want to name it?");
+            	    statement.setRemainingString(getInputText());
+                }
+
+            	if (isNullOrEmpty(statement.getRemainingString())) {
+            	    display("Sorry - I didn't catch that name.");
+            	    continue;
+                }
                 statement.getReceivingObject().setNickName(statement.getRemainingString());
                 displayWithinAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString());
             }

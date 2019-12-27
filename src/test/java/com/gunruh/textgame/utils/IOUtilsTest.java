@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import static junit.framework.TestCase.*;
 
@@ -80,8 +79,7 @@ public class IOUtilsTest {
     public void testConvertInputListToAction_DefaultLook() {
         String sampleInput = "Blaster.";
         GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
-        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
-        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(blaster), null);
+        Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), null);
 
         assertEquals(Action.Look, statement.getAction());
         assertEquals(blaster, statement.getReceivingObject());
@@ -91,8 +89,7 @@ public class IOUtilsTest {
     public void testConvertInputListToStatement() {
         String sampleInput = "pick up the blaster.";
         GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
-        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
-        Statement statement = IOUtils.getStatementFromInputList(inputList, new ArrayList<GameObject>(), Collections.singletonList(blaster));
+        Statement statement = IOUtils.getStatementFromInputText(sampleInput, new ArrayList<GameObject>(), Collections.singletonList(blaster));
 
         assertEquals(Action.Take, statement.getAction());
         assertEquals(blaster, statement.getReceivingObject());
@@ -102,8 +99,7 @@ public class IOUtilsTest {
     public void testConvertInputListToDirection() {
         String sampleInput = "walk north.";
         GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
-        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
-        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(blaster), null);
+        Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), null);
 
         assertEquals(Action.Move, statement.getAction());
         assertEquals(Direction.North, statement.getDirection());
@@ -115,8 +111,7 @@ public class IOUtilsTest {
         GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
         GameObject rock = new GameObject("Rock", "It's Just a rock.") {};
 
-        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
-        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(blaster), Collections.singletonList(rock));
+        Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), Collections.singletonList(rock));
 
         assertEquals(Action.Shoot, statement.getAction());
         assertNull(statement.getDirection());
@@ -130,8 +125,7 @@ public class IOUtilsTest {
         GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
         GameObject rock = new GameObject("Rock", "It's Just a rock.") {};
 
-        List<String> inputList = IOUtils.getInputListFromText(sampleInput);
-        Statement statement = IOUtils.getStatementFromInputList(inputList, Collections.singletonList(blaster), Collections.singletonList(rock));
+        Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), Collections.singletonList(rock));
 
         assertEquals(Action.Shoot, statement.getAction());
         assertNull(statement.getDirection());
@@ -258,5 +252,24 @@ public class IOUtilsTest {
         room.getAvailableObjects().add(new GameObject("blaster", "A blasting device.") {});
 
         assertEquals("A room to test.\nA blaster is here.", room.getDescription());
+    }
+
+    @Test
+    public void testNameObject() {
+        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+
+        Statement statement = IOUtils.getStatementFromInputText("Name the blaster Big Steve 2000", Collections.singletonList(blaster), null);
+
+        assertEquals("Big Steve 2000", statement.getRemainingString());
+    }
+
+    @Test
+    public void testNameAlreadyNamedObject() {
+        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        blaster.setNickName("Big Steve 2000");
+
+        Statement statement = IOUtils.getStatementFromInputText("Name Big Steve 2000 Reginald Stevenson III", Collections.singletonList(blaster), null);
+
+        assertEquals("Reginald Stevenson III", statement.getRemainingString());
     }
 }
