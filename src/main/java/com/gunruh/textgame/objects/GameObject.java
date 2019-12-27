@@ -34,4 +34,12 @@ public abstract class GameObject {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+    
+    public void shoot(GameObject receivingObject) {
+    	receivingObject.receiveShoot(this);
+    }
+    
+    public void receiveShoot(GameObject actingObject) {
+    	this.health -= actingObject.getEffectivenessAsBlaster();
+    }
 }

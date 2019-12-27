@@ -18,12 +18,18 @@ public class IOUtils {
     }
 
     public static void displayGameObject(GameObject gameObject) {
+    	StringBuilder displayBuilder = new StringBuilder();
+    	
         if (!isNullOrEmpty(gameObject.getNickName())) {
-            display(gameObject.getNickName() + " (" + gameObject.getName() + ")\n" + gameObject.getDescription());
+            displayBuilder.append(gameObject.getNickName() + " (" + gameObject.getName() + ")\n" + gameObject.getDescription());
         }
         else {
-            display(gameObject.getName() + "\n" + gameObject.getDescription());
+            displayBuilder.append(gameObject.getName() + "\n" + gameObject.getDescription());
         }
+        
+        displayBuilder.append("\nHealth: " + gameObject.getHealth());
+        
+        display(displayBuilder.toString());
     }
 
     public static void display(String text) {

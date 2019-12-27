@@ -111,6 +111,17 @@ public class Game {
                 displayWithinAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString());
             }
             
+            else if (Action.Shoot == statement.getAction()) {
+            	if (statement.getActingObject() == null || statement.getReceivingObject() == null) {
+            		display("Couldn't get it done unforch... I need to know which gun and also what the target is.");
+            		continue;
+            	}
+            	
+            	GameObject targetObject = statement.getReceivingObject();
+            	statement.getActingObject().shoot(targetObject);
+            	displayWithinAsterisks("Shoots " + (!isNullOrEmpty(targetObject.getNickName()) ? targetObject.getNickName() : targetObject.getName()));
+            }
+            
             else if (Action.Move == statement.getAction()) {
                 if (statement.getDirection() == null) {
                     display("Which direction?");
@@ -174,6 +185,7 @@ public class Game {
 
     private void initializeGame() {
         // Initialize Room Objects
+        RoomA.getInstance().getAvailableObjects().add(new Blaster());
         RoomB.getInstance().getAvailableObjects().add(new Blaster());
 
         display(Constants.INTRO_TEXT);
