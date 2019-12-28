@@ -6,6 +6,12 @@ import java.util.List;
 import static com.gunruh.textgame.utils.IOUtils.display;
 
 public class Player extends GameObject {
+    private static Player INSTANCE = new Player("Kevin", "A man on a mission.");
+
+    public static Player getInstance() {
+        return INSTANCE;
+    }
+
     private List<GameObject> inventory;
     private Room currentRoom;
 
@@ -14,7 +20,7 @@ public class Player extends GameObject {
         return 0;
     }
 
-    public Player(String name, String description) {
+    private Player(String name, String description) {
         super(name, description);
         this.inventory = new ArrayList<GameObject>();
         this.currentRoom = Room.ROOM_NOT_PRESENT;

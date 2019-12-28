@@ -9,7 +9,7 @@ import com.gunruh.textgame.utils.InputMaps;
 import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
-    Player player = new Player("Kevin", "A man on a mission.");
+    Player player = Player.getInstance();
 
     public void run() {
         initializeGame();
@@ -44,12 +44,12 @@ public class Game {
                 if (roomObjectIndex != -1) {
                     GameObject takenObject = player.getCurrentRoom().getAvailableObjects().remove(roomObjectIndex);
                     player.getInventory().add(takenObject);
-                    displayWithinAsterisks("Picks up " + (!isNullOrEmpty(takenObject.getNickName()) ? takenObject.getNickName() : takenObject.getName()));
+                    displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(takenObject));
                 }
                 else {
                     int playerInventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
                     if (playerInventoryIndex != -1) {
-                        display("You already have " + (!isNullOrEmpty(statement.getReceivingObject().getNickName()) ? statement.getReceivingObject().getNickName() : ("the " + statement.getReceivingObject().getName())));
+                        display("You already have " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
                     }
                 }
             }
@@ -112,14 +112,26 @@ public class Game {
             }
             
             else if (Action.Shoot == statement.getAction()) {
+                if (statement.getActingObject() == null) {
+                    GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getInventory(), Action.Shoot);
+                    if (bestMatchBlaster == null) {
+                        display("You don't have anything to use as a blaster.");
+                        continue;
+                    }
+                    else {
+                        display("(using " + IOUtils.getNickNameOrNameWithArticle(bestMatchBlaster) + ")");
+                        statement.setActingObject(bestMatchBlaster);
+                    }
+                }
+
             	if (statement.getActingObject() == null || statement.getReceivingObject() == null) {
             		display("Couldn't get it done unforch... I need to know which gun and also what the target is.");
             		continue;
             	}
             	
             	GameObject targetObject = statement.getReceivingObject();
+                displayWithinAsterisks("Shoots " + (!isNullOrEmpty(targetObject.getNickName()) ? targetObject.getNickName() : targetObject.getName()));
             	statement.getActingObject().shoot(targetObject);
-            	displayWithinAsterisks("Shoots " + (!isNullOrEmpty(targetObject.getNickName()) ? targetObject.getNickName() : targetObject.getName()));
             }
             
             else if (Action.Move == statement.getAction()) {

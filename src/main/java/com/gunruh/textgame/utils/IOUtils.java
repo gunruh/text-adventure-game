@@ -3,12 +3,10 @@ package com.gunruh.textgame.utils;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Room;
 import com.gunruh.textgame.objects.Statement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class IOUtils {
     private static Scanner scanner = new Scanner(System.in);
@@ -26,8 +24,10 @@ public class IOUtils {
         else {
             displayBuilder.append(gameObject.getName() + "\n" + gameObject.getDescription());
         }
-        
-        displayBuilder.append("\nHealth: " + gameObject.getHealth());
+
+        if (!(gameObject instanceof Room)) {
+            displayBuilder.append("\nHealth: " + gameObject.getHealth());
+        }
         
         display(displayBuilder.toString());
     }
@@ -374,5 +374,57 @@ public class IOUtils {
         }
 
         return capitalizedString;
+    }
+
+    public static String getNickNameOrNameWithArticle(GameObject gameObject) {
+        String nameReturned = null;
+
+        if (gameObject != null) {
+            if (!isNullOrEmpty(gameObject.getNickName())) {
+                nameReturned = gameObject.getNickName();
+            }
+            else {
+                nameReturned = "the " + gameObject.getName();
+            }
+        }
+
+        return nameReturned;
+    }
+
+    public static String getRandomDestroyString() {
+        List<String> destroyStrings = Arrays.asList(
+                "All that remains are space crumbs.",
+                "You see what appears to be a crouton left behind, but you accidentally step on it.",
+                "A small pile of space dust blows away in the breeze.",
+                "You notice a silver coin left behind, but a weird lookin' bug comes and takes it.");
+
+        Random random = new Random();
+        int randomInt = random.nextInt(destroyStrings.size() -1);
+
+        return destroyStrings.get(randomInt);
+    }
+
+    public static GameObject getGameObjectWithHighestEffectiveness(List<GameObject> gameObjects, Action action) {
+        GameObject bestMatchObject = null;
+
+        if (gameObjects != null) {
+            int highestValue = 0;
+            for (GameObject gameObject : gameObjects) {
+                switch (action) {
+                    case Shoot: {
+                        if (gameObject.getEffectivenessAsBlaster() > highestValue) {
+                            bestMatchObject = gameObject;
+                            highestValue = gameObject.getEffectivenessAsBlaster();
+                        }
+                        break;
+                    }
+                    default: {
+                        // do nothing
+                    }
+                }
+            }
+        }
+
+        return bestMatchObject;
     }
 }

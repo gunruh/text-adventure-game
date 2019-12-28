@@ -4,6 +4,8 @@
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
     </list>
@@ -89,6 +91,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="IOUtilsTest.testDestroyObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testDestroyObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testDestroyPlayerInventoryObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testDestroyPlayerInventoryObject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testGetNickNameOrNameWithArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testGetNickNameOrNameWithArticle" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="IOUtilsTest.testNameAlreadyNamedObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
@@ -105,69 +155,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testNameObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="text-adventure-game" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testNameObject" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IOUtilsTest.testRoomDescription" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="text-adventure-game" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testRoomDescription" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IOUtilsTest.testRoomDescriptionSingleItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="text-adventure-game" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testRoomDescriptionSingleItem" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Main Game" />
       <item itemvalue="JUnit.IOUtilsTest" />
-      <item itemvalue="JUnit.IOUtilsTest.testRoomDescription" />
-      <item itemvalue="JUnit.IOUtilsTest.testRoomDescriptionSingleItem" />
-      <item itemvalue="JUnit.IOUtilsTest.testNameObject" />
       <item itemvalue="JUnit.IOUtilsTest.testNameAlreadyNamedObject" />
+      <item itemvalue="JUnit.IOUtilsTest.testGetNickNameOrNameWithArticle" />
+      <item itemvalue="JUnit.IOUtilsTest.testDestroyObject" />
+      <item itemvalue="JUnit.IOUtilsTest.testDestroyPlayerInventoryObject" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IOUtilsTest.testDestroyPlayerInventoryObject" />
+        <item itemvalue="JUnit.IOUtilsTest.testDestroyObject" />
+        <item itemvalue="JUnit.IOUtilsTest.testGetNickNameOrNameWithArticle" />
         <item itemvalue="JUnit.IOUtilsTest" />
         <item itemvalue="JUnit.IOUtilsTest.testNameAlreadyNamedObject" />
-        <item itemvalue="JUnit.IOUtilsTest.testNameObject" />
-        <item itemvalue="JUnit.IOUtilsTest.testRoomDescriptionSingleItem" />
-        <item itemvalue="JUnit.IOUtilsTest.testRoomDescription" />
       </list>
     </recent_temporary>
   </component>
@@ -233,16 +235,5 @@
     <MESSAGE value="Moved Actions and Directions to enumerations package. Created basic blaster object. Created player object. Added player inventory and room objects lists. Added input mapping for &quot;Look&quot; action. Added several methods in IOUtils.java. Updated JUnit tests." />
     <MESSAGE value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
     <option name="LAST_COMMIT_MESSAGE" value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java</url>
-          <line>240</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

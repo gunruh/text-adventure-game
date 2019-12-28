@@ -1,8 +1,10 @@
 package com.gunruh.textgame.utils;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.Room;
 import com.gunruh.textgame.objects.Statement;
 import org.junit.Test;
@@ -271,5 +273,33 @@ public class IOUtilsTest {
         Statement statement = IOUtils.getStatementFromInputText("Name Big Steve 2000 Reginald Stevenson III", Collections.singletonList(blaster), null);
 
         assertEquals("Reginald Stevenson III", statement.getRemainingString());
+    }
+
+    @Test
+    public void testGetNickNameOrNameWithArticle() {
+        GameObject anderson = new GameObject("Rock", "A test rock.") {};
+        anderson.setNickName("Anderson");
+        assertEquals("Anderson", IOUtils.getNickNameOrNameWithArticle(anderson));
+
+        GameObject rock = new GameObject("Rock", "Another test rock.") {};
+        assertEquals("the Rock", IOUtils.getNickNameOrNameWithArticle(rock));
+    }
+
+    @Test
+    public void testDestroyRoomObject() {
+        GameObject rock = new GameObject("Rock", "A rock for testing.") {};
+        Room room = new Room("Room", "A Room for testing") {};
+        room.getAvailableObjects().add(rock);
+        Player.getInstance().setCurrentRoom(room);
+        rock.takeDamage(100);
+        assertFalse(room.getAvailableObjects().contains(rock));
+    }
+
+    @Test
+    public void testDestroyPlayerInventoryObject() {
+        GameObject rock = new GameObject("Rock", "A rock for testing.") {};
+        Player.getInstance().getInventory().add(rock);
+        rock.takeDamage(100);
+        assertFalse(Player.getInstance().getInventory().contains(rock));
     }
 }
