@@ -5,7 +5,7 @@ public class Blaster extends GameObject {
         super("Blaster", "A laser gun.");
     }
 
-    private int effectivenessAsGun = 50;
+    private int effectivenessAsGun = 100;
 
     @Override
     public int getEffectivenessAsBlaster() {

@@ -124,13 +124,26 @@ public class Game {
                     }
                 }
 
-            	if (statement.getActingObject() == null || statement.getReceivingObject() == null) {
-            		display("Couldn't get it done unforch... I need to know which gun and also what the target is.");
-            		continue;
+            	if (statement.getReceivingObject() == null) {
+            		display("What is the target?");
+            		String searchText = IOUtils.getInputText();
+            		GameObject receivingObject = IOUtils.getMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), Player.getInstance().getCurrentRoom().getAvailableObjects()));
+            		if (receivingObject == statement.getActingObject()) {
+            		    display("You can't shoot an object with itself.");
+            		    continue;
+                    }
+            		else {
+                        statement.setReceivingObject(receivingObject);
+                    }
             	}
+
+            	if (statement.getReceivingObject() == null) {
+            	    display("Sorry, I couldn't determine your target.");
+            	    continue;
+                }
             	
             	GameObject targetObject = statement.getReceivingObject();
-                displayWithinAsterisks("Shoots " + (!isNullOrEmpty(targetObject.getNickName()) ? targetObject.getNickName() : targetObject.getName()));
+                displayWithinAsterisks("Shoots " + IOUtils.getNickNameOrNameWithArticle(targetObject) + " with the " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()));
             	statement.getActingObject().shoot(targetObject);
             }
             
@@ -199,6 +212,9 @@ public class Game {
         // Initialize Room Objects
         RoomA.getInstance().getAvailableObjects().add(new Blaster());
         RoomB.getInstance().getAvailableObjects().add(new GameObject("Troll", "Big, smelly, hometown of \"cave\".") {});
+        RoomB.getInstance().getAvailableObjects().add(new GameObject("Rock", "Just your average cave rock.") {});
+        RoomB.getInstance().getAvailableObjects().add(new GameObject("Sock", "Wonder who left this here...") {});
+        RoomB.getInstance().getAvailableObjects().add(new GameObject("Clock", "It is unclear whether the time is correct.") {});
 
         display(Constants.INTRO_TEXT);
         player.enterRoom(RoomA.getInstance());

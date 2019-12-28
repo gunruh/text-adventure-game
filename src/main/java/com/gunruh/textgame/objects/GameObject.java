@@ -53,6 +53,7 @@ public abstract class GameObject {
 
         if (this.health - amount >= 0) {
             this.health -= amount;
+            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage.");
         }
         else {
             this.health = 0;
