@@ -51,15 +51,13 @@ public abstract class GameObject {
             return;
         }
 
-        if (this.health - amount >= 0) {
+        if (this.health - amount > 0) {
             this.health -= amount;
             IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage.");
         }
         else {
             this.health = 0;
-        }
 
-        if (this.health <= 0) {
             IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString());
             // When health reaches zero, the GameObject disappears (this default behavior may be overridden in extended classes)
             Player.getInstance().getInventory().remove(this);

@@ -399,7 +399,7 @@ public class IOUtils {
                 "You notice a silver coin left behind, but a weird lookin' bug comes and takes it.");
 
         Random random = new Random();
-        int randomInt = random.nextInt(destroyStrings.size() -1);
+        int randomInt = random.nextInt(destroyStrings.size());
 
         return destroyStrings.get(randomInt);
     }

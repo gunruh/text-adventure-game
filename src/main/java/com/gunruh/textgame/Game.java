@@ -119,7 +119,6 @@ public class Game {
                         continue;
                     }
                     else {
-                        display("(using " + IOUtils.getNickNameOrNameWithArticle(bestMatchBlaster) + ")");
                         statement.setActingObject(bestMatchBlaster);
                     }
                 }
