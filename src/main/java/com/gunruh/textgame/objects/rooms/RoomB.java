@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects;
+package com.gunruh.textgame.objects.rooms;
 
 import static com.gunruh.textgame.utils.IOUtils.display;
 

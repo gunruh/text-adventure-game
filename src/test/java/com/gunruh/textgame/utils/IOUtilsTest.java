@@ -1,11 +1,10 @@
 package com.gunruh.textgame.utils;
 
-import com.gunruh.textgame.Game;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Player;
-import com.gunruh.textgame.objects.Room;
+import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
 import org.junit.Test;
 

@@ -9,5 +9,7 @@ public enum Direction {
     SouthWest,
     West,
     NorthWest,
-    NotADirection;
+    NotADirection,
+    Up,
+    Down;
 }

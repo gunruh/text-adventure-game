@@ -1,5 +1,7 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.objects.rooms.Room;
+
 import java.util.ArrayList;
 import java.util.List;
 

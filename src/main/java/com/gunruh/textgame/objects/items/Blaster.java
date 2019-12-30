@@ -1,4 +1,6 @@
-package com.gunruh.textgame.objects;
+package com.gunruh.textgame.objects.items;
+
+import com.gunruh.textgame.objects.GameObject;
 
 public class Blaster extends GameObject {
     public Blaster() {

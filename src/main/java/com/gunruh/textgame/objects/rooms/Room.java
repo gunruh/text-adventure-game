@@ -1,5 +1,6 @@
-package com.gunruh.textgame.objects;
+package com.gunruh.textgame.objects.rooms;
 
+import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 
@@ -52,6 +53,16 @@ public abstract class Room extends GameObject {
     }
 
     public Room goNorthWest() {
+        System.out.println(Constants.CANT_GO_THAT_WAY);
+        return ROOM_NOT_PRESENT;
+    }
+
+    public Room goUp() {
+        System.out.println(Constants.CANT_GO_THAT_WAY);
+        return ROOM_NOT_PRESENT;
+    }
+
+    public Room goDown() {
         System.out.println(Constants.CANT_GO_THAT_WAY);
         return ROOM_NOT_PRESENT;
     }

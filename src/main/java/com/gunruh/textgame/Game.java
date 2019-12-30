@@ -2,6 +2,10 @@ package com.gunruh.textgame;
 
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.objects.*;
+import com.gunruh.textgame.objects.items.Blaster;
+import com.gunruh.textgame.objects.rooms.RoomA;
+import com.gunruh.textgame.objects.rooms.RoomB;
+import com.gunruh.textgame.objects.rooms.starship.JanitorsQuarters;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
@@ -37,6 +41,11 @@ public class Game {
 
                 if (statement.getReceivingObject() == null) {
                     display("Sorry - I can't find that object.");
+                    continue;
+                }
+
+                if (statement.getReceivingObject().isPermanentFixture()) {
+                    display("Unfortunately you can't take this item with you.");
                     continue;
                 }
 
@@ -191,6 +200,14 @@ public class Game {
                         player.enterRoom(player.getCurrentRoom().goNorthWest());
                         break;
                     }
+                    case Up: {
+                        player.enterRoom(player.getCurrentRoom().goUp());
+                        break;
+                    }
+                    case Down: {
+                        player.enterRoom(player.getCurrentRoom().goDown());
+                        break;
+                    }
                     default: {
                         display("I don't know that direction.");
                         break;
@@ -215,7 +232,8 @@ public class Game {
         RoomB.getInstance().getAvailableObjects().add(new GameObject("Sock", "Wonder who left this here...") {});
         RoomB.getInstance().getAvailableObjects().add(new GameObject("Clock", "It is unclear whether the time is correct.") {});
 
+        display(Constants.SPACE_DUDES_TITLE);
         display(Constants.INTRO_TEXT);
-        player.enterRoom(RoomA.getInstance());
+        player.enterRoom(JanitorsQuarters.getInstance());
     }
 }

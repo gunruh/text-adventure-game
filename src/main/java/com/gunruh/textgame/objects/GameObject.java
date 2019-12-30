@@ -7,14 +7,25 @@ public abstract class GameObject {
     private final String name;
     private final String description;
     private String nickName;
+    private boolean isPermanentFixture;
+
+    // use this to determine whether the object can be taken by the player.
+    public boolean isPermanentFixture() {
+        return isPermanentFixture;
+    }
 
     public int getEffectivenessAsBlaster() {
         return 0;
     }
 
     protected GameObject(String name, String description) {
+        this(name, description, false);
+    }
+
+    protected GameObject(String name, String description, boolean isPermanentFixture) {
         this.name = name;
         this.description = description;
+        this.isPermanentFixture = isPermanentFixture;
     }
 
     public int getHealth() {

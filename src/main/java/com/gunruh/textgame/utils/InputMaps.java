@@ -31,7 +31,6 @@ public class InputMaps {
         actionMap.put("get", Action.Take);
 
         actionMap.put("drop", Action.Drop);
-        actionMap.put("d", Action.Drop);
         actionMap.put("leave", Action.Drop);
         actionMap.put("let go", Action.Drop);
         actionMap.put("set", Action.Drop);
@@ -67,5 +66,9 @@ public class InputMaps {
         directionMap.put("w", Direction.West);
         directionMap.put("northwest", Direction.NorthWest);
         directionMap.put("nw", Direction.NorthWest);
+        directionMap.put("u", Direction.Up);
+        directionMap.put("up", Direction.Up);
+        directionMap.put("d", Direction.Down);
+        directionMap.put("down", Direction.Down);
     }
 }
