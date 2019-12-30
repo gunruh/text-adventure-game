@@ -27,7 +27,7 @@ public class MainUpperHallway extends Room {
 
     @Override
     public Room goEast() {
-        return EastWestCorridor.getIntance();
+        return EastWestCorridor.getInstance();
     }
 
     @Override

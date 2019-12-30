@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainElevatorDown.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainUpperHallway.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/PassengersQuarters.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/EastWestCorridor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/RestrictedElevator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/EngineRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/EngineRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/JanitorsQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/JanitorsQuarters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/MainElevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainElevatorUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/MainHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainHallwayLevel0.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/NavigationRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/NavigationRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainElevatorUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainElevatorUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainUpperHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainUpperHallway.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

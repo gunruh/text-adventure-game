@@ -2,6 +2,7 @@ package com.gunruh.textgame.objects.rooms.starship.level0;
 
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.NavigationRoom;
+import com.gunruh.textgame.objects.rooms.starship.level1.MainUpperHallway;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class MainElevatorUp extends Room {
@@ -18,7 +19,7 @@ public class MainElevatorUp extends Room {
     @Override
     public Room goUp() {
         IOUtils.displayWithinAsterisks("You feel heavier for a moment as the elevator glides upward. The doors open and you step out.");
-        return NavigationRoom.getInstance();
+        return MainUpperHallway.getInstance();
     }
 
     @Override
