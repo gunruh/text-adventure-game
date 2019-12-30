@@ -15,6 +15,6 @@ public class EngineRoom extends Room {
 
     @Override
     public Room goNorth() {
-        return MainHallwayLevel0.getInstance();
+        return MainLowerHallway.getInstance();
     }
 }

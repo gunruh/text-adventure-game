@@ -1,9 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
+import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.level0.EngineRoom;
-import com.gunruh.textgame.objects.rooms.starship.level0.JanitorsQuarters;
-import com.gunruh.textgame.objects.rooms.starship.level0.MainElevatorUp;
 
 public class MainUpperHallway extends Room {
     private MainUpperHallway() {
@@ -12,6 +10,9 @@ public class MainUpperHallway extends Room {
                         "\nIt runs North and South (with North at the front of the ship)." +
                         "\nThe passengers' quarters are along the west wall. One of them has left the door open." +
                         "\nThere is a corridor leading east.");
+
+        getAvailableObjects().add(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
+        getAvailableObjects().add(new GameObject("Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
     }
 
     private static final MainUpperHallway INSTANCE = new MainUpperHallway();
@@ -32,7 +33,7 @@ public class MainUpperHallway extends Room {
 
     @Override
     public Room goSouth() {
-        return RestrictedElevator.getInstance();
+        return RestrictedElevatorUp.getInstance();
     }
 
     @Override

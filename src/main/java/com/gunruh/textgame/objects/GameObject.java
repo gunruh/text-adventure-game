@@ -47,6 +47,14 @@ public abstract class GameObject {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
+    public void talkTo(GameObject receivingObject) {
+        receivingObject.receiveTalkTo(this);
+    }
+
+    public void receiveTalkTo(GameObject actingObject) {
+        IOUtils.display(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " has nothing to say."));
+    }
     
     public void shoot(GameObject receivingObject) {
     	receivingObject.receiveShoot(this);

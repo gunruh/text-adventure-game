@@ -1,7 +1,6 @@
 package com.gunruh.textgame.objects.rooms.starship.level0;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.NavigationRoom;
 import com.gunruh.textgame.objects.rooms.starship.level1.MainUpperHallway;
 import com.gunruh.textgame.utils.IOUtils;
 
@@ -14,6 +13,11 @@ public class MainElevatorUp extends Room {
 
     public static MainElevatorUp getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public Room goSouth() {
+        return MainLowerHallway.getInstance();
     }
 
     @Override

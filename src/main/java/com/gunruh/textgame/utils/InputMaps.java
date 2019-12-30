@@ -50,6 +50,15 @@ public class InputMaps {
         actionMap.put("rename", Action.Name);
         actionMap.put("call", Action.Name);
 
+        actionMap.put("say", Action.Speak);
+        actionMap.put("speak", Action.Speak);
+        actionMap.put("chat", Action.Speak);
+        actionMap.put("whisper", Action.Speak);
+        actionMap.put("recite", Action.Speak);
+        actionMap.put("tell", Action.Speak);
+        actionMap.put("hello", Action.Speak);
+        actionMap.put("talk", Action.Speak);
+
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);
         directionMap.put("northeast", Direction.NorthEast);

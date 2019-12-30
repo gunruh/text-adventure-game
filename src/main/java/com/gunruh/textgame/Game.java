@@ -154,6 +154,21 @@ public class Game {
                 displayWithinAsterisks("Shoots " + IOUtils.getNickNameOrNameWithArticle(targetObject) + " with the " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()));
             	statement.getActingObject().shoot(targetObject);
             }
+
+            else if (Action.Speak == statement.getAction()) {
+                if (statement.getReceivingObject() == null) {
+                    display("Talk to who?");
+                    String whoInput = getInputText();
+                    statement.setReceivingObject(getMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+                }
+
+                if (statement.getReceivingObject() == null) {
+                    display("Sorry - I didn't understand who you wanted to talk to.");
+                    continue;
+                }
+
+                player.talkTo(statement.getReceivingObject());
+            }
             
             else if (Action.Move == statement.getAction()) {
                 if (statement.getDirection() == null) {

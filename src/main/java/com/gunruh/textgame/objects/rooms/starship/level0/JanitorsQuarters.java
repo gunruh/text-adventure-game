@@ -20,6 +20,6 @@ public class JanitorsQuarters extends Room {
 
     @Override
     public Room goEast() {
-        return MainHallwayLevel0.getInstance();
+        return MainLowerHallway.getInstance();
     }
 }

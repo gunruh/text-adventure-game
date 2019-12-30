@@ -6,5 +6,6 @@ public enum Action {
     Look,
     Shoot,
     Drop,
-    Name;
+    Name,
+    Speak;
 }

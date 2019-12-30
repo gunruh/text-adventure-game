@@ -2,11 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/EastWestCorridor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/RestrictedElevator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/RestrictedElevatorKeyCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/Captain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/restrictedLevel/RestrictedElevatorDown.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/restrictedLevel/RestrictedLevelHallway.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/Blaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/Blaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/NavigationRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/restrictedLevel/NavigationRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/EngineRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/EngineRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/JanitorsQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/JanitorsQuarters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainElevatorUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainElevatorUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainHallwayLevel0.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level0/MainLowerHallway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/EastWestCorridor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/EastWestCorridor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainElevatorDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainElevatorDown.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainUpperHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/MainUpperHallway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/RestrictedElevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/RestrictedElevatorUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +56,9 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last.edited.regexp" value="`" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -52,9 +70,11 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gunruh.textgame.objects.rooms.starship.restrictedLevel" />
       <recent name="com.gunruh.textgame.objects.rooms.starship.level1" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.gunruh.textgame.objects.items" />
       <recent name="com.gunruh.textgame.objects.rooms.starship.level1" />
       <recent name="com.gunruh.textgame.objects.rooms.starship" />
       <recent name="objects" />
