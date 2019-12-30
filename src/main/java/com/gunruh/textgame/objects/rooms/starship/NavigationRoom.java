@@ -1,6 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship;
 
 import com.gunruh.textgame.objects.rooms.Room;
+import com.gunruh.textgame.objects.rooms.starship.level0.MainElevatorUp;
 
 public class NavigationRoom extends Room {
     private NavigationRoom() {
@@ -15,6 +16,6 @@ public class NavigationRoom extends Room {
 
     @Override
     public Room goSouth() {
-        return MainElevator.getInstance();
+        return MainElevatorUp.getInstance();
     }
 }

@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship;
+package com.gunruh.textgame.objects.rooms.starship.level0;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.rooms.Room;
@@ -20,6 +20,6 @@ public class JanitorsQuarters extends Room {
 
     @Override
     public Room goEast() {
-        return MainHallway.getInstance();
+        return MainHallwayLevel0.getInstance();
     }
 }
