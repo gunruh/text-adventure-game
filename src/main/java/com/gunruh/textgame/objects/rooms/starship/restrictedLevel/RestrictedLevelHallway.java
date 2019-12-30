@@ -1,5 +1,6 @@
 package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
 
+import com.gunruh.textgame.objects.items.RestrictedElevatorKeyCard;
 import com.gunruh.textgame.objects.rooms.Room;
 
 public class RestrictedLevelHallway extends Room {
