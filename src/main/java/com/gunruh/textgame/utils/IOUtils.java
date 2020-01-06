@@ -14,6 +14,10 @@ public class IOUtils {
     public static void displayWithinAsterisks(String displayText) {
         display("*" + displayText + "*");
     }
+    
+    public static void displayWithinDoubleQuotes(String displayText) {
+    	display("\"" + displayText + "\"");
+    }
 
     public static void displayGameObject(GameObject gameObject) {
     	StringBuilder displayBuilder = new StringBuilder();
