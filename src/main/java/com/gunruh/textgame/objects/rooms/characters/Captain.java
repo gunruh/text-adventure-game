@@ -18,7 +18,7 @@ public class Captain extends GameObject {
     
     @Override
     public void receiveTalkTo(GameObject gameObject) {
-    	IOUtils.display("The captain says: \"I love my boy. One day he's going to be the captain of this cruiser." + 
+    	IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: \"I love my boy. One day he's going to be the captain of this cruiser.\n" + 
     	                "I also love corndogs. What's that? You say there are free corndogs today? ... I'll be right back...\"");
     	IOUtils.displayWithinAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " leaves the room.");
     	Player.getInstance().getCurrentRoom().getAvailableObjects().remove(this);

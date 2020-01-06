@@ -26,7 +26,7 @@ public class RestrictedElevatorDown extends Room {
     public Room goDown() {
         // Check if key card is in player inventory, or just in the elevator.
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(RestrictedElevatorKeyCard.getInstance())) {
-            return NavigationRoom.getInstance();
+            return MainUpperHallway.getInstance();
         }
         else {
             IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");

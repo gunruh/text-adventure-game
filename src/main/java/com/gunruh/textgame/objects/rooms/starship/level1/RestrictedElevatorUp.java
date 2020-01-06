@@ -4,6 +4,7 @@ import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.RestrictedElevatorKeyCard;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.restrictedLevel.NavigationRoom;
+import com.gunruh.textgame.objects.rooms.starship.restrictedLevel.RestrictedLevelHallway;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class RestrictedElevatorUp extends Room {
@@ -26,7 +27,7 @@ public class RestrictedElevatorUp extends Room {
     public Room goUp() {
         // Check if key card is in player inventory, or just in the elevator.
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(RestrictedElevatorKeyCard.getInstance())) {
-            return NavigationRoom.getInstance();
+            return RestrictedLevelHallway.getInstance();
         }
         else {
             IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");
