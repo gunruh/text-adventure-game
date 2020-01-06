@@ -17,6 +17,11 @@ public class Captain extends GameObject {
     }
     
     @Override
+	public boolean isPermanentFixture() {
+		return true;
+	}
+    
+    @Override
     public void receiveTalkTo(GameObject gameObject) {
     	IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: \"I love my boy. One day he's going to be the captain of this cruiser.\n" + 
     	                "I also love corndogs. What's that? You say there are free corndogs today? ... I'll be right back...\"");

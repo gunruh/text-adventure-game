@@ -17,6 +17,11 @@ public class AndersonJr extends GameObject {
 	}
 	
 	@Override
+	public boolean isPermanentFixture() {
+		return true;
+	}
+	
+	@Override
 	public void receiveTalkTo(GameObject gameObject) {
 		if (Player.getInstance().getCurrentRoom().getAvailableObjects().contains(Captain.getInstance())) {
 			IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: \"I'm the next in line to be the big Kahoona of this ship." + 
