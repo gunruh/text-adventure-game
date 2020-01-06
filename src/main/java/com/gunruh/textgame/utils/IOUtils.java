@@ -404,7 +404,7 @@ public class IOUtils {
         return destroyStrings.get(randomInt);
     }
 
-    public static GameObject getGameObjectWithHighestEffectiveness(List<GameObject> gameObjects, Action action) {
+    public static GameObject getGameObjectWithHighestEffectiveness(List<GameObject> gameObjects, Action action, GameObject objectToExclude) {
         GameObject bestMatchObject = null;
 
         if (gameObjects != null) {
@@ -412,7 +412,7 @@ public class IOUtils {
             for (GameObject gameObject : gameObjects) {
                 switch (action) {
                     case Shoot: {
-                        if (gameObject.getEffectivenessAsBlaster() > highestValue) {
+                        if (gameObject.getEffectivenessAsBlaster() > highestValue && gameObject != objectToExclude) {
                             bestMatchObject = gameObject;
                             highestValue = gameObject.getEffectivenessAsBlaster();
                         }

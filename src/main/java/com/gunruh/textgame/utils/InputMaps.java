@@ -1,4 +1,4 @@
-package com.gunruh.textgame.utils;
+	package com.gunruh.textgame.utils;
 
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;

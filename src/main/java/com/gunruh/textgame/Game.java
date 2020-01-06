@@ -1,3 +1,4 @@
+
 package com.gunruh.textgame;
 
 import com.gunruh.textgame.enumerations.Action;
@@ -121,8 +122,14 @@ public class Game {
             }
             
             else if (Action.Shoot == statement.getAction()) {
+            	// check for 'shoot blaster' meaning 'shoot with blaster', rather than 'shoot at blaster'.
+            	if (statement.getActingObject() == null && statement.getReceivingObject() != null && statement.getReceivingObject().getEffectivenessAsBlaster() > 0) {
+                	statement.setActingObject(statement.getReceivingObject());
+                	statement.setReceivingObject(null);
+            	}
+            	
                 if (statement.getActingObject() == null) {
-                    GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getInventory(), Action.Shoot);
+                    GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getInventory(), Action.Shoot, statement.getReceivingObject());
                     if (bestMatchBlaster == null) {
                         display("You don't have anything to use as a blaster.");
                         continue;
@@ -133,7 +140,7 @@ public class Game {
                 }
 
             	if (statement.getReceivingObject() == null) {
-            		display("What is the target?");
+            		display("What do you want to shoot " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
             		String searchText = IOUtils.getInputText();
             		GameObject receivingObject = IOUtils.getMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), Player.getInstance().getCurrentRoom().getAvailableObjects()));
             		if (receivingObject == statement.getActingObject()) {
