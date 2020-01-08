@@ -29,7 +29,7 @@ public class IOUtils {
             displayBuilder.append(gameObject.getName() + "\n" + gameObject.getDescription());
         }
 
-        if (!(gameObject instanceof Room)) {
+        if (!(gameObject instanceof Room) && gameObject.getHealth() < 100) {
             displayBuilder.append("\nHealth: " + gameObject.getHealth());
         }
         

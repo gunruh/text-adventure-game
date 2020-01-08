@@ -7,5 +7,6 @@ public enum Action {
     Shoot,
     Drop,
     Name,
-    Speak;
+    Speak,
+    Inventory;
 }

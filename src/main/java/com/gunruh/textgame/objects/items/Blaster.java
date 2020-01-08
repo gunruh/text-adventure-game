@@ -1,6 +1,7 @@
 package com.gunruh.textgame.objects.items;
 
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.utils.IOUtils;
 
 public class Blaster extends GameObject {
     public Blaster() {
@@ -12,5 +13,11 @@ public class Blaster extends GameObject {
     @Override
     public int getEffectivenessAsBlaster() {
         return effectivenessAsGun;
+    }
+
+    @Override
+    public void shoot(GameObject receivingObject) {
+        IOUtils.displayWithinAsterisks("A flash of red laser light shoots from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
+        super.shoot(receivingObject);
     }
 }

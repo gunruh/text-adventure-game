@@ -3,12 +3,13 @@ package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.RestrictedElevatorKeyCard;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.level1.MainUpperHallway;
+import com.gunruh.textgame.objects.rooms.starship.level1.RestrictedElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class RestrictedElevatorDown extends Room {
     private RestrictedElevatorDown() {
         super("Restricted Elevator", "This elevator can only be used with a key card. The doors are on the north side.");
+        setIsNewPlace(false);
     }
 
     private static RestrictedElevatorDown INSTANCE = new RestrictedElevatorDown();
@@ -26,7 +27,8 @@ public class RestrictedElevatorDown extends Room {
     public Room goDown() {
         // Check if key card is in player inventory, or just in the elevator.
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(RestrictedElevatorKeyCard.getInstance())) {
-            return MainUpperHallway.getInstance();
+            IOUtils.displayWithinAsterisks("The doors close, and you feel the elevator lurch downward. The northern doors open again.");
+            return RestrictedElevatorUp.getInstance();
         }
         else {
             IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");

@@ -158,7 +158,6 @@ public class Game {
                 }
             	
             	GameObject targetObject = statement.getReceivingObject();
-                displayWithinAsterisks("Shoots " + IOUtils.getNickNameOrNameWithArticle(targetObject) + " with the " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()));
             	statement.getActingObject().shoot(targetObject);
             }
 

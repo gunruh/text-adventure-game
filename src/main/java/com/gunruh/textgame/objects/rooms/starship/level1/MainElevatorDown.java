@@ -1,12 +1,13 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.level0.MainLowerHallway;
+import com.gunruh.textgame.objects.rooms.starship.level0.MainElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class MainElevatorDown extends Room {
     private MainElevatorDown() {
-        super("Main Elevator", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should).");
+        super("Main Elevator", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should). The doors are on the south side.");
+        setIsNewPlace(false);
     }
 
     private static MainElevatorDown INSTANCE = new MainElevatorDown();
@@ -28,7 +29,7 @@ public class MainElevatorDown extends Room {
 
     @Override
     public Room goDown() {
-        IOUtils.displayWithinAsterisks("You feel lighter for a moment as the elevator glides downward. The doors open and you step out.");
-        return MainLowerHallway.getInstance();
+        IOUtils.displayWithinAsterisks("The doors close, and you feel lighter as the elevator glides downward. The elevator doors open to the South.");
+        return MainElevatorUp.getInstance();
     }
 }

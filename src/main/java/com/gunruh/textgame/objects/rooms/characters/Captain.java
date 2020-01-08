@@ -20,7 +20,12 @@ public class Captain extends GameObject {
 	public boolean isPermanentFixture() {
 		return true;
 	}
-    
+
+	@Override
+    public void receiveShoot(GameObject actingObject) {
+        IOUtils.displayWithinAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " is wearing official blaster-proof gear. " + IOUtils.getNickNameOrNameWithArticle(actingObject) + "'s attack has no effect.");
+    }
+
     @Override
     public void receiveTalkTo(GameObject gameObject) {
     	IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: \"I love my boy. One day he's going to be the captain of this cruiser.\n" + 

@@ -58,6 +58,11 @@ public class InputMaps {
         actionMap.put("tell", Action.Speak);
         actionMap.put("hello", Action.Speak);
         actionMap.put("talk", Action.Speak);
+        actionMap.put("ask", Action.Speak);
+
+        actionMap.put("i", Action.Inventory);
+        actionMap.put("inventory", Action.Inventory);
+        actionMap.put("inv", Action.Inventory);
 
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);
