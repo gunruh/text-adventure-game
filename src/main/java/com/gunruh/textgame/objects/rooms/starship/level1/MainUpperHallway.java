@@ -9,7 +9,8 @@ public class MainUpperHallway extends Room {
         super("Main Upper Hallway",
                 "This is the main hallway on the top floor of the space cruiser." +
                         "\nIt runs North and South (with North at the front of the ship)." +
-                        "\nThe passengers' quarters are along the west wall. One of them has left the door open." +
+                        "\nThe passengers' quarters are along the west wall. One of them has left the door open." + 
+                        "\nThe double doors to the Kitchen are in the northeast corner." +
                         "\nThere is a corridor leading east.");
 
         getAvailableObjects().add(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
@@ -26,6 +27,11 @@ public class MainUpperHallway extends Room {
     @Override
     public Room goNorth() {
         return MainElevatorDown.getInstance();
+    }
+    
+    @Override
+    public Room goNorthEast() {
+    	return Kitchen.getInstance();
     }
 
     @Override
