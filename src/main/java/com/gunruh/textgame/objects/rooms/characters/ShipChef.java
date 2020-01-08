@@ -22,7 +22,7 @@ public class ShipChef extends GameObject {
 	
 	@Override
 	public void receiveTalkTo(GameObject gameObject) {
-		IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: " + 
+		IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: " +
 		                                                     "\n\"Why, hello there. You better not be scrambling around in my kitchen.\"");
 	}
 }

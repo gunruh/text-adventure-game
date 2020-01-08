@@ -1,5 +1,6 @@
 package com.gunruh.textgame.objects.rooms.starship.level0;
 
+import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainLowerHallway extends Room {
@@ -8,6 +9,7 @@ public class MainLowerHallway extends Room {
                 "This is the main hallway on the bottom floor of the space cruiser." +
                         "\nIt runs North and South (with North at the front of the ship)." +
                         "\nThe Janitor's Quarters room is on the west wall.");
+        getAvailableObjects().add(new GameObject("Tip Sheet", "Type 'Look' to look around, or examine something!") {});
     }
 
     private static final MainLowerHallway INSTANCE = new MainLowerHallway();
