@@ -6,7 +6,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class JanitorsCloset extends Room {
     private JanitorsCloset() {
-        super("Janitor's Closet", "This is where the janitor supplies usually are, but the bucket and squeegie are missing..." + 
+        super("Janitor's Closet", "This room stores the window-cleaning supplies, but a few items seem to have been taken..." +
               "\nThe door is on the west side.");
 
         getAvailableObjects().add(CleaningSprayGun.getInstance());

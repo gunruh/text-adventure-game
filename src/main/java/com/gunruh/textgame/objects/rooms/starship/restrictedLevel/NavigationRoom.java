@@ -1,6 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
 
-import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.items.RubberSqueegee;
+import com.gunruh.textgame.objects.items.WindowWashingCloth;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.characters.AndersonJr;
 import com.gunruh.textgame.objects.rooms.characters.Captain;
@@ -12,8 +13,8 @@ public class NavigationRoom extends Room {
         getAvailableObjects().add(Captain.getInstance());
         getAvailableObjects().add(AndersonJr.getInstance());
 
-        getAvailableObjects().add(new GameObject("Window-Washing Bucket", "A bucket for window washing.") {});
-        getAvailableObjects().add(new GameObject("Rubber squeegie", "Useful for squeeging space gunk off escape pod windows.") {});
+        getAvailableObjects().add(RubberSqueegee.getInstance());
+        getAvailableObjects().add(WindowWashingCloth.getInstance());
     }
 
     private static NavigationRoom INSTANCE = new NavigationRoom();

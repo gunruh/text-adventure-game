@@ -11,6 +11,8 @@ import java.util.*;
 public class IOUtils {
     private static Scanner scanner = new Scanner(System.in);
 
+    private static Random random = new Random(); // Used for random generation.
+
     public static void displayWithinAsterisks(String displayText) {
         display("*" + displayText + "*");
     }
@@ -22,18 +24,28 @@ public class IOUtils {
     public static void displayGameObject(GameObject gameObject) {
     	StringBuilder displayBuilder = new StringBuilder();
     	
-        if (!isNullOrEmpty(gameObject.getNickName())) {
-            displayBuilder.append(gameObject.getNickName() + " (" + gameObject.getName() + ")\n" + gameObject.getDescription());
-        }
-        else {
-            displayBuilder.append(gameObject.getName() + "\n" + gameObject.getDescription());
-        }
+        displayBuilder.append(getNickNameAndNameString(gameObject));
+
+        displayBuilder.append("\n" + gameObject.getDescription());
 
         if (!(gameObject instanceof Room) && gameObject.getHealth() < 100) {
             displayBuilder.append("\nHealth: " + gameObject.getHealth());
         }
         
         display(displayBuilder.toString());
+    }
+
+    public static String getNickNameAndNameString(GameObject gameObject) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (!isNullOrEmpty(gameObject.getNickName())) {
+            stringBuilder.append(gameObject.getNickName() + " (" + gameObject.getName() + ")");
+        }
+        else {
+            stringBuilder.append(gameObject.getName());
+        }
+
+        return stringBuilder.toString();
     }
 
     public static void display(String text) {
@@ -409,7 +421,6 @@ public class IOUtils {
         String selectedString = null;
 
         if (stringList != null && !stringList.isEmpty()) {
-            Random random = new Random();
             int randomInt = random.nextInt(stringList.size());
             selectedString = stringList.get(randomInt);
         }

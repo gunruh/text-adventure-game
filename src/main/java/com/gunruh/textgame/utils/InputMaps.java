@@ -39,6 +39,7 @@ public class InputMaps {
         actionMap.put("shoot", Action.Shoot);
         actionMap.put("blast", Action.Shoot);
         actionMap.put("fire", Action.Shoot);
+        actionMap.put("spritz", Action.Shoot);
 
         actionMap.put("look", Action.Look);
         actionMap.put("l", Action.Look);

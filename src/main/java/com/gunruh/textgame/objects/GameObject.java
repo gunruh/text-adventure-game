@@ -53,7 +53,7 @@ public abstract class GameObject {
     }
 
     public void receiveTalkTo(GameObject actingObject) {
-        IOUtils.display(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " has nothing to say."));
+        IOUtils.display(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " does not seem to respond."));
     }
     
     public void shoot(GameObject receivingObject) {

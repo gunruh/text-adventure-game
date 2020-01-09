@@ -11,6 +11,8 @@ import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
 
+import java.util.Iterator;
+
 import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
@@ -174,6 +176,32 @@ public class Game {
                 }
 
                 player.talkTo(statement.getReceivingObject());
+            }
+
+            else if (Action.Inventory == statement.getAction()) {
+                StringBuilder stringBuilder = new StringBuilder();
+
+                stringBuilder.append("Inventory:");
+
+                if (Player.getInstance().getInventory().isEmpty()) {
+                    stringBuilder.append(" Nothing.");
+                }
+                else {
+                    stringBuilder.append("\n\n"); // Next line - double spaced.
+                    Iterator<GameObject> itemIterator = Player.getInstance().getInventory().iterator();
+                    while (itemIterator.hasNext()) {
+                        GameObject gameObject = itemIterator.next();
+                        stringBuilder.append("- ");
+                        stringBuilder.append(IOUtils.getNickNameAndNameString(gameObject));
+
+                        if (itemIterator.hasNext()) {
+                            stringBuilder.append("\n");
+                        }
+                    }
+                }
+
+                IOUtils.display(stringBuilder.toString());
+                continue;
             }
             
             else if (Action.Move == statement.getAction()) {

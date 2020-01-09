@@ -8,7 +8,7 @@ import java.util.List;
 import static com.gunruh.textgame.utils.IOUtils.display;
 
 public class Player extends GameObject {
-    private static Player INSTANCE = new Player("Kevin", "A man on a mission.");
+    private static Player INSTANCE = new Player("Space Dude", "A man on a mission.");
 
     public static Player getInstance() {
         return INSTANCE;
