@@ -59,6 +59,7 @@ public class InputMaps {
         actionMap.put("hello", Action.Speak);
         actionMap.put("talk", Action.Speak);
         actionMap.put("ask", Action.Speak);
+        actionMap.put("command", Action.Speak);
 
         actionMap.put("i", Action.Inventory);
         actionMap.put("inventory", Action.Inventory);

@@ -1,7 +1,8 @@
-package com.gunruh.textgame.objects.rooms.starship.level1;
+package com.gunruh.textgame.objects.rooms.starship.upperLevel;
 
 import com.gunruh.textgame.objects.items.Blaster;
 import com.gunruh.textgame.objects.rooms.Room;
+import com.gunruh.textgame.objects.rooms.starship.eastCorridor.StarBoardHallway;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class EastWestCorridor extends Room {
@@ -18,8 +19,7 @@ public class EastWestCorridor extends Room {
 
     @Override
     public Room goEast() {
-        IOUtils.display("Sorry, it's clogged. The game hasn't been made this far yet.");
-        return Room.ROOM_NOT_PRESENT;
+        return StarBoardHallway.getInstance();
     }
 
     @Override

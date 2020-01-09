@@ -1,7 +1,7 @@
-package com.gunruh.textgame.objects.rooms.starship.level1;
+package com.gunruh.textgame.objects.rooms.starship.upperLevel;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.level0.MainElevatorUp;
+import com.gunruh.textgame.objects.rooms.starship.lowerLevel.MainElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class MainElevatorDown extends Room {

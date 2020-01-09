@@ -1,11 +1,9 @@
 package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
 
-import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.characters.AndersonJr;
 import com.gunruh.textgame.objects.rooms.characters.Captain;
-import com.gunruh.textgame.objects.rooms.starship.level0.MainElevatorUp;
 
 public class NavigationRoom extends Room {
     private NavigationRoom() {

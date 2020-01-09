@@ -402,10 +402,19 @@ public class IOUtils {
                 "A small pile of space dust blows away in the breeze.",
                 "You notice a silver coin left behind, but a weird lookin' bug comes and takes it.");
 
-        Random random = new Random();
-        int randomInt = random.nextInt(destroyStrings.size());
+        return getRandomStringFromStringList(destroyStrings);
+    }
 
-        return destroyStrings.get(randomInt);
+    public static String getRandomStringFromStringList(List<String> stringList) {
+        String selectedString = null;
+
+        if (stringList != null && !stringList.isEmpty()) {
+            Random random = new Random();
+            int randomInt = random.nextInt(stringList.size());
+            selectedString = stringList.get(randomInt);
+        }
+
+        return selectedString;
     }
 
     public static GameObject getGameObjectWithHighestEffectiveness(List<GameObject> gameObjects, Action action, GameObject objectToExclude) {

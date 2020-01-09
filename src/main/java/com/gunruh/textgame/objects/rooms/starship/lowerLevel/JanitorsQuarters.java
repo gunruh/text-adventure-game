@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship.level0;
+package com.gunruh.textgame.objects.rooms.starship.lowerLevel;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.rooms.Room;

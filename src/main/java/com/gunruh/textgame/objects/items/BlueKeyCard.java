@@ -2,14 +2,14 @@ package com.gunruh.textgame.objects.items;
 
 import com.gunruh.textgame.objects.GameObject;
 
-public class RestrictedElevatorKeyCard extends GameObject {
-    private RestrictedElevatorKeyCard() {
+public class BlueKeyCard extends GameObject {
+    private BlueKeyCard() {
         super("Blue Key Card", "A blue key card with some sort of magnetic signature. It may allow access to restricted areas.");
     }
 
-    private static RestrictedElevatorKeyCard INSTANCE = new RestrictedElevatorKeyCard();
+    private static BlueKeyCard INSTANCE = new BlueKeyCard();
 
-    public static RestrictedElevatorKeyCard getInstance() {
+    public static BlueKeyCard getInstance() {
         return INSTANCE;
     }
 }
