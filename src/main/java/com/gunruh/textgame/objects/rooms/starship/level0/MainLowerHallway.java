@@ -21,6 +21,11 @@ public class MainLowerHallway extends Room {
     public Room goNorth() {
         return MainElevatorUp.getInstance();
     }
+    
+    @Override
+    public Room goEast() {
+    	return JanitorsCloset.getInstance();
+    }
 
     @Override
     public Room goSouth() {
