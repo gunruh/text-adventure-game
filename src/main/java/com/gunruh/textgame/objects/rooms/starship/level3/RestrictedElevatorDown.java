@@ -1,14 +1,14 @@
-package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
+package com.gunruh.textgame.objects.rooms.starship.level3;
 
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.BlueKeyCard;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.upperLevel.RestrictedElevatorUp;
+import com.gunruh.textgame.objects.rooms.starship.level2.RestrictedElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class RestrictedElevatorDown extends Room {
     private RestrictedElevatorDown() {
-        super("Restricted Elevator", "This elevator can only be used with a key card. The doors are on the north side.");
+        super("Restricted Elevator (Level: 3)", "This elevator has magnetic authentication sensors. It will only go up or down if the keycard is nearby. The doors are on the north side.");
         setIsNewPlace(false);
     }
 

@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship.eastCorridor;
+package com.gunruh.textgame.objects.rooms.starship.level2.starboadSide;
 
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.characters.KevinThePodBot17;

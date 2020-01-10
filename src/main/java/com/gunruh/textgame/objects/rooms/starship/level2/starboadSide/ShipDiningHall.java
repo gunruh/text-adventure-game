@@ -1,7 +1,7 @@
-package com.gunruh.textgame.objects.rooms.starship.eastCorridor;
+package com.gunruh.textgame.objects.rooms.starship.level2.starboadSide;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.upperLevel.Kitchen;
+import com.gunruh.textgame.objects.rooms.starship.level2.Kitchen;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class ShipDiningHall extends Room {

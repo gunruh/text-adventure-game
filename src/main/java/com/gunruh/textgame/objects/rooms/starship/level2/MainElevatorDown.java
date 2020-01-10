@@ -1,12 +1,12 @@
-package com.gunruh.textgame.objects.rooms.starship.upperLevel;
+package com.gunruh.textgame.objects.rooms.starship.level2;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.lowerLevel.MainElevatorUp;
+import com.gunruh.textgame.objects.rooms.starship.level1.MainElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class MainElevatorDown extends Room {
     private MainElevatorDown() {
-        super("Main Elevator", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should). The doors are on the south side.");
+        super("Main Elevator (Level: 2)", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should). The doors are on the south side.");
         setIsNewPlace(false);
     }
 

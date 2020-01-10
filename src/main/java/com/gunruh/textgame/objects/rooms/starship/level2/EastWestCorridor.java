@@ -1,9 +1,8 @@
-package com.gunruh.textgame.objects.rooms.starship.upperLevel;
+package com.gunruh.textgame.objects.rooms.starship.level2;
 
 import com.gunruh.textgame.objects.items.Blaster;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.starship.eastCorridor.StarBoardHallway;
-import com.gunruh.textgame.utils.IOUtils;
+import com.gunruh.textgame.objects.rooms.starship.level2.starboadSide.StarBoardHallway;
 
 public class EastWestCorridor extends Room {
     private EastWestCorridor() {

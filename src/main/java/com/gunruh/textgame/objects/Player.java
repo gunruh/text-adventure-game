@@ -17,11 +17,6 @@ public class Player extends GameObject {
     private List<GameObject> inventory;
     private Room currentRoom;
 
-    @Override
-    public int getEffectivenessAsBlaster() {
-        return 0;
-    }
-
     private Player(String name, String description) {
         super(name, description);
         this.inventory = new ArrayList<GameObject>();

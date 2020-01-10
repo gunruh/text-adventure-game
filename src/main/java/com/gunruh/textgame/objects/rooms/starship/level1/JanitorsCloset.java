@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship.lowerLevel;
+package com.gunruh.textgame.objects.rooms.starship.level1;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.items.CleaningSprayGun;

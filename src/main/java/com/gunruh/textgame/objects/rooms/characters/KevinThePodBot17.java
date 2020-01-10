@@ -20,6 +20,8 @@ public class KevinThePodBot17 extends GameObject {
         return INSTANCE;
     }
 
+    private int speechCount = 0;
+
     @Override
     public boolean isPermanentFixture() {
         return true;
@@ -46,6 +48,11 @@ public class KevinThePodBot17 extends GameObject {
                 "You humans are always saying things like \"Please\" and \"Thank\". I find your \"attempt\" at being polite rather inefficient.",
                 "The answer to your question is not worth my time.");
 
-        return IOUtils.getRandomStringFromStringList(kevinStrings);
+        if (speechCount > kevinStrings.size() - 1) {
+            // reset
+            speechCount = 0;
+        }
+
+        return kevinStrings.get(speechCount++);
     }
 }

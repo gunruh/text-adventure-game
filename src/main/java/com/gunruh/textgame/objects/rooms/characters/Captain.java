@@ -28,7 +28,8 @@ public class Captain extends GameObject {
 
     @Override
     public void receiveTalkTo(GameObject gameObject) {
-    	IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: \"I love my boy. I brought him to 'Bring-Your-Child-To-Work Day' today." +
+    	IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says: " +
+                "\n\"I love my boy. I brought him to 'Bring-Your-Child-To-Work Day' today." +
                 "\nOne day he's going to be the captain of this cruiser." +
     	                "\nI also love corndogs. What's that? You say there are free corndogs today? ... I'll be right back...\"");
     	IOUtils.displayWithinAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " leaves the room.");

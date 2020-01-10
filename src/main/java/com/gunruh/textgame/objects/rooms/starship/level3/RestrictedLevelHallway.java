@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship.restrictedLevel;
+package com.gunruh.textgame.objects.rooms.starship.level3;
 
 import com.gunruh.textgame.objects.rooms.Room;
 

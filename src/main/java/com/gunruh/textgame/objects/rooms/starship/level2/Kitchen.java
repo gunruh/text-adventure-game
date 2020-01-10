@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.starship.upperLevel;
+package com.gunruh.textgame.objects.rooms.starship.level2;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.items.GoldenSpatula;

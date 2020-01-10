@@ -6,7 +6,7 @@ import com.gunruh.textgame.objects.*;
 import com.gunruh.textgame.objects.items.Blaster;
 import com.gunruh.textgame.objects.rooms.RoomA;
 import com.gunruh.textgame.objects.rooms.RoomB;
-import com.gunruh.textgame.objects.rooms.starship.lowerLevel.JanitorsQuarters;
+import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
