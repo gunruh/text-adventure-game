@@ -66,6 +66,10 @@ public class InputMaps {
         actionMap.put("inventory", Action.Inventory);
         actionMap.put("inv", Action.Inventory);
 
+        actionMap.put("push", Action.Push);
+        actionMap.put("press", Action.Push);
+        actionMap.put("activate", Action.Push);
+
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);
         directionMap.put("northeast", Direction.NorthEast);

@@ -8,5 +8,6 @@ public enum Action {
     Drop,
     Name,
     Speak,
+    Push,
     Inventory;
 }

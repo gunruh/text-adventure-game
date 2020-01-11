@@ -38,7 +38,13 @@ public class RestrictedElevatorDown extends Room {
 
     @Override
     public Room goUp() {
-        IOUtils.displayWithinAsterisks("The elevator cannot go any higher.");
-        return Room.ROOM_NOT_PRESENT;
+        if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(BlueKeyCard.getInstance())) {
+            IOUtils.displayWithinAsterisks("The elevator cannot go any higher.");
+            return Room.ROOM_NOT_PRESENT;
+        }
+        else {
+            IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");
+            return Room.ROOM_NOT_PRESENT;
+        }
     }
 }
