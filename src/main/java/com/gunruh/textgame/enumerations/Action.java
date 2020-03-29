@@ -1,6 +1,7 @@
 package com.gunruh.textgame.enumerations;
 
 public enum Action {
+    UNKNOWN_ACTION,
     Move,
     Take,
     Look,
@@ -9,5 +10,9 @@ public enum Action {
     Name,
     Speak,
     Push,
-    Inventory;
+    Inventory,
+    Open,
+    Close,
+    Insert,
+    Remove;
 }

@@ -7,12 +7,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/KeyCardGreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/Dresser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/BlueKeyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/KeyCardBlue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/AndersonJr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/AndersonJr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/Captain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/Captain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/KevinThePodBot17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/KevinThePodBot17.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/ShipChef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/ShipChef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/JanitorsQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/JanitorsQuarters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/Kitchen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/Kitchen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/MainUpperHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/MainUpperHallway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/PassengersQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/PassengersQuarters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/RestrictedElevatorUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/RestrictedElevatorUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/EscapePod17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/EscapePod17.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/StarBoardHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/StarBoardHallway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/NavigationRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/NavigationRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/RestrictedElevatorDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/RestrictedElevatorDown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,8 +66,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last.edited.regexp" value="`" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+    <property name="last.edited.regexp" value="the" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -62,6 +82,7 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gunruh.textgame.objects.items" />
       <recent name="com.gunruh.textgame.objects.rooms.starship.restrictedLevel" />
       <recent name="com.gunruh.textgame.objects.rooms.starship.level1" />
     </key>
@@ -85,7 +106,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main Game">
+  <component name="RunManager" selected="JUnit.IOUtilsTest.getsatementfromInputFixNullPointer">
     <configuration name="Main Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.Main" />
       <module name="text-adventure-game" />
@@ -93,7 +114,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.getsatementfromInputFixNullPointer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
@@ -103,22 +124,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IOUtilsTest.testDestroyObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="text-adventure-game" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testDestroyObject" />
+      <option name="METHOD_NAME" value="getsatementfromInputFixNullPointer" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,7 +146,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testGetNickNameOrNameWithArticle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.testGetAvailableObjectsText_OneItemNoNickname" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
@@ -150,13 +156,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testGetNickNameOrNameWithArticle" />
+      <option name="METHOD_NAME" value="testGetAvailableObjectsText_OneItemNoNickname" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IOUtilsTest.testNameAlreadyNamedObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="IOUtilsTest.testNormalizeInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="text-adventure-game" />
       <extension name="coverage">
         <pattern>
@@ -166,7 +172,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
-      <option name="METHOD_NAME" value="testNameAlreadyNamedObject" />
+      <option name="METHOD_NAME" value="testNormalizeInput" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IOUtilsTest.testNormalizeInput_RemoveArticleAdjectives" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="text-adventure-game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gunruh.textgame.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gunruh.textgame.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.utils.IOUtilsTest" />
+      <option name="METHOD_NAME" value="testNormalizeInput_RemoveArticleAdjectives" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,19 +196,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main Game" />
-      <item itemvalue="JUnit.IOUtilsTest" />
-      <item itemvalue="JUnit.IOUtilsTest.testNameAlreadyNamedObject" />
-      <item itemvalue="JUnit.IOUtilsTest.testGetNickNameOrNameWithArticle" />
-      <item itemvalue="JUnit.IOUtilsTest.testDestroyObject" />
       <item itemvalue="JUnit.IOUtilsTest.testDestroyPlayerInventoryObject" />
+      <item itemvalue="JUnit.IOUtilsTest.testGetAvailableObjectsText_OneItemNoNickname" />
+      <item itemvalue="JUnit.IOUtilsTest.testNormalizeInput" />
+      <item itemvalue="JUnit.IOUtilsTest.testNormalizeInput_RemoveArticleAdjectives" />
+      <item itemvalue="JUnit.IOUtilsTest.getsatementfromInputFixNullPointer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IOUtilsTest.getsatementfromInputFixNullPointer" />
+        <item itemvalue="JUnit.IOUtilsTest.testNormalizeInput_RemoveArticleAdjectives" />
+        <item itemvalue="JUnit.IOUtilsTest.testNormalizeInput" />
+        <item itemvalue="JUnit.IOUtilsTest.testGetAvailableObjectsText_OneItemNoNickname" />
         <item itemvalue="JUnit.IOUtilsTest.testDestroyPlayerInventoryObject" />
-        <item itemvalue="JUnit.IOUtilsTest.testDestroyObject" />
-        <item itemvalue="JUnit.IOUtilsTest.testGetNickNameOrNameWithArticle" />
-        <item itemvalue="JUnit.IOUtilsTest" />
-        <item itemvalue="JUnit.IOUtilsTest.testNameAlreadyNamedObject" />
       </list>
     </recent_temporary>
   </component>

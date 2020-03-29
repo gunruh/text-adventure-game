@@ -13,16 +13,12 @@ public class Statement {
     private String remainingString;
 
     public Statement(GameObject actingObject, Action action, GameObject receivingObject) {
-        this.actingObject = actingObject;
-        this.action = action;
-        this.receivingObject = receivingObject;
-        this.direction = null;
-        this.remainingString = null;
+        this(actingObject, action, receivingObject, null);
     }
 
     public Statement(GameObject actingObject, Action action, GameObject receivingObject, Direction direction) {
         this.actingObject = actingObject;
-        this.action = action;
+        this.action = action != null ? action : Action.UNKNOWN_ACTION;
         this.receivingObject = receivingObject;
         this.direction = direction;
         this.remainingString = null;

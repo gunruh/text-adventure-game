@@ -1,6 +1,8 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.items.containers.Container;
+import com.gunruh.textgame.objects.items.containers.Dresser;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.IOUtils;
 
@@ -11,7 +13,9 @@ public class JanitorsQuarters extends Room {
                         "\nThere's a door on the east side of the room." +
                         "\nTry typing 'Go East' to walk through the east door.");
         getAvailableObjects().add(new GameObject("Bed", "No time for sleep, gotta get to work!", true) {});
-        getAvailableObjects().add(new GameObject("Dresser", "Just a basic dresser. Standard issue for janitors such as yourself.", true) {});
+        getAvailableObjects().add(Dresser.getInstance());
+        getAvailableObjects().add(new Container("Lightweight Chest", "A container for nic-nacks and paddy-whacks.", 10) {});
+
     }
 
     private static final JanitorsQuarters INSTANCE = new JanitorsQuarters();

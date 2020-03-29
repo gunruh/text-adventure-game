@@ -1,7 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.level2;
 
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.items.BlueKeyCard;
+import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainUpperHallway extends Room {
@@ -14,7 +14,7 @@ public class MainUpperHallway extends Room {
 
         getAvailableObjects().add(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
         getAvailableObjects().add(new GameObject("Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
-        getAvailableObjects().add(BlueKeyCard.getInstance());
+        getAvailableObjects().add(KeyCardBlue.getInstance());
     }
 
     private static final MainUpperHallway INSTANCE = new MainUpperHallway();

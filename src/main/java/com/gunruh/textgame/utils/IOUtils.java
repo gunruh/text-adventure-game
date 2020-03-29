@@ -73,10 +73,23 @@ public class IOUtils {
     }
 
     public static String normalizeInput (String inputString) {
+        return normalizeInput(inputString, false);
+    }
+
+    public static String normalizeInput (String inputString, boolean removeArticleAdjectives) {
         String normalizedInput = inputString;
 
         if (!isNullOrEmpty(inputString)) {
             normalizedInput = inputString.toLowerCase().trim();
+
+            if (removeArticleAdjectives) {
+                if (isArticleAdjective(normalizedInput)) {
+                    normalizedInput = ""; // for the case where they only typed an article adjective with no subject.
+                }
+                if (normalizedInput.matches("(the|a|an)[\\s]+.*")) {
+                    normalizedInput = normalizedInput.replaceAll("(the|a|an)[\\s]+", "");
+                }
+            }
         }
 
         return normalizedInput;
@@ -133,7 +146,7 @@ public class IOUtils {
         say "goose" (SAY <anything - remove non-alpha characters>) --> print everything after "say"
         say goose. (SAY <anything>) --> print everything after "say"
         shoot the troll (SHOOT the TROLL) --> print "(with blaster)" or item with highest value of "effectivenessAsBlaster"
-        unlock the door with the key (UNLOCK the DOOR with the KEY)
+        unlock the door with the key (UNLOCK the DOOR WITH the KEY)
         eat the burrito (EAT the BURRITO)
         go east (GO EAST)
         walk east (WALK EAST)
@@ -150,6 +163,11 @@ public class IOUtils {
         climb down the ladder (CLIMB DOWN LADDER)
         go down (GO DOWN)
         go up (GO UP)
+        open the container (OPEN the CONTAINER)
+        close the container (CLOSE the CONTAINER)
+        take the blaster out of the container (TAKE the BLASTER out of the CONTAINER)
+        remove the blaster from the container (REMOVE the BLASTER from the CONTAINER)
+        put the blaster into the container (PUT the BLASTER INTO the CONTAINER
         */
 
         Statement statement = new Statement(null, null, null, null);
@@ -325,7 +343,7 @@ public class IOUtils {
         }
 
         GameObject matchingObject = null;
-        String cleanedSearchText = normalizeInput(searchText);
+        String cleanedSearchText = normalizeInput(searchText, true);
 
         for (GameObject gameObject : availableObjects) {
             if ((!isNullOrEmpty(gameObject.getNickName()) && normalizeInput(gameObject.getNickName()).contains(cleanedSearchText)) || (!isNullOrEmpty(gameObject.getName()) && normalizeInput(gameObject.getName()).contains(cleanedSearchText))) {
@@ -450,5 +468,39 @@ public class IOUtils {
         }
 
         return bestMatchObject;
+    }
+
+    public static String getObjectListAsString(List<GameObject> objectList) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (objectList != null) {
+            Iterator<GameObject> gameObjectIterator = objectList.iterator();
+            while (gameObjectIterator.hasNext()) {
+                GameObject gameObject = gameObjectIterator.next();
+
+                // If the list contains more than one object, and we're at the second to last object
+                if (objectList.size() > 1 && !gameObjectIterator.hasNext()) {
+                    stringBuilder.append("and ");
+                }
+
+                if (!isNullOrEmpty(gameObject.getNickName())) {
+                    stringBuilder.append(gameObject.getNickName());
+                }
+                else {
+                    stringBuilder.append(getAorAnForString(gameObject.getName()) + " " + gameObject.getName());
+                }
+
+                if (gameObjectIterator.hasNext()) {
+                    if (objectList.size() > 2) {
+                        stringBuilder.append(", ");
+                    }
+                    else {
+                        stringBuilder.append(" ");
+                    }
+                }
+            }
+        }
+
+        return stringBuilder.toString();
     }
 }

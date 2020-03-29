@@ -4,6 +4,7 @@ package com.gunruh.textgame;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.objects.*;
 import com.gunruh.textgame.objects.items.Blaster;
+import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.objects.rooms.RoomA;
 import com.gunruh.textgame.objects.rooms.RoomB;
 import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
@@ -38,6 +39,12 @@ public class Game {
             switch (statement.getAction()) {
                 case Take: {
                     handleTake(statement);
+                    // todo add support for 'take from inside container' probably in 'handleTake()' method ^^^
+                    break;
+                }
+                case Insert: {
+                    // todo handle this.
+                    IOUtils.displayWithinAsterisks("The game doesn't support 'insert into' yet.");
                     break;
                 }
                 case Drop: {
@@ -62,6 +69,14 @@ public class Game {
                 }
                 case Inventory: {
                     handleShowInventory(statement);
+                    break;
+                }
+                case Open: {
+                    handleOpen(statement);
+                    break;
+                }
+                case Close: {
+                    handleClose(statement);
                     break;
                 }
                 case Move: {
@@ -154,6 +169,20 @@ public class Game {
                 GameObject gameObject = itemIterator.next();
                 stringBuilder.append("- ");
                 stringBuilder.append(IOUtils.getNickNameAndNameString(gameObject));
+
+                if (gameObject instanceof Container) {
+                    if (((Container) gameObject).isOpen()) {
+                        Iterator<GameObject> innerItemIterator = ((Container) gameObject).getItems().iterator();
+                        while (innerItemIterator.hasNext()) {
+                            GameObject innerItem = innerItemIterator.next();
+                            stringBuilder.append(" - ");
+                            stringBuilder.append(IOUtils.getNickNameAndNameString(innerItem));
+                        }
+                    }
+                    else {
+                        stringBuilder.append(" (Closed)");
+                    }
+                }
 
                 if (itemIterator.hasNext()) {
                     stringBuilder.append("\n");
@@ -304,6 +333,46 @@ public class Game {
             if (playerInventoryIndex != -1) {
                 display("You already have " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
             }
+        }
+    }
+
+    private void handleOpen(Statement statement) {
+        if (statement.getReceivingObject() == null) {
+            IOUtils.display("Open what?");
+            String openInput = IOUtils.getInputText();
+            statement.setReceivingObject(getMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+        }
+
+        if (statement.getReceivingObject() == null) {
+            display("Sorry - I can't find that object.");
+            return;
+        }
+
+        if (statement.getReceivingObject() instanceof Container) {
+            ((Container) statement.getReceivingObject()).receiveOpen();
+        }
+        else {
+            IOUtils.displayWithinAsterisks("You can't open " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+        }
+    }
+
+    private void handleClose(Statement statement) {
+        if (statement.getReceivingObject() == null) {
+            IOUtils.display("Close what?");
+            String closeInput = IOUtils.getInputText();
+            statement.setReceivingObject(getMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+        }
+
+        if (statement.getReceivingObject() == null) {
+            display("Sorry - I can't find that object.");
+            return;
+        }
+
+        if (statement.getReceivingObject() instanceof Container) {
+            ((Container) statement.getReceivingObject()).receiveClose();
+        }
+        else {
+            IOUtils.displayWithinAsterisks("You can't close " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
         }
     }
 

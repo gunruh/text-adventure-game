@@ -8,8 +8,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 import static junit.framework.TestCase.*;
 
@@ -170,58 +169,47 @@ public class IOUtilsTest {
 
     @Test
     public void testGetAvailableObjectsText_ThreeItems() {
-        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
-
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
         GameObject bike = new GameObject("Bike", "A blue bicycle.") {};
         GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
 
-        room.getAvailableObjects().add(mike);
-        room.getAvailableObjects().add(bike);
-        room.getAvailableObjects().add(apple);
+        List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, bike, apple));
 
-        assertEquals("Mike, a Bike, and an Apple", room.getAvailableObjectsString());
+        assertEquals("Mike, a Bike, and an Apple", IOUtils.getObjectListAsString(gameObjects));
     }
 
     @Test
     public void testGetAvailableObjectsText_TwoItems() {
-        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
-
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
         GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
 
-        room.getAvailableObjects().add(mike);
-        room.getAvailableObjects().add(apple);
+        List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, apple));
 
-        assertEquals("Mike and an Apple", room.getAvailableObjectsString());
+        assertEquals("Mike and an Apple", IOUtils.getObjectListAsString(gameObjects));
     }
 
     @Test
     public void testGetAvailableObjectsText_OneItemWithNickName() {
-        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
-
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
 
-        room.getAvailableObjects().add(mike);
+        List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike));
 
-        assertEquals("Mike", room.getAvailableObjectsString());
+        assertEquals("Mike", IOUtils.getObjectListAsString(gameObjects));
     }
 
     @Test
     public void testGetAvailableObjectsText_OneItemNoNickname() {
-        Room room = new Room("Basic Room", "Just a basic room for testing.") {};
-
         GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
 
-        room.getAvailableObjects().add(apple);
+        List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(apple));
 
-        assertEquals("an Apple", room.getAvailableObjectsString());
+        assertEquals("an Apple", IOUtils.getObjectListAsString(gameObjects));
     }
 
     @Test
@@ -300,5 +288,16 @@ public class IOUtilsTest {
         Player.getInstance().getInventory().add(rock);
         rock.takeDamage(100);
         assertFalse(Player.getInstance().getInventory().contains(rock));
+    }
+
+    @Test
+    public void testNormalizeInput_RemoveArticleAdjectives() {
+        assertEquals("", IOUtils.normalizeInput("", true));
+        assertEquals("", IOUtils.normalizeInput("the", true));
+        assertEquals("", IOUtils.normalizeInput("a", true));
+        assertEquals("", IOUtils.normalizeInput("an", true));
+        assertEquals("apple", IOUtils.normalizeInput("the apple", true));
+        assertEquals("apple", IOUtils.normalizeInput("an apple ", true));
+        assertEquals("apple", IOUtils.normalizeInput("a apple  ", true));
     }
 }

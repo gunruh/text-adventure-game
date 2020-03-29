@@ -3,8 +3,8 @@ package com.gunruh.textgame.objects.rooms.starship.level3;
 import com.gunruh.textgame.objects.items.RubberSqueegee;
 import com.gunruh.textgame.objects.items.WindowWashingCloth;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.characters.AndersonJr;
-import com.gunruh.textgame.objects.rooms.characters.Captain;
+import com.gunruh.textgame.objects.characters.AndersonJr;
+import com.gunruh.textgame.objects.characters.Captain;
 
 public class NavigationRoom extends Room {
     private NavigationRoom() {

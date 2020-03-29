@@ -1,7 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.level2.starboadSide;
 
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.characters.KevinThePodBot17;
+import com.gunruh.textgame.objects.characters.KevinThePodBot17;
 
 public class EscapePod17 extends Room {
     private EscapePod17() {

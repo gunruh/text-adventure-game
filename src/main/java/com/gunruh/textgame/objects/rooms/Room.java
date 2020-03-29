@@ -5,7 +5,6 @@ import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class Room extends GameObject {
@@ -81,7 +80,7 @@ public abstract class Room extends GameObject {
 
         if (getAvailableObjects() != null && !getAvailableObjects().isEmpty()) {
             descriptionBuilder.append("\n");
-            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(getAvailableObjectsString()));
+            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getObjectListAsString(availableObjects)));
             if (getAvailableObjects().size() == 1) {
                 descriptionBuilder.append(" is here.");
             }
@@ -105,37 +104,4 @@ public abstract class Room extends GameObject {
         this.availableObjects = availableObjects;
     }
 
-    public String getAvailableObjectsString() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (availableObjects != null) {
-            Iterator<GameObject> gameObjectIterator = availableObjects.iterator();
-            while (gameObjectIterator.hasNext()) {
-                GameObject gameObject = gameObjectIterator.next();
-
-                // If the list contains more than one object, and we're at the second to last object
-                if (availableObjects.size() > 1 && !gameObjectIterator.hasNext()) {
-                    stringBuilder.append("and ");
-                }
-
-                if (!IOUtils.isNullOrEmpty(gameObject.getNickName())) {
-                    stringBuilder.append(gameObject.getNickName());
-                }
-                else {
-                    stringBuilder.append(IOUtils.getAorAnForString(gameObject.getName()) + " " + gameObject.getName());
-                }
-
-                if (gameObjectIterator.hasNext()) {
-                    if (availableObjects.size() > 2) {
-                        stringBuilder.append(", ");
-                    }
-                    else {
-                        stringBuilder.append(" ");
-                    }
-                }
-            }
-        }
-
-        return stringBuilder.toString();
-    }
 }

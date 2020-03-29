@@ -1,7 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.level3;
 
 import com.gunruh.textgame.objects.Player;
-import com.gunruh.textgame.objects.items.BlueKeyCard;
+import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level2.RestrictedElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
@@ -26,7 +26,7 @@ public class RestrictedElevatorDown extends Room {
     @Override
     public Room goDown() {
         // Check if key card is in player inventory, or just in the elevator.
-        if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(BlueKeyCard.getInstance())) {
+        if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(KeyCardBlue.getInstance())) {
             IOUtils.displayWithinAsterisks("The doors close, and you feel the elevator lurch downward. The northern doors open again.");
             return RestrictedElevatorUp.getInstance();
         }
@@ -38,7 +38,7 @@ public class RestrictedElevatorDown extends Room {
 
     @Override
     public Room goUp() {
-        if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(BlueKeyCard.getInstance())) {
+        if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), getAvailableObjects()).contains(KeyCardBlue.getInstance())) {
             IOUtils.displayWithinAsterisks("The elevator cannot go any higher.");
             return Room.ROOM_NOT_PRESENT;
         }

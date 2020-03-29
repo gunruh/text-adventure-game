@@ -3,7 +3,7 @@ package com.gunruh.textgame.objects.rooms.starship.level2;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.items.GoldenSpatula;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.objects.rooms.characters.ShipChef;
+import com.gunruh.textgame.objects.characters.ShipChef;
 
 public class Kitchen extends Room {
 	private Kitchen() {

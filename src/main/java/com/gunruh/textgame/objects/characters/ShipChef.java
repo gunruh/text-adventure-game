@@ -1,4 +1,4 @@
-package com.gunruh.textgame.objects.rooms.characters;
+package com.gunruh.textgame.objects.characters;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.utils.IOUtils;

@@ -29,6 +29,8 @@ public class InputMaps {
         actionMap.put("collect", Action.Take);
         actionMap.put("find", Action.Take);
         actionMap.put("get", Action.Take);
+        actionMap.put("remove", Action.Take);
+        actionMap.put("extract", Action.Take);
 
         actionMap.put("drop", Action.Drop);
         actionMap.put("leave", Action.Drop);
@@ -69,6 +71,14 @@ public class InputMaps {
         actionMap.put("push", Action.Push);
         actionMap.put("press", Action.Push);
         actionMap.put("activate", Action.Push);
+
+        actionMap.put("open", Action.Open);
+
+        actionMap.put("close", Action.Close);
+        actionMap.put("shut", Action.Close);
+
+        actionMap.put("insert", Action.Insert);
+        actionMap.put("put", Action.Insert);
 
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);

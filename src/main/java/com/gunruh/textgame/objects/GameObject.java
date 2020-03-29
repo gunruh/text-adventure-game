@@ -1,8 +1,10 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.utils.IOUtils;
 
 public abstract class GameObject {
+    protected static final GameObject EMPTY_GAME_OBJECT = new GameObject(null, null) {};
     private int health = 100;
     private final String name;
     private final String description;
@@ -83,4 +85,23 @@ public abstract class GameObject {
             Player.getInstance().getCurrentRoom().getAvailableObjects().remove(this);
         }
     }
+
+    public void insertInto(GameObject receivingObject) {
+        if (receivingObject instanceof Container) {
+            ((Container) receivingObject).receiveInsertInto(this);
+        }
+        else {
+            IOUtils.displayWithinAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(receivingObject));
+        }
+    }
+
+    public void removeFrom(GameObject receivingObject) {
+        if (receivingObject instanceof Container) {
+            ((Container) receivingObject).receiveRemove(this);
+        }
+        else {
+            IOUtils.displayWithinAsterisks("Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + ".");
+        }
+    }
+
 }

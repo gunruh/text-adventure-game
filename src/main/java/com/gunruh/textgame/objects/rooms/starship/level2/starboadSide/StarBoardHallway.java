@@ -1,7 +1,7 @@
 package com.gunruh.textgame.objects.rooms.starship.level2.starboadSide;
 
 import com.gunruh.textgame.objects.Player;
-import com.gunruh.textgame.objects.items.BlueKeyCard;
+import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level2.EastWestCorridor;
 import com.gunruh.textgame.utils.IOUtils;
@@ -30,7 +30,7 @@ public class StarBoardHallway extends Room {
 
     @Override
     public Room goSouth() {
-        if (Player.getInstance().getInventory().contains(BlueKeyCard.getInstance())) {
+        if (Player.getInstance().getInventory().contains(KeyCardBlue.getInstance())) {
             IOUtils.displayWithinAsterisks("BEEP BEEP BOOYEEP. The door opens.");
             return ServiceAirLock.getInstance();
         }
