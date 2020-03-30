@@ -68,7 +68,7 @@ public class Game {
                     break;
                 }
                 case Inventory: {
-                    handleShowInventory(statement);
+                    handleInventory(statement);
                     break;
                 }
                 case Open: {
@@ -154,7 +154,7 @@ public class Game {
         }
     }
 
-    private void handleShowInventory(Statement statement) {
+    private void handleInventory(Statement statement) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("Inventory:");
@@ -175,7 +175,7 @@ public class Game {
                         Iterator<GameObject> innerItemIterator = ((Container) gameObject).getItems().iterator();
                         while (innerItemIterator.hasNext()) {
                             GameObject innerItem = innerItemIterator.next();
-                            stringBuilder.append(" - ");
+                            stringBuilder.append("\n - ");
                             stringBuilder.append(IOUtils.getNickNameAndNameString(innerItem));
                         }
                     }

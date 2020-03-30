@@ -6,7 +6,7 @@ import com.gunruh.textgame.objects.items.KeyCardGreen;
 public class Dresser extends Container {
     private static Dresser INSTANCE = new Dresser();
 
-    protected Dresser() {
+    private Dresser() {
         super("Dresser", "Just a basic dresser. Standard issue for janitors such as yourself.", 3, true);
         addItem(new GameObject("Old Photograph", "It's a picture of your mom from back home.") {});
         addItem(new GameObject("Alarm Clock", "It used to sit on top of the dresser, but... eh... too noisy.") {});
