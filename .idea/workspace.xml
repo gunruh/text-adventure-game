@@ -7,32 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/KeyCardGreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/Container.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/Dresser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/enumerations/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/Statement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/BlueKeyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/KeyCardBlue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/AndersonJr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/AndersonJr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/Captain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/Captain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/KevinThePodBot17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/KevinThePodBot17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/characters/ShipChef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/characters/ShipChef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/JanitorsQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level1/JanitorsQuarters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/Kitchen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/Kitchen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/MainUpperHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/MainUpperHallway.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/PassengersQuarters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/PassengersQuarters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/RestrictedElevatorUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/RestrictedElevatorUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/EscapePod17.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/EscapePod17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/StarBoardHallway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level2/starboadSide/StarBoardHallway.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/NavigationRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/NavigationRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/RestrictedElevatorDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/rooms/starship/level3/RestrictedElevatorDown.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/IOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/utils/InputMaps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gunruh/textgame/utils/IOUtilsTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +82,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.IOUtilsTest.getsatementfromInputFixNullPointer">
+  <component name="RunManager" selected="Application.Main Game">
     <configuration name="Main Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.gunruh.textgame.Main" />
       <module name="text-adventure-game" />
@@ -274,5 +250,16 @@
     <MESSAGE value="Moved Actions and Directions to enumerations package. Created basic blaster object. Created player object. Added player inventory and room objects lists. Added input mapping for &quot;Look&quot; action. Added several methods in IOUtils.java. Updated JUnit tests." />
     <MESSAGE value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
     <option name="LAST_COMMIT_MESSAGE" value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -273,7 +273,7 @@ public class IOUtils {
         }
         
         // if there's a direction but no action and no objects, go ahead and assume the move action
-        if (statement.getDirection() != null && (statement.getAction() == null && statement.getReceivingObject() == null)) {
+        if (statement.getDirection() != null && ((statement.getAction() == null || statement.getAction() == Action.UNKNOWN_ACTION) && statement.getReceivingObject() == null)) {
         	statement.setAction(Action.Move);
         }
         
