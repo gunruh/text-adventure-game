@@ -175,7 +175,7 @@ public class Game {
                         Iterator<GameObject> innerItemIterator = ((Container) gameObject).getItems().iterator();
                         while (innerItemIterator.hasNext()) {
                             GameObject innerItem = innerItemIterator.next();
-                            stringBuilder.append("\n - ");
+                            stringBuilder.append("\n  - ");
                             stringBuilder.append(IOUtils.getNickNameAndNameString(innerItem));
                         }
                     }

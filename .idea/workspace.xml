@@ -6,7 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="" />
+    <list default="true" id="ac089694-054f-4373-babc-647abe93808e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/LightweightChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gunruh/textgame/objects/items/containers/LightweightChest.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +49,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
   </component>
   <component name="RecentsManager">
@@ -246,6 +252,7 @@
     <MESSAGE value="Adding Look and Shoot Actions. Moving some methods up to abstract GameObject class. Adding Direction to the Statement. Adding InputMaps class. Adding 'getStatementFromInputList()' method for parsing input String lists. Updating gitignore." />
     <MESSAGE value="Moved Actions and Directions to enumerations package. Created basic blaster object. Created player object. Added player inventory and room objects lists. Added input mapping for &quot;Look&quot; action. Added several methods in IOUtils.java. Updated JUnit tests." />
     <MESSAGE value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
+    <MESSAGE value="Adding Lightweight Chest for testing Container objects." />
     <option name="LAST_COMMIT_MESSAGE" value="Adding setter for GameObject.NickName. Creating 'getAvailableObjectsString()' method to display a room's list of GameObjects as a comma-separated list to the user. Creating 'getAorAnForString()' method which gets correct article adjective 'a' or 'an' for word. Using combined list of inventory AND room contents for second chance on the Take action - because that's how it works inside the Statement creation method. Adding JUnit tests for new methods." />
   </component>
   <component name="XDebuggerManager">
