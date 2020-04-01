@@ -12,8 +12,6 @@ import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
 
-import java.util.Iterator;
-
 import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
@@ -168,7 +166,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Talk to who?");
             String whoInput = getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -200,7 +198,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("What do you want to shoot " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
             String searchText = IOUtils.getInputText();
-            GameObject receivingObject = IOUtils.getMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), Player.getInstance().getCurrentRoom().getAvailableObjects()));
+            GameObject receivingObject = IOUtils.findMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), Player.getInstance().getCurrentRoom().getAvailableObjects()));
             if (receivingObject == statement.getActingObject()) {
                 display("You can't shoot an object with itself.");
                 return;
@@ -223,7 +221,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Name what?");
             String nameInput = IOUtils.getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -257,7 +255,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Drop what?");
             String takeInput = IOUtils.getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, player.getInventory()));
+            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, player.getInventory()));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -280,10 +278,8 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Take what?");
             String takeInput = IOUtils.getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects()), false));
         }
-
-        //
 
         if (statement.getReceivingObject() == null) {
             display("Sorry - I can't find that object.");
@@ -313,7 +309,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             IOUtils.display("Open what?");
             String openInput = IOUtils.getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -333,7 +329,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             IOUtils.display("Close what?");
             String closeInput = IOUtils.getInputText();
-            statement.setReceivingObject(getMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
         }
 
         if (statement.getReceivingObject() == null) {

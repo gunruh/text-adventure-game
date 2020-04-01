@@ -3,11 +3,9 @@ package com.gunruh.textgame.utils;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
-import sun.nio.ch.IOUtil;
 
 import java.util.*;
 
@@ -228,7 +226,7 @@ public class IOUtils {
 
             if (firstObjectIndex == -1) {
                 List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
-                firstObject = getMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
+                firstObject = findMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (firstObject != null) {
                     firstObjectIndex = i;
                     continue;
@@ -237,7 +235,7 @@ public class IOUtils {
 
             if (secondObjectIndex == -1) {
                 List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
-                secondObject = getMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
+                secondObject = findMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (secondObject != null && !secondObject.equals(firstObject)) {
                     secondObjectIndex = i;
                     continue;
@@ -340,18 +338,36 @@ public class IOUtils {
         return combinedGameObjectList;
     }
 
-    public static GameObject getMatchingGameObjectFromList(String searchText, List<GameObject> availableObjects) {
-        if (availableObjects == null || isNullOrEmpty(searchText)) {
+    public static GameObject findMatchingGameObjectFromList(String searchText, List<GameObject> gameObjects) {
+        return findMatchingGameObjectFromList(searchText, gameObjects, false);
+    }
+
+    public static GameObject findMatchingGameObjectFromList(String searchText, List<GameObject> gameObjects, boolean removeObject) {
+        if (gameObjects == null || isNullOrEmpty(searchText)) {
             return null;
         }
 
         GameObject matchingObject = null;
         String cleanedSearchText = normalizeInput(searchText, true);
 
-        for (GameObject gameObject : availableObjects) {
+        Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
+        while (gameObjectIterator.hasNext()) {
+            GameObject gameObject = gameObjectIterator.next();
+
             if ((!isNullOrEmpty(gameObject.getNickName()) && normalizeInput(gameObject.getNickName()).contains(cleanedSearchText)) || (!isNullOrEmpty(gameObject.getName()) && normalizeInput(gameObject.getName()).contains(cleanedSearchText))) {
                 matchingObject = gameObject;
+                if (removeObject) {
+                    gameObjectIterator.remove();
+                }
                 break;
+            }
+            // Check inside containers too
+            else if (gameObject instanceof Container) {
+                Container containerObject = (Container) gameObject;
+                matchingObject = findMatchingGameObjectFromList(searchText, containerObject.getItems(), removeObject);
+                if (matchingObject != null) {
+                    break;
+                }
             }
         }
 
