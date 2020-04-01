@@ -9,8 +9,8 @@ public class JanitorsCloset extends Room {
         super("Janitor's Closet", "This room stores the window-cleaning supplies, but a few items seem to have been taken..." +
               "\nThe door is on the west side.");
 
-        getAvailableObjects().add(CleaningSprayGun.getInstance());
-        getAvailableObjects().add(new GameObject("Crumpled Note", "Opening the note reveals the text: " +
+        addItem(CleaningSprayGun.getInstance());
+        addItem(new GameObject("Crumpled Note", "Opening the note reveals the text: " +
                 "\n\"BiLL wuz HeeRe.\"") {});
     }
 

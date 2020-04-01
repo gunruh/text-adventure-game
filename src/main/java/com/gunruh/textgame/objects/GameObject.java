@@ -3,6 +3,8 @@ package com.gunruh.textgame.objects;
 import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.utils.IOUtils;
 
+import java.util.List;
+
 public abstract class GameObject {
     protected static final GameObject EMPTY_GAME_OBJECT = new GameObject(null, null) {};
     private int health = 100;
@@ -10,6 +12,7 @@ public abstract class GameObject {
     private final String description;
     private String nickName;
     private boolean isPermanentFixture;
+    private List<GameObject> parentContainer;
 
     // use this to determine whether the object can be taken by the player.
     public boolean isPermanentFixture() {
@@ -104,4 +107,11 @@ public abstract class GameObject {
         }
     }
 
+    public List<GameObject> getParentContainer() {
+        return parentContainer;
+    }
+
+    public void setParentContainer(List<GameObject> parentContainer) {
+        this.parentContainer = parentContainer;
+    }
 }

@@ -12,9 +12,9 @@ public class MainUpperHallway extends Room {
                         "\nThe Kitchen's double doors are in the northeast corner." +
                         "\nThere is a corridor leading east.");
 
-        getAvailableObjects().add(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
-        getAvailableObjects().add(new GameObject("Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
-        getAvailableObjects().add(KeyCardBlue.getInstance());
+        addItem(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
+        addItem(new GameObject("Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
+        addItem(KeyCardBlue.getInstance());
     }
 
     private static final MainUpperHallway INSTANCE = new MainUpperHallway();

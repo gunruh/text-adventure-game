@@ -13,9 +13,9 @@ public class JanitorsQuarters extends Room {
                 "This place has become your home. It's a humble room, but is a good place to get some rest." +
                         "\nThere's a door on the east side of the room." +
                         "\nTry typing 'Go East' to walk through the east door.");
-        getAvailableObjects().add(new GameObject("Bed", "No time for sleep, gotta get to work!", true) {});
-        getAvailableObjects().add(Dresser.getInstance());
-        getAvailableObjects().add(LightweightChest.getInstance());
+        addItem(new GameObject("Bed", "No time for sleep, gotta get to work!", true) {});
+        addItem(Dresser.getInstance());
+        addItem(LightweightChest.getInstance());
 
     }
 

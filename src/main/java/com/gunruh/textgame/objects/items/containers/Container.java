@@ -46,6 +46,7 @@ public abstract class Container extends GameObject {
         if (gameObject != null) {
             if (items.size() < itemLimit) {
                 items.add(gameObject);
+                gameObject.setParentContainer(items);
             }
             else {
                 IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " cannot hold any more items.");

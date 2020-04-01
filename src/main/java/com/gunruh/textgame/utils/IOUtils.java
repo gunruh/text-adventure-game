@@ -363,10 +363,11 @@ public class IOUtils {
             }
             // Check inside containers too
             else if (gameObject instanceof Container) {
-                Container containerObject = (Container) gameObject;
-                matchingObject = findMatchingGameObjectFromList(searchText, containerObject.getItems(), removeObject);
-                if (matchingObject != null) {
-                    break;
+                if (((Container) gameObject).isOpen()) {
+                    matchingObject = findMatchingGameObjectFromList(searchText, ((Container) gameObject).getItems(), removeObject);
+                    if (matchingObject != null) {
+                        break;
+                    }
                 }
             }
         }
@@ -537,7 +538,7 @@ public class IOUtils {
         String indent = indentBuilder.toString();
 
         if (gameObjects == null || gameObjects.isEmpty()) {
-            stringBuilder.append(indent).append("[No Items]");
+            stringBuilder.append(indent).append("[Empty]");
         }
         else {
             Iterator<GameObject> itemIterator = gameObjects.iterator();

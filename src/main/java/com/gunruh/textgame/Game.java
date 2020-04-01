@@ -266,7 +266,7 @@ public class Game {
         int inventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
         if (inventoryIndex != -1) {
             GameObject droppedObject = player.getInventory().remove(inventoryIndex);
-            player.getCurrentRoom().getAvailableObjects().add(droppedObject);
+            player.getCurrentRoom().addItem(droppedObject);
             displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
         }
         else {
@@ -291,17 +291,17 @@ public class Game {
             return;
         }
 
-        int roomObjectIndex = player.getCurrentRoom().getAvailableObjects().indexOf(statement.getReceivingObject());
-        if (roomObjectIndex != -1) {
-            GameObject takenObject = player.getCurrentRoom().getAvailableObjects().remove(roomObjectIndex);
-            player.getInventory().add(takenObject);
-            displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(takenObject));
+        if (statement.getReceivingObject().getParentContainer().equals(Player.getInstance().getInventory())) {
+            display("You already have " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
         }
+
         else {
-            int playerInventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
-            if (playerInventoryIndex != -1) {
-                display("You already have " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+            boolean successfulRemoved = statement.getReceivingObject().getParentContainer().remove(statement.getReceivingObject());
+            if (!successfulRemoved) {
+                displayWithinAsterisks("Error taking object... could not remove from parent container.");
             }
+            Player.getInstance().takeItem(statement.getReceivingObject());
+            displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
         }
     }
 
@@ -347,11 +347,11 @@ public class Game {
 
     private void initializeGame() {
         // Initialize Room Objects
-        RoomA.getInstance().getAvailableObjects().add(new Blaster());
-        RoomB.getInstance().getAvailableObjects().add(new GameObject("Troll", "Big, smelly, hometown of \"cave\".") {});
-        RoomB.getInstance().getAvailableObjects().add(new GameObject("Rock", "Just your average cave rock.") {});
-        RoomB.getInstance().getAvailableObjects().add(new GameObject("Sock", "Wonder who left this here...") {});
-        RoomB.getInstance().getAvailableObjects().add(new GameObject("Clock", "It is unclear whether the time is correct.") {});
+        RoomA.getInstance().addItem(new Blaster());
+        RoomB.getInstance().addItem(new GameObject("Troll", "Big, smelly, hometown of \"cave\".") {});
+        RoomB.getInstance().addItem(new GameObject("Rock", "Just your average cave rock.") {});
+        RoomB.getInstance().addItem(new GameObject("Sock", "Wonder who left this here...") {});
+        RoomB.getInstance().addItem(new GameObject("Clock", "It is unclear whether the time is correct.") {});
 
         display(Constants.SPACE_DUDES_TITLE);
         display(Constants.INTRO_TEXT);

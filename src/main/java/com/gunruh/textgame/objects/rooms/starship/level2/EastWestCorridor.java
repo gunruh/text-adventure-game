@@ -7,7 +7,7 @@ import com.gunruh.textgame.objects.rooms.starship.level2.starboadSide.StarBoardH
 public class EastWestCorridor extends Room {
     private EastWestCorridor() {
         super("East-West Corridor", "It's a passage that goes West and East.");
-        getAvailableObjects().add(new Blaster());
+        addItem(new Blaster());
     }
 
     private static EastWestCorridor INSTANCE = new EastWestCorridor();

@@ -34,6 +34,13 @@ public class Player extends GameObject {
         }
     }
 
+    public void takeItem(GameObject gameObject) {
+        if (gameObject != null) {
+            inventory.add(gameObject);
+            gameObject.setParentContainer(inventory);
+        }
+    }
+
     public List<GameObject> getInventory() {
         return inventory;
     }

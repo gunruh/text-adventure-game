@@ -92,6 +92,13 @@ public abstract class Room extends GameObject {
         return descriptionBuilder.toString();
     }
 
+    public void addItem(GameObject gameObject) {
+        if (gameObject != null) {
+            availableObjects.add(gameObject);
+            gameObject.setParentContainer(availableObjects);
+        }
+    }
+
     public void setIsNewPlace(boolean newPlace) {
         isNewPlace = newPlace;
     }

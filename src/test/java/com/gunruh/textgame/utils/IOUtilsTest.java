@@ -227,9 +227,9 @@ public class IOUtilsTest {
     public void testRoomDescriptionMultipleItems() {
         Room room = new Room("Test Room", "A room to test.") {};
 
-        room.getAvailableObjects().add(new GameObject("blaster", "A blasting device.") {});
-        room.getAvailableObjects().add(new GameObject("rock", "Just an old rock.") {});
-        room.getAvailableObjects().add(new GameObject("apple", "Tasty fruit.") {});
+        room.addItem(new GameObject("blaster", "A blasting device.") {});
+        room.addItem(new GameObject("rock", "Just an old rock.") {});
+        room.addItem(new GameObject("apple", "Tasty fruit.") {});
 
         assertEquals("A room to test.\nA blaster, a rock, and an apple are here.", room.getDescription());
     }
@@ -238,7 +238,7 @@ public class IOUtilsTest {
     public void testRoomDescriptionSingleItem() {
         Room room = new Room("Test Room", "A room to test.") {};
 
-        room.getAvailableObjects().add(new GameObject("blaster", "A blasting device.") {});
+        room.addItem(new GameObject("blaster", "A blasting device.") {});
 
         assertEquals("A room to test.\nA blaster is here.", room.getDescription());
     }
@@ -276,7 +276,7 @@ public class IOUtilsTest {
     public void testDestroyRoomObject() {
         GameObject rock = new GameObject("Rock", "A rock for testing.") {};
         Room room = new Room("Room", "A Room for testing") {};
-        room.getAvailableObjects().add(rock);
+        room.addItem(rock);
         Player.getInstance().setCurrentRoom(room);
         rock.takeDamage(100);
         assertFalse(room.getAvailableObjects().contains(rock));
