@@ -29,7 +29,7 @@ public abstract class Container extends GameObject {
         if (isOpen) {
             if (items != null && !items.isEmpty()) {
                 descriptionBuilder.append("\nContains: ");
-                descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getObjectListAsString(items)) + ".");
+                descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getSentenceStringFromGameObjectsList(items)) + ".");
             }
             else {
                 descriptionBuilder.append("\nContains: nothing.");

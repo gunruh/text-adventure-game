@@ -3,8 +3,11 @@ package com.gunruh.textgame.utils;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Player;
+import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
+import sun.nio.ch.IOUtil;
 
 import java.util.*;
 
@@ -470,7 +473,7 @@ public class IOUtils {
         return bestMatchObject;
     }
 
-    public static String getObjectListAsString(List<GameObject> objectList) {
+    public static String getSentenceStringFromGameObjectsList(List<GameObject> objectList) {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (objectList != null) {
@@ -497,6 +500,49 @@ public class IOUtils {
                     else {
                         stringBuilder.append(" ");
                     }
+                }
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public static String getListStringFromGameObjectsList(List<GameObject> gameObjects, int indentLevel) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Increase indent
+        indentLevel += 2;
+
+        // Build indentation
+        StringBuilder indentBuilder = new StringBuilder();
+        for (int i = 0; i < indentLevel; i++) {
+            indentBuilder.append(" ");
+        }
+        String indent = indentBuilder.toString();
+
+        if (gameObjects == null || gameObjects.isEmpty()) {
+            stringBuilder.append(indent).append("[No Items]");
+        }
+        else {
+            Iterator<GameObject> itemIterator = gameObjects.iterator();
+            while (itemIterator.hasNext()) {
+                GameObject gameObject = itemIterator.next();
+                stringBuilder.append(indent).append("- ");
+                stringBuilder.append(IOUtils.getNickNameAndNameString(gameObject));
+
+                // Recursively print Container contents if it's open
+                if (gameObject instanceof Container) {
+                    if (((Container) gameObject).isOpen()) {
+                        stringBuilder.append("\n");
+                        stringBuilder.append(IOUtils.getListStringFromGameObjectsList(((Container) gameObject).getItems(), indentLevel));
+                    }
+                    else {
+                        stringBuilder.append(" (Closed)");
+                    }
+                }
+
+                if (itemIterator.hasNext()) {
+                    stringBuilder.append("\n");
                 }
             }
         }

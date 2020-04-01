@@ -157,38 +157,9 @@ public class Game {
     private void handleInventory(Statement statement) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Inventory:");
+        stringBuilder.append("Inventory:\n");
 
-        if (Player.getInstance().getInventory().isEmpty()) {
-            stringBuilder.append(" Nothing.");
-        }
-        else {
-            stringBuilder.append("\n\n"); // Next line - double spaced.
-            Iterator<GameObject> itemIterator = Player.getInstance().getInventory().iterator();
-            while (itemIterator.hasNext()) {
-                GameObject gameObject = itemIterator.next();
-                stringBuilder.append("- ");
-                stringBuilder.append(IOUtils.getNickNameAndNameString(gameObject));
-
-                if (gameObject instanceof Container) {
-                    if (((Container) gameObject).isOpen()) {
-                        Iterator<GameObject> innerItemIterator = ((Container) gameObject).getItems().iterator();
-                        while (innerItemIterator.hasNext()) {
-                            GameObject innerItem = innerItemIterator.next();
-                            stringBuilder.append("\n  - ");
-                            stringBuilder.append(IOUtils.getNickNameAndNameString(innerItem));
-                        }
-                    }
-                    else {
-                        stringBuilder.append(" (Closed)");
-                    }
-                }
-
-                if (itemIterator.hasNext()) {
-                    stringBuilder.append("\n");
-                }
-            }
-        }
+        stringBuilder.append(IOUtils.getListStringFromGameObjectsList(Player.getInstance().getInventory(), 0));
 
         IOUtils.display(stringBuilder.toString());
     }
@@ -311,6 +282,8 @@ public class Game {
             String takeInput = IOUtils.getInputText();
             statement.setReceivingObject(getMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
         }
+
+        //
 
         if (statement.getReceivingObject() == null) {
             display("Sorry - I can't find that object.");

@@ -80,7 +80,7 @@ public abstract class Room extends GameObject {
 
         if (getAvailableObjects() != null && !getAvailableObjects().isEmpty()) {
             descriptionBuilder.append("\n");
-            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getObjectListAsString(availableObjects)));
+            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getSentenceStringFromGameObjectsList(availableObjects)));
             if (getAvailableObjects().size() == 1) {
                 descriptionBuilder.append(" is here.");
             }

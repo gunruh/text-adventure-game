@@ -177,7 +177,7 @@ public class IOUtilsTest {
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, bike, apple));
 
-        assertEquals("Mike, a Bike, and an Apple", IOUtils.getObjectListAsString(gameObjects));
+        assertEquals("Mike, a Bike, and an Apple", IOUtils.getSentenceStringFromGameObjectsList(gameObjects));
     }
 
     @Test
@@ -189,7 +189,7 @@ public class IOUtilsTest {
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, apple));
 
-        assertEquals("Mike and an Apple", IOUtils.getObjectListAsString(gameObjects));
+        assertEquals("Mike and an Apple", IOUtils.getSentenceStringFromGameObjectsList(gameObjects));
     }
 
     @Test
@@ -200,7 +200,7 @@ public class IOUtilsTest {
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike));
 
-        assertEquals("Mike", IOUtils.getObjectListAsString(gameObjects));
+        assertEquals("Mike", IOUtils.getSentenceStringFromGameObjectsList(gameObjects));
     }
 
     @Test
@@ -209,7 +209,7 @@ public class IOUtilsTest {
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(apple));
 
-        assertEquals("an Apple", IOUtils.getObjectListAsString(gameObjects));
+        assertEquals("an Apple", IOUtils.getSentenceStringFromGameObjectsList(gameObjects));
     }
 
     @Test
