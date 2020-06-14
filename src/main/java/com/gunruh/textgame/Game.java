@@ -11,6 +11,7 @@ import com.gunruh.textgame.objects.rooms.RoomA;
 import com.gunruh.textgame.objects.rooms.RoomB;
 import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
 import com.gunruh.textgame.utils.Constants;
+import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
 
@@ -267,9 +268,8 @@ public class Game {
             return;
         }
 
-        int inventoryIndex = player.getItems().indexOf(statement.getReceivingObject());
-        if (inventoryIndex != -1) {
-            GameObject droppedObject = player.getItems().remove(inventoryIndex);
+        GameObject droppedObject = ContainerUtils.recursiveRemove(player, statement.getReceivingObject());
+        if (droppedObject != GameObject.EMPTY_GAME_OBJECT) {
             player.getCurrentRoom().addItem(droppedObject);
             displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
         }

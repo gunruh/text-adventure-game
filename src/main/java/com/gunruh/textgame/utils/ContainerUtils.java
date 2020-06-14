@@ -15,7 +15,7 @@ public class ContainerUtils {
             GameObject listObject = gameObjectIterator.next();
             if (listObject instanceof Container) {
                 removedItem = recursiveRemove((Container) listObject, gameObject);
-                if (removedItem != null) {
+                if (removedItem != GameObject.EMPTY_GAME_OBJECT) {
                     return removedItem;
                 }
             }
