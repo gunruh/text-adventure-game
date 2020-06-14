@@ -62,10 +62,9 @@ public class IOUtils {
     }
 
     public static List<String> getInputListFromText(String userInput) {
-        // commenting this out for now - I don't think removing these is actually necessary, and causes problems when trying to reconcile a cleaned word with the original input.
-        // String cleanedInput = userInput.replaceAll("[.!?\\-\"'%]", "");
+        String cleanedInput = userInput.replaceAll("[.!?\\-\"'%]", "");
 
-        String[] inputList = userInput.trim().split("[\\s]+"); // split on groups of one or more white space.
+        String[] inputList = cleanedInput.trim().split("[\\s]+"); // split on groups of one or more white space.
 
         return Arrays.asList(inputList);
     }
