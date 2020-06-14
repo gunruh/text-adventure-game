@@ -1,12 +1,10 @@
 package com.gunruh.textgame.utils;
 
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.containerObjects.ContainerIMPL;
 import org.junit.Test;
-import sun.plugin2.message.GetAppletMessage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ContainerUtilsTest {
     @Test
