@@ -30,7 +30,7 @@ public class StarBoardHallway extends Room {
 
     @Override
     public Room goSouth() {
-        if (Player.getInstance().getInventory().contains(KeyCardBlue.getInstance())) {
+        if (Player.getInstance().getItems().contains(KeyCardBlue.getInstance())) {
             IOUtils.displayWithinAsterisks("BEEP BEEP BOOYEEP. The door opens.");
             return ServiceAirLock.getInstance();
         }

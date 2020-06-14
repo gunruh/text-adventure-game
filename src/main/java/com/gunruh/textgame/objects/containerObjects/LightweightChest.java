@@ -1,8 +1,8 @@
-package com.gunruh.textgame.objects.items.containers;
+package com.gunruh.textgame.objects.containerObjects;
 
 import com.gunruh.textgame.objects.GameObject;
 
-public class LightweightChest extends Container {
+public class LightweightChest extends ContainerIMPL {
     private static LightweightChest INSTANCE = new LightweightChest();
 
     private LightweightChest() {

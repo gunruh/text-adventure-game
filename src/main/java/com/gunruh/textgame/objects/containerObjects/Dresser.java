@@ -1,9 +1,9 @@
-package com.gunruh.textgame.objects.items.containers;
+package com.gunruh.textgame.objects.containerObjects;
 
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.items.KeyCardGreen;
 
-public class Dresser extends Container {
+public class Dresser extends ContainerIMPL {
     private static Dresser INSTANCE = new Dresser();
 
     private Dresser() {

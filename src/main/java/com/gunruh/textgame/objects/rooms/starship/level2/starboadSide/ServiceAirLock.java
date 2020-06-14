@@ -31,7 +31,7 @@ public class ServiceAirLock extends Room {
 
     @Override
     public Room goEast() {
-        List<GameObject> playerInventory = Player.getInstance().getInventory();
+        List<GameObject> playerInventory = Player.getInstance().getItems();
         if (playerInventory.contains(CleaningSprayGun.getInstance()) && playerInventory.contains(RubberSqueegee.getInstance()) && playerInventory.contains(WindowWashingCloth.getInstance())) {
             IOUtils.displayWithinAsterisks("WAAAWOOOOBEE BOOOOP... SWOOOOOOSHHHHH. The airlock sensor reads all three items and opens, sucking you out to space.");
             return SpaceOutsideEscapePods.getInstance();

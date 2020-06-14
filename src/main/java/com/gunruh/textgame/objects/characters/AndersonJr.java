@@ -28,7 +28,7 @@ public class AndersonJr extends GameObject {
 	
 	@Override
 	public void receiveTalkTo(GameObject gameObject) {
-		if (Player.getInstance().getCurrentRoom().getAvailableObjects().contains(Captain.getInstance())) {
+		if (Player.getInstance().getCurrentRoom().getItems().contains(Captain.getInstance())) {
 			IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
 																		 "\n\"I'm the next in line to be the big Kahoona of this ship." +
 			                                                             "\nSo I'm on my best behavior... at least while my dad is in the room..." + 

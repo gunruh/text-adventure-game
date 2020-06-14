@@ -168,7 +168,7 @@ public class IOUtilsTest {
     }
 
     @Test
-    public void testGetAvailableObjectsText_ThreeItems() {
+    public void testGetItemsText_ThreeItems() {
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
@@ -181,7 +181,7 @@ public class IOUtilsTest {
     }
 
     @Test
-    public void testGetAvailableObjectsText_TwoItems() {
+    public void testGetItemsText_TwoItems() {
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
@@ -193,7 +193,7 @@ public class IOUtilsTest {
     }
 
     @Test
-    public void testGetAvailableObjectsText_OneItemWithNickName() {
+    public void testGetItemsText_OneItemWithNickName() {
         // A Blaster nicknamed "Mike"
         GameObject mike = new GameObject("Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
@@ -204,7 +204,7 @@ public class IOUtilsTest {
     }
 
     @Test
-    public void testGetAvailableObjectsText_OneItemNoNickname() {
+    public void testGetItemsText_OneItemNoNickname() {
         GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(apple));
@@ -279,15 +279,15 @@ public class IOUtilsTest {
         room.addItem(rock);
         Player.getInstance().setCurrentRoom(room);
         rock.takeDamage(100);
-        assertFalse(room.getAvailableObjects().contains(rock));
+        assertFalse(room.getItems().contains(rock));
     }
 
     @Test
     public void testDestroyPlayerInventoryObject() {
         GameObject rock = new GameObject("Rock", "A rock for testing.") {};
-        Player.getInstance().getInventory().add(rock);
+        Player.getInstance().getItems().add(rock);
         rock.takeDamage(100);
-        assertFalse(Player.getInstance().getInventory().contains(rock));
+        assertFalse(Player.getInstance().getItems().contains(rock));
     }
 
     @Test

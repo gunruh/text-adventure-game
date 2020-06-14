@@ -1,12 +1,13 @@
 package com.gunruh.textgame.objects;
 
-import com.gunruh.textgame.objects.items.containers.Container;
+import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.utils.IOUtils;
 
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class GameObject {
-    protected static final GameObject EMPTY_GAME_OBJECT = new GameObject(null, null) {};
+    public static final GameObject EMPTY_GAME_OBJECT = new GameObject(null, null) {};
     private int health = 100;
     private final String name;
     private final String description;
@@ -80,18 +81,34 @@ public abstract class GameObject {
             IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage.");
         }
         else {
-            this.health = 0;
-
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString());
-            // When health reaches zero, the GameObject disappears (this default behavior may be overridden in extended classes)
-            Player.getInstance().getInventory().remove(this);
-            Player.getInstance().getCurrentRoom().getAvailableObjects().remove(this);
+            destroy(true);
         }
+    }
+
+    public void destroy(boolean displayDestroyString) {
+        this.health = 0;
+
+        if (this instanceof Container) {
+            Iterator<GameObject> gameObjectIterator = ((Container) this).getItems().iterator();
+            while (gameObjectIterator.hasNext()) {
+                GameObject gameObject = gameObjectIterator.next();
+                gameObject.destroy(false); // Don't display the string for contents of a container.
+            }
+        }
+
+        if (displayDestroyString) {
+            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + ((this instanceof Container)? " and any items inside have" : " has") + " been destroyed. " + IOUtils.getRandomDestroyString());
+        }
+
+        // When health reaches zero, the GameObject disappears (this default behavior may be overridden in extended classes)
+
+        // todo remove this? reorganizing the way objects are destroyed - just need to remove all references so garbage collector picks them up.
+        // this.getParentContainer().remove(this);
     }
 
     public void insertInto(GameObject receivingObject) {
         if (receivingObject instanceof Container) {
-            ((Container) receivingObject).receiveInsertInto(this);
+            ((Container) receivingObject).addItem(this);
         }
         else {
             IOUtils.displayWithinAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(receivingObject));
@@ -100,7 +117,7 @@ public abstract class GameObject {
 
     public void removeFrom(GameObject receivingObject) {
         if (receivingObject instanceof Container) {
-            ((Container) receivingObject).receiveRemove(this);
+            ((Container) receivingObject).removeItem(this);
         }
         else {
             IOUtils.displayWithinAsterisks("Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + ".");

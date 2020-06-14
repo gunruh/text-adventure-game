@@ -2,15 +2,19 @@
 package com.gunruh.textgame;
 
 import com.gunruh.textgame.enumerations.Action;
-import com.gunruh.textgame.objects.*;
+import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.Player;
+import com.gunruh.textgame.objects.Statement;
+import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.items.Blaster;
-import com.gunruh.textgame.objects.items.containers.Container;
 import com.gunruh.textgame.objects.rooms.RoomA;
 import com.gunruh.textgame.objects.rooms.RoomB;
 import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
+
+import java.util.List;
 
 import static com.gunruh.textgame.utils.IOUtils.*;
 
@@ -32,7 +36,7 @@ public class Game {
                 continue;
             }
 
-            Statement statement = IOUtils.getStatementFromInputText(input, player.getInventory(), player.getCurrentRoom().getAvailableObjects());
+            Statement statement = IOUtils.getStatementFromInputText(input, player.getItems(), player.getCurrentRoom().getItems());
 
             switch (statement.getAction()) {
                 case Take: {
@@ -157,7 +161,7 @@ public class Game {
 
         stringBuilder.append("Inventory:\n");
 
-        stringBuilder.append(IOUtils.getListStringFromGameObjectsList(Player.getInstance().getInventory(), 0));
+        stringBuilder.append(IOUtils.getListStringFromGameObjectsList(Player.getInstance().getItems(), 0));
 
         IOUtils.display(stringBuilder.toString());
     }
@@ -166,7 +170,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Talk to who?");
             String whoInput = getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -185,7 +189,7 @@ public class Game {
         }
 
         if (statement.getActingObject() == null) {
-            GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getInventory(), Action.Shoot, statement.getReceivingObject());
+            GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getItems(), Action.Shoot, statement.getReceivingObject());
             if (bestMatchBlaster == null) {
                 display("You don't have anything to use as a blaster.");
                 return;
@@ -198,7 +202,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("What do you want to shoot " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
             String searchText = IOUtils.getInputText();
-            GameObject receivingObject = IOUtils.findMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getInventory(), Player.getInstance().getCurrentRoom().getAvailableObjects()));
+            GameObject receivingObject = IOUtils.findMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), Player.getInstance().getCurrentRoom().getItems()));
             if (receivingObject == statement.getActingObject()) {
                 display("You can't shoot an object with itself.");
                 return;
@@ -221,7 +225,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Name what?");
             String nameInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -255,17 +259,17 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             display("Drop what?");
             String takeInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, player.getInventory()));
+            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, player.getItems()));
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry - I can't find that object.");
+            display("Sorry - I can't find that object in your inventory.");
             return;
         }
 
-        int inventoryIndex = player.getInventory().indexOf(statement.getReceivingObject());
+        int inventoryIndex = player.getItems().indexOf(statement.getReceivingObject());
         if (inventoryIndex != -1) {
-            GameObject droppedObject = player.getInventory().remove(inventoryIndex);
+            GameObject droppedObject = player.getItems().remove(inventoryIndex);
             player.getCurrentRoom().addItem(droppedObject);
             displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
         }
@@ -275,41 +279,51 @@ public class Game {
     }
 
     private void handleTake(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            display("Take what?");
-            String takeInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects()), false));
+        GameObject itemToTake = statement.getReceivingObject(); // default to receiving object.
+        Container containerItem = player.getCurrentRoom(); // default to current room.
+
+        // Check to see if you're taking an item from within another item
+        if (statement.getReceivingObject() != null) {
+            if (statement.getActingObject() != null && statement.getReceivingObject() instanceof Container) {
+                itemToTake = statement.getActingObject();
+                containerItem = (Container) statement.getReceivingObject();
+            }
         }
 
-        if (statement.getReceivingObject() == null) {
+        if (itemToTake == null) {
+            display("Take what?");
+            String takeInput = IOUtils.getInputText();
+            itemToTake = findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), containerItem.getItems()), false);
+        }
+
+        if (itemToTake == null) {
             display("Sorry - I can't find that object.");
             return;
         }
 
-        if (statement.getReceivingObject().isPermanentFixture()) {
+        if (itemToTake.isPermanentFixture()) {
             display("Unfortunately you can't take this item with you.");
             return;
         }
 
-        if (statement.getReceivingObject().getParentContainer().equals(Player.getInstance().getInventory())) {
-            display("You already have " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+        if (Player.getInstance().getItems().contains(itemToTake)) {
+            display("You already have " + IOUtils.getNickNameOrNameWithArticle(itemToTake));
+            return;
         }
 
-        else {
-            boolean successfulRemoved = statement.getReceivingObject().getParentContainer().remove(statement.getReceivingObject());
-            if (!successfulRemoved) {
-                displayWithinAsterisks("Error taking object... could not remove from parent container.");
-            }
-            Player.getInstance().takeItem(statement.getReceivingObject());
-            displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+        boolean successfulRemoved = itemToTake.getParentContainer().remove(itemToTake);
+        if (!successfulRemoved) {
+            displayWithinAsterisks("Error taking object... could not remove from parent container.");
         }
+        Player.getInstance().takeItem(itemToTake);
+        displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(itemToTake));
     }
 
     private void handleOpen(Statement statement) {
         if (statement.getReceivingObject() == null) {
             IOUtils.display("Open what?");
             String openInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
         }
 
         if (statement.getReceivingObject() == null) {
@@ -329,7 +343,7 @@ public class Game {
         if (statement.getReceivingObject() == null) {
             IOUtils.display("Close what?");
             String closeInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getInventory(), player.getCurrentRoom().getAvailableObjects())));
+            statement.setReceivingObject(findMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
         }
 
         if (statement.getReceivingObject() == null) {

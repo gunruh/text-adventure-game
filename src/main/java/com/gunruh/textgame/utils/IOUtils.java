@@ -3,7 +3,7 @@ package com.gunruh.textgame.utils;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.items.containers.Container;
+import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
 
@@ -27,11 +27,11 @@ public class IOUtils {
     	
         displayBuilder.append(getNickNameAndNameString(gameObject));
 
-        displayBuilder.append("\n" + gameObject.getDescription());
-
         if (!(gameObject instanceof Room) && gameObject.getHealth() < 100) {
-            displayBuilder.append("\nHealth: " + gameObject.getHealth());
+            displayBuilder.append(" (Health: " + gameObject.getHealth() + "%)");
         }
+
+        displayBuilder.append("\n" + gameObject.getDescription());
         
         display(displayBuilder.toString());
     }
@@ -62,9 +62,10 @@ public class IOUtils {
     }
 
     public static List<String> getInputListFromText(String userInput) {
-        String cleanedInput = userInput.replaceAll("[.!?\\-\"'%]", "");
+        // commenting this out for now - I don't think removing these is actually necessary, and causes problems when trying to reconcile a cleaned word with the original input.
+        // String cleanedInput = userInput.replaceAll("[.!?\\-\"'%]", "");
 
-        String[] inputList = cleanedInput.trim().split("[\\s]+"); // split on groups of one or more white space.
+        String[] inputList = userInput.trim().split("[\\s]+"); // split on groups of one or more white space.
 
         return Arrays.asList(inputList);
     }
@@ -225,7 +226,18 @@ public class IOUtils {
             }
 
             if (firstObjectIndex == -1) {
-                List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
+                List<GameObject> allAvailableObjects;
+                switch (statement.getAction()) {
+                    case Take: {
+                        // Look at room items before player items in this case.
+                        allAvailableObjects = getCombinedGameObjectsList(roomObjects, playerInventory);
+                        break;
+                    }
+                    default: {
+                        allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
+                    }
+                }
+
                 firstObject = findMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (firstObject != null) {
                     firstObjectIndex = i;
@@ -234,6 +246,16 @@ public class IOUtils {
             }
 
             if (secondObjectIndex == -1) {
+                // Make sure this isn't still part of the first object.
+                if (firstObject != null) {
+                    if (firstObject.getNickName() != null && firstObject.getNickName().toLowerCase().contains(currentWordNormalized)) {
+                        continue;
+                    }
+                    else if (firstObject.getName() != null && firstObject.getName().toLowerCase().contains(currentWordNormalized)) {
+                        continue;
+                    }
+                }
+
                 List<GameObject> allAvailableObjects = getCombinedGameObjectsList(playerInventory, roomObjects);
                 secondObject = findMatchingGameObjectFromList(currentWordNormalized, allAvailableObjects);
                 if (secondObject != null && !secondObject.equals(firstObject)) {
@@ -363,7 +385,7 @@ public class IOUtils {
             }
             // Check inside containers too
             else if (gameObject instanceof Container) {
-                if (((Container) gameObject).isOpen()) {
+                if (((Container) gameObject).isContainerOpen()) {
                     matchingObject = findMatchingGameObjectFromList(searchText, ((Container) gameObject).getItems(), removeObject);
                     if (matchingObject != null) {
                         break;
@@ -379,7 +401,7 @@ public class IOUtils {
         boolean isRightToLeftRelationalWord = false;
 
         if (!isNullOrEmpty(currentWord)) {
-            isRightToLeftRelationalWord = ("using".equalsIgnoreCase(currentWord) || "with".equalsIgnoreCase(currentWord) || "from".equalsIgnoreCase(currentWord));
+            isRightToLeftRelationalWord = ("using".equalsIgnoreCase(currentWord) || "with".equalsIgnoreCase(currentWord));
         }
 
         return isRightToLeftRelationalWord;
@@ -549,7 +571,7 @@ public class IOUtils {
 
                 // Recursively print Container contents if it's open
                 if (gameObject instanceof Container) {
-                    if (((Container) gameObject).isOpen()) {
+                    if (((Container) gameObject).isContainerOpen()) {
                         stringBuilder.append("\n");
                         stringBuilder.append(IOUtils.getListStringFromGameObjectsList(((Container) gameObject).getItems(), indentLevel));
                     }

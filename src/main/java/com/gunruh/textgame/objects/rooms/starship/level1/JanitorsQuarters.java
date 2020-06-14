@@ -1,9 +1,8 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.items.containers.Container;
-import com.gunruh.textgame.objects.items.containers.Dresser;
-import com.gunruh.textgame.objects.items.containers.LightweightChest;
+import com.gunruh.textgame.objects.containerObjects.Dresser;
+import com.gunruh.textgame.objects.containerObjects.LightweightChest;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.IOUtils;
 

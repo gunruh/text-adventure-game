@@ -33,6 +33,6 @@ public class Captain extends GameObject {
                 "\nOne day he's going to be the captain of this cruiser." +
     	                "\nI also love corndogs. What's that? You say there are free corndogs today? ... I'll be right back...\"");
     	IOUtils.displayWithinAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " leaves the room.");
-    	Player.getInstance().getCurrentRoom().getAvailableObjects().remove(this);
+    	Player.getInstance().getCurrentRoom().getItems().remove(this);
     }
 }

@@ -1,15 +1,19 @@
 package com.gunruh.textgame.objects.rooms;
 
 import com.gunruh.textgame.objects.GameObject;
+import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.utils.Constants;
+import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Room extends GameObject {
-    private boolean isNewPlace = true;
+public abstract class Room extends GameObject implements Container {
     public static final Room ROOM_NOT_PRESENT = new Room(null, null) {};
+    private boolean isNewPlace = true;
+    private int itemLimit = -1; // rooms can have infinite items by default.
+    private boolean itemsVisible = true;
     List<GameObject> availableObjects = new ArrayList<GameObject>();
 
     public Room(String name, String description) {
@@ -78,10 +82,10 @@ public abstract class Room extends GameObject {
     public String getDescription() {
         StringBuilder descriptionBuilder = new StringBuilder(super.getDescription());
 
-        if (getAvailableObjects() != null && !getAvailableObjects().isEmpty()) {
+        if (getItems() != null && !getItems().isEmpty()) {
             descriptionBuilder.append("\n");
             descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getSentenceStringFromGameObjectsList(availableObjects)));
-            if (getAvailableObjects().size() == 1) {
+            if (getItems().size() == 1) {
                 descriptionBuilder.append(" is here.");
             }
             else {
@@ -103,12 +107,53 @@ public abstract class Room extends GameObject {
         isNewPlace = newPlace;
     }
 
-    public List<GameObject> getAvailableObjects() {
-        return availableObjects;
+    public void setItems(List<GameObject> items) {
+        this.availableObjects = items;
     }
 
-    public void setAvailableObjects(List<GameObject> availableObjects) {
-        this.availableObjects = availableObjects;
+    @Override
+    public GameObject removeItem(GameObject requestedObject) {
+        return ContainerUtils.recursiveRemove(this, requestedObject);
+    }
+
+    @Override
+    public void receiveClose() {
+        setContainerOpen(false);
+    }
+
+    @Override
+    public void receiveOpen() {
+        setContainerOpen(true);
+    }
+
+    @Override
+    public int getItemLimit() {
+        return itemLimit;
+    }
+
+    @Override
+    public void setItemLimit(int itemLimit) {
+        this.itemLimit = itemLimit;
+    }
+
+    @Override
+    public boolean isContainerOpen() {
+        return itemsVisible;
+    }
+
+    @Override
+    public void setContainerOpen(boolean open) {
+        itemsVisible = open;
+    }
+
+    @Override
+    public int getItemCount() {
+        return availableObjects.size();
+    }
+
+    @Override
+    public List<GameObject> getItems() {
+        return availableObjects;
     }
 
 }
