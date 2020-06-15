@@ -5,6 +5,7 @@ import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class ContainerIMPL extends GameObject implements Container {
@@ -107,6 +108,16 @@ public abstract class ContainerIMPL extends GameObject implements Container {
         }
         else {
             IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already open.");
+        }
+    }
+
+    public void destroy(boolean displayDestroyString) {
+        super.destroy(displayDestroyString);
+
+        Iterator<GameObject> gameObjectIterator = getItems().iterator();
+        while (gameObjectIterator.hasNext()) {
+            GameObject gameObject = gameObjectIterator.next();
+            gameObject.destroy(false); // Don't display the string for contents of a container.
         }
     }
 

@@ -1,9 +1,9 @@
 package com.gunruh.textgame.objects;
 
 import com.gunruh.textgame.objects.containerObjects.Container;
+import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class GameObject {
@@ -13,6 +13,7 @@ public abstract class GameObject {
     private final String description;
     private String nickName;
     private boolean isPermanentFixture;
+    private boolean isDestroyed = false;
     private List<GameObject> parentContainer;
 
     // use this to determine whether the object can be taken by the player.
@@ -36,6 +37,10 @@ public abstract class GameObject {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public String getName() {
@@ -86,24 +91,13 @@ public abstract class GameObject {
     }
 
     public void destroy(boolean displayDestroyString) {
-        this.health = 0;
-
-        if (this instanceof Container) {
-            Iterator<GameObject> gameObjectIterator = ((Container) this).getItems().iterator();
-            while (gameObjectIterator.hasNext()) {
-                GameObject gameObject = gameObjectIterator.next();
-                gameObject.destroy(false); // Don't display the string for contents of a container.
-            }
-        }
+        setHealth(0);
+        setDestroyed(true);
+        parentContainer.remove(this);
 
         if (displayDestroyString) {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + ((this instanceof Container)? " and any items inside have" : " has") + " been destroyed. " + IOUtils.getRandomDestroyString());
+            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString());
         }
-
-        // When health reaches zero, the GameObject disappears (this default behavior may be overridden in extended classes)
-
-        // todo remove this? reorganizing the way objects are destroyed - just need to remove all references so garbage collector picks them up.
-        // this.getParentContainer().remove(this);
     }
 
     public void insertInto(GameObject receivingObject) {
@@ -130,5 +124,13 @@ public abstract class GameObject {
 
     public void setParentContainer(List<GameObject> parentContainer) {
         this.parentContainer = parentContainer;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        isDestroyed = destroyed;
     }
 }

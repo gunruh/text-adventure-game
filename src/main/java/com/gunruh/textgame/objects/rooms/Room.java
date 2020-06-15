@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class Room extends GameObject implements Container {
     public static final Room ROOM_NOT_PRESENT = new Room(null, null) {};
     private boolean isNewPlace = true;
-    private int itemLimit = -1; // rooms can have infinite items by default.
+    private int itemLimit = Integer.MAX_VALUE; // rooms can have infinite items by default.
     private boolean itemsVisible = true;
     List<GameObject> availableObjects = new ArrayList<GameObject>();
 
@@ -97,6 +97,8 @@ public abstract class Room extends GameObject implements Container {
     }
 
     public void addItem(GameObject gameObject) {
+        // currently does not check item limit - unlimited items.
+
         if (gameObject != null) {
             availableObjects.add(gameObject);
             gameObject.setParentContainer(availableObjects);

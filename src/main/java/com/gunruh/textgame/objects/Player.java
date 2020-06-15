@@ -3,6 +3,7 @@ package com.gunruh.textgame.objects;
 import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.ContainerUtils;
+import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Player extends GameObject implements Container {
 
     private List<GameObject> inventory;
     private Room currentRoom;
-    private int itemLimit = -1; // default item limit is infinite;
+    private int itemLimit = Integer.MAX_VALUE;
 
     private Player(String name, String description) {
         super(name, description);
@@ -40,7 +41,6 @@ public class Player extends GameObject implements Container {
     public void takeItem(GameObject gameObject) {
         if (gameObject != null) {
             addItem(gameObject);
-            gameObject.setParentContainer(inventory);
         }
     }
 
@@ -58,7 +58,15 @@ public class Player extends GameObject implements Container {
 
     @Override
     public void addItem(GameObject gameObject) {
-        inventory.add(gameObject);
+        if (gameObject != null) {
+            if (inventory.size() < itemLimit) {
+                inventory.add(gameObject);
+                gameObject.setParentContainer(inventory);
+            }
+            else {
+                IOUtils.capitalizeFirstLetter("You cannot hold any more items.");
+            }
+        }
     }
 
     @Override

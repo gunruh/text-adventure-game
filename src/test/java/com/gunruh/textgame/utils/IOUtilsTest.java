@@ -285,7 +285,7 @@ public class IOUtilsTest {
     @Test
     public void testDestroyPlayerInventoryObject() {
         GameObject rock = new GameObject("Rock", "A rock for testing.") {};
-        Player.getInstance().getItems().add(rock);
+        Player.getInstance().addItem(rock);
         rock.takeDamage(100);
         assertFalse(Player.getInstance().getItems().contains(rock));
     }
