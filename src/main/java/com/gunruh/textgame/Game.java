@@ -274,38 +274,29 @@ public class Game {
             return;
         }
 
-        // todo - refactor and consolidate the following 'insert into' logic.
-        // first check the player's inventory.
-        GameObject foundObject = ContainerUtils.recursiveRemove(player, itemToDrop);
-        if (foundObject != GameObject.EMPTY_GAME_OBJECT) {
-            if (containerItem == player.getCurrentRoom()) {
-                containerItem.addItem(foundObject);
-                displayWithinAsterisks("Drops " + (!isNullOrEmpty(foundObject.getNickName()) ? foundObject.getNickName() : foundObject.getName()));
+        // if containerItem is the current room - you can only drop it if you already have it.
+        if (containerItem == player.getCurrentRoom()) {
+            GameObject removedObject = ContainerUtils.recursiveRemove(player, itemToDrop);
+            if (removedObject != GameObject.EMPTY_GAME_OBJECT) {
+                player.getCurrentRoom().addItem(removedObject);
+                displayWithinAsterisks("Drops " + IOUtils.getNickNameOrNameWithArticle(removedObject) + ".");
             }
             else {
-                boolean successfulInsert = foundObject.insertInto((GameObject) containerItem);
-                if (successfulInsert) {
-                    ContainerUtils.recursiveRemove(player, foundObject);
-                }
+                display("You don't have that.");
             }
         }
         else {
-            // item must be in the room - don't allow player to drop something into the room that isn't in inventory.
-            if (containerItem == player.getCurrentRoom()) {
-                display("You don't have that.");
+            // In this case, it's an 'insert into' command. The player doesn't have to have it in their inventory to move it.
+            // You can't move permanent fixtures (can't put it inside a container)
+            if (!itemToDrop.isPermanentFixture()) {
+                List<GameObject> parentList = itemToDrop.getParentContainer();
+                boolean successfulInsert = itemToDrop.insertInto((GameObject) containerItem);
+                if (successfulInsert) {
+                    parentList.remove(itemToDrop);
+                }
             }
             else {
-                // try to get the item from the room and put it into the receiving object.
-                foundObject = ContainerUtils.recursiveFind(player.getCurrentRoom(), itemToDrop);
-                if (foundObject != GameObject.EMPTY_GAME_OBJECT) {
-                    boolean successfulInsert = foundObject.insertInto((GameObject) containerItem);
-                    if (successfulInsert) {
-                        ContainerUtils.recursiveRemove(player.getCurrentRoom(), foundObject);
-                    }
-                }
-                else {
-                    display("Sorry - I couldn't find the object to drop.");
-                }
+                displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(itemToDrop)) + " cannot be moved.");
             }
         }
     }

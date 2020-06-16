@@ -51,7 +51,7 @@ public abstract class ContainerIMPL extends GameObject implements Container {
     public void addItem(GameObject gameObject) {
         if (gameObject != null) {
             items.add(gameObject);
-            gameObject.setParentContainer(items);
+            gameObject.setParentContainer(items); // set its parent container to this container's items.
         }
     }
 
@@ -61,7 +61,6 @@ public abstract class ContainerIMPL extends GameObject implements Container {
         if (isContainerOpen()) {
             if (getItemCount() < getItemLimit()) {
                 addItem(actingObject);
-                Player.getInstance().getItems().remove(actingObject); // remove from player inventory, since it's now inside the container.
                 IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
                 isReceiveSuccess = true;
             }

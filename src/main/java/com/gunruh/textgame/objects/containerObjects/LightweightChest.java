@@ -7,7 +7,7 @@ public class LightweightChest extends ContainerIMPL {
 
     private LightweightChest() {
         super("Lightweight Chest", "A container for nic-nacks and paddy-whacks.", 10);
-        GameObject fuzzersTheSpaceChimp = new GameObject("Stuffed Animal", "It's just a stuffed animal, not a real space chimp.") {};
+        GameObject fuzzersTheSpaceChimp = new GameObject("Stuffed Animal", "It's just a stuffed animal, not a real space animal.") {};
         fuzzersTheSpaceChimp.setNickName("Fuzzers the Space Chimp");
         addItem(fuzzersTheSpaceChimp);
         addItem(new GameObject("Sock Squid", "Remember this? You made a 'sock squid' out of all the socks without matches.") {});
