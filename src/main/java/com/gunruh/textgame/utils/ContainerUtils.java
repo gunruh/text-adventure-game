@@ -6,26 +6,36 @@ import com.gunruh.textgame.objects.containerObjects.Container;
 import java.util.Iterator;
 
 public class ContainerUtils {
-    // todo maybe make this breadth-first instead of depth-first search eventually.
     public static GameObject recursiveRemove(Container container, GameObject gameObject) {
-        GameObject removedItem = GameObject.EMPTY_GAME_OBJECT;
+        return recursiveFind(container, gameObject, true);
+    }
+
+    public static GameObject recursiveFind(Container container, GameObject gameObject) {
+        return recursiveFind(container, gameObject, false);
+    }
+
+    // todo maybe make this breadth-first instead of depth-first search eventually.
+    public static GameObject recursiveFind(Container container, GameObject gameObject, boolean isRemove) {
+        GameObject foundItem = GameObject.EMPTY_GAME_OBJECT;
 
         Iterator<GameObject> gameObjectIterator = container.getItems().iterator();
         while (gameObjectIterator.hasNext()) {
             GameObject listObject = gameObjectIterator.next();
-            if (listObject instanceof Container) {
-                removedItem = recursiveRemove((Container) listObject, gameObject);
-                if (removedItem != GameObject.EMPTY_GAME_OBJECT) {
-                    return removedItem;
+            if (listObject == gameObject) {
+                foundItem = listObject;
+                if (isRemove) {
+                    gameObjectIterator.remove();
                 }
-            }
-            else if (listObject == gameObject) {
-                removedItem = listObject;
-                gameObjectIterator.remove();
                 break;
+            }
+            else if (listObject instanceof Container) {
+                foundItem = recursiveFind((Container) listObject, gameObject, isRemove);
+                if (foundItem != GameObject.EMPTY_GAME_OBJECT) {
+                    break;
+                }
             }
         }
 
-        return removedItem;
+        return foundItem;
     }
 }

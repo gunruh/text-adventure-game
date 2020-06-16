@@ -1,6 +1,7 @@
 package com.gunruh.textgame.objects;
 
 import com.gunruh.textgame.objects.containerObjects.Container;
+import com.gunruh.textgame.objects.containerObjects.ContainerIMPL;
 import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 
@@ -100,13 +101,13 @@ public abstract class GameObject {
         }
     }
 
-    public void insertInto(GameObject receivingObject) {
-        if (receivingObject instanceof Container) {
-            ((Container) receivingObject).addItem(this);
-        }
-        else {
-            IOUtils.displayWithinAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(receivingObject));
-        }
+    public boolean insertInto(GameObject receivingObject) {
+        return receivingObject.receiveInsertInto(this);
+    }
+
+    public boolean receiveInsertInto(GameObject actingObject) {
+        IOUtils.displayWithinAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(this));
+        return false;
     }
 
     public void removeFrom(GameObject receivingObject) {

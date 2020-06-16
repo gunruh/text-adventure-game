@@ -14,13 +14,17 @@ public abstract class ContainerIMPL extends GameObject implements Container {
     private List<GameObject> items = new ArrayList<GameObject>();
 
     protected ContainerIMPL(String name, String description, int itemLimit) {
-        super(name, description);
-        this.itemLimit = itemLimit;
+        this(name, description, itemLimit, false);
     }
 
     protected ContainerIMPL(String name, String description, int itemLimit, boolean isPermanentFixture) {
+        this(name, description, itemLimit, isPermanentFixture, false);
+    }
+
+    protected ContainerIMPL(String name, String description, int itemLimit, boolean isPermanentFixture, boolean isContainerOpen) {
         super(name, description, isPermanentFixture);
         this.itemLimit = itemLimit;
+        this.isContainerOpen = isContainerOpen;
     }
 
     @Override
@@ -43,24 +47,23 @@ public abstract class ContainerIMPL extends GameObject implements Container {
         return descriptionBuilder.toString();
     }
 
+    // This method will always add the item - if you want to first check size limit, open/close, etc., then use 'receiveInsertInto()'.
     public void addItem(GameObject gameObject) {
         if (gameObject != null) {
-            if (items.size() < itemLimit) {
-                items.add(gameObject);
-                gameObject.setParentContainer(items);
-            }
-            else {
-                IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " cannot hold any more items.");
-            }
+            items.add(gameObject);
+            gameObject.setParentContainer(items);
         }
     }
 
-    public void receiveInsertInto(GameObject actingObject) {
+    public boolean receiveInsertInto(GameObject actingObject) {
+        boolean isReceiveSuccess = false;
+
         if (isContainerOpen()) {
             if (getItemCount() < getItemLimit()) {
                 addItem(actingObject);
                 Player.getInstance().getItems().remove(actingObject); // remove from player inventory, since it's now inside the container.
                 IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
+                isReceiveSuccess = true;
             }
             else {
                 IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " cannot hold any more items.");
@@ -69,6 +72,8 @@ public abstract class ContainerIMPL extends GameObject implements Container {
         else {
             IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open.");
         }
+
+        return isReceiveSuccess;
     }
 
     public GameObject removeItem(GameObject requestedObject) {

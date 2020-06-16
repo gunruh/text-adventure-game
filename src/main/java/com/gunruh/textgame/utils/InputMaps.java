@@ -34,9 +34,11 @@ public class InputMaps {
 
         actionMap.put("drop", Action.Drop);
         actionMap.put("leave", Action.Drop);
-        actionMap.put("let go", Action.Drop);
+        actionMap.put("let go", Action.Drop); // todo figure out how to handle this phrase? ... phrases in general...
         actionMap.put("set", Action.Drop);
         actionMap.put("dump", Action.Drop);
+        actionMap.put("insert", Action.Drop);
+        actionMap.put("put", Action.Drop);
 
         actionMap.put("shoot", Action.Shoot);
         actionMap.put("blast", Action.Shoot);
@@ -76,9 +78,6 @@ public class InputMaps {
 
         actionMap.put("close", Action.Close);
         actionMap.put("shut", Action.Close);
-
-        actionMap.put("insert", Action.Insert);
-        actionMap.put("put", Action.Insert);
 
         directionMap.put("north", Direction.North);
         directionMap.put("n", Direction.North);

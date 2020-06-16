@@ -14,6 +14,7 @@ import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 import com.gunruh.textgame.utils.InputMaps;
+import sun.nio.ch.IOUtil;
 
 import java.util.List;
 
@@ -42,12 +43,6 @@ public class Game {
             switch (statement.getAction()) {
                 case Take: {
                     handleTake(statement);
-                    // todo add support for 'take from inside container' probably in 'handleTake()' method ^^^
-                    break;
-                }
-                case Insert: {
-                    // todo handle this.
-                    IOUtils.displayWithinAsterisks("The game doesn't support 'insert into' yet.");
                     break;
                 }
                 case Drop: {
@@ -257,24 +252,61 @@ public class Game {
     }
 
     private void handleDrop(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            display("Drop what?");
-            String takeInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(takeInput, player.getItems()));
+        GameObject itemToDrop = statement.getReceivingObject(); // default to receiving object.
+        Container containerItem = player.getCurrentRoom(); // default to current room.
+
+        // check to see if you're dropping this item into another item.
+        if (statement.getReceivingObject() != null) {
+            if (statement.getActingObject() != null && statement.getReceivingObject() instanceof Container) {
+                itemToDrop = statement.getActingObject();
+                containerItem = (Container) statement.getReceivingObject();
+            }
         }
 
-        if (statement.getReceivingObject() == null) {
-            display("Sorry - I can't find that object in your inventory.");
+        if (itemToDrop == null) {
+            display("Which object?");
+            String takeInput = IOUtils.getInputText();
+            itemToDrop = findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems()));
+        }
+
+        if (itemToDrop == null) {
+            display("Sorry - I can't find that object.");
             return;
         }
 
-        GameObject droppedObject = ContainerUtils.recursiveRemove(player, statement.getReceivingObject());
-        if (droppedObject != GameObject.EMPTY_GAME_OBJECT) {
-            player.getCurrentRoom().addItem(droppedObject);
-            displayWithinAsterisks("Drops " + (!isNullOrEmpty(droppedObject.getNickName()) ? droppedObject.getNickName() : droppedObject.getName()));
+        // todo - refactor and consolidate the following 'insert into' logic.
+        // first check the player's inventory.
+        GameObject foundObject = ContainerUtils.recursiveRemove(player, itemToDrop);
+        if (foundObject != GameObject.EMPTY_GAME_OBJECT) {
+            if (containerItem == player.getCurrentRoom()) {
+                containerItem.addItem(foundObject);
+                displayWithinAsterisks("Drops " + (!isNullOrEmpty(foundObject.getNickName()) ? foundObject.getNickName() : foundObject.getName()));
+            }
+            else {
+                boolean successfulInsert = foundObject.insertInto((GameObject) containerItem);
+                if (successfulInsert) {
+                    ContainerUtils.recursiveRemove(player, foundObject);
+                }
+            }
         }
         else {
-            display("You don't have that.");
+            // item must be in the room - don't allow player to drop something into the room that isn't in inventory.
+            if (containerItem == player.getCurrentRoom()) {
+                display("You don't have that.");
+            }
+            else {
+                // try to get the item from the room and put it into the receiving object.
+                foundObject = ContainerUtils.recursiveFind(player.getCurrentRoom(), itemToDrop);
+                if (foundObject != GameObject.EMPTY_GAME_OBJECT) {
+                    boolean successfulInsert = foundObject.insertInto((GameObject) containerItem);
+                    if (successfulInsert) {
+                        ContainerUtils.recursiveRemove(player.getCurrentRoom(), foundObject);
+                    }
+                }
+                else {
+                    display("Sorry - I couldn't find the object to drop.");
+                }
+            }
         }
     }
 
@@ -315,7 +347,7 @@ public class Game {
         if (!successfulRemoved) {
             displayWithinAsterisks("Error taking object... could not remove from parent container.");
         }
-        Player.getInstance().takeItem(itemToTake);
+        Player.getInstance().addItem(itemToTake);
         displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(itemToTake));
     }
 

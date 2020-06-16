@@ -77,4 +77,20 @@ public class ContainerUtilsTest {
         GameObject removedObject = ContainerUtils.recursiveRemove(box, rock);
         assertEquals(removedObject, GameObject.EMPTY_GAME_OBJECT);
     }
+
+    @Test
+    public void testRecursiveRemove3rdLevel_Container() {
+        ContainerIMPL box = new ContainerIMPL("Box", "A small box.", 5) {};
+        ContainerIMPL smallBox = new ContainerIMPL("Small Box", "An even smaller box.", 3) {};
+        box.addItem(smallBox);
+
+        ContainerIMPL reallySmallBox = new ContainerIMPL("Really Small Box", "The smallest box of them all.", 1) {};
+        smallBox.addItem(reallySmallBox);
+
+        GameObject rock = new GameObject("Rock", "A small rock.") {};
+        reallySmallBox.addItem(rock);
+
+        GameObject removedObject = ContainerUtils.recursiveRemove(box, reallySmallBox);
+        assertEquals(removedObject, reallySmallBox);
+    }
 }
