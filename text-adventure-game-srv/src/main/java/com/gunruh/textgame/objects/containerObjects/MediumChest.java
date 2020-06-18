@@ -2,7 +2,7 @@ package com.gunruh.textgame.objects.containerObjects;
 
 import com.gunruh.textgame.objects.GameObject;
 
-public class MediumChest extends ContainerIMPL {
+public class MediumChest extends ContainerObject {
     private static MediumChest INSTANCE = new MediumChest();
 
     private MediumChest() {

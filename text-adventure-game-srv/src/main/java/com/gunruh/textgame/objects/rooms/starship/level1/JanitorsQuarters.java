@@ -26,7 +26,7 @@ public class JanitorsQuarters extends Room {
 
     @Override
     public Room goEast() {
-        IOUtils.display("Good Job! You went through the door.");
+        IOUtils.display(outputBuffer, "Good Job! You went through the door.");
         return MainLowerHallway.getInstance();
     }
 }

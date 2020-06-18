@@ -15,7 +15,7 @@ public class RoomA extends Room {
 
     @Override
     public Room goEast() {
-        IOUtils.display("You crawled through the hole - good job.");
+        IOUtils.display(outputBuffer, "You crawled through the hole - good job.");
         return RoomB.getInstance();
     }
 }

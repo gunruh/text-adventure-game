@@ -17,7 +17,7 @@ public class SpaceOutsideEscapePods extends Room {
 
     @Override
     public Room goWest() {
-        IOUtils.displayWithinAsterisks("The Airlock doors open, and you are pulled in by a tractor beam.");
+        IOUtils.displayWithinAsterisks(outputBuffer, "The Airlock doors open, and you are pulled in by a tractor beam.");
         return ServiceAirLock.getInstance();
     }
 }

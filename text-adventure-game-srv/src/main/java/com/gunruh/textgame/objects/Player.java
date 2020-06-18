@@ -11,17 +11,11 @@ import java.util.List;
 import static com.gunruh.textgame.utils.IOUtils.display;
 
 public class Player extends GameObject implements Container {
-    private static Player INSTANCE = new Player("Space Dude", "A man on a mission.");
-
-    public static Player getInstance() {
-        return INSTANCE;
-    }
-
     private List<GameObject> inventory;
     private Room currentRoom;
     private int itemLimit = Integer.MAX_VALUE;
 
-    private Player(String name, String description) {
+    public Player(String name, String description) {
         super(name, description);
         this.inventory = new ArrayList<GameObject>();
         this.currentRoom = Room.ROOM_NOT_PRESENT;
@@ -33,7 +27,7 @@ public class Player extends GameObject implements Container {
         }
         else {
             currentRoom = room;
-            display(room.getRoomDisplay());
+            display(outputBuffer, room.getRoomdisplay(outputBuffer, ));
             room.setIsNewPlace(false);
         }
     }

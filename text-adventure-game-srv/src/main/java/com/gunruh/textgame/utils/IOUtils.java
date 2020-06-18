@@ -14,15 +14,15 @@ public class IOUtils {
 
     private static Random random = new Random(); // Used for random generation.
 
-    public static void displayWithinAsterisks(String displayText) {
-        display("*" + displayText + "*");
+    public static void displayWithinAsterisks(StringBuffer outputBuffer, String displayText) {
+        display(outputBuffer, "*" + displayText + "*");
     }
     
-    public static void displayWithinDoubleQuotes(String displayText) {
-    	display("\"" + displayText + "\"");
+    public static void displayWithinDoubleQuotes(StringBuffer outputBuffer, String displayText) {
+    	display(outputBuffer, "\"" + displayText + "\"");
     }
 
-    public static void displayGameObject(GameObject gameObject) {
+    public static void displayGameObject(StringBuffer outputBuffer, GameObject gameObject) {
     	StringBuilder displayBuilder = new StringBuilder();
     	
         displayBuilder.append(getNickNameAndNameString(gameObject));
@@ -33,7 +33,20 @@ public class IOUtils {
 
         displayBuilder.append("\n" + gameObject.getDescription());
         
-        display(displayBuilder.toString());
+        display(outputBuffer, displayBuilder.toString());
+    }
+
+    public static void display(StringBuffer outputBuffer, String text) {
+//        System.out.println(text);
+//        System.out.println(""); // Spacing
+        outputBuffer.append(text);
+    }
+
+    public static String getInputTextFromConsole() {
+        System.out.print("> ");
+        String input = scanner.nextLine();
+        System.out.println(""); // spacing
+        return input;
     }
 
     public static String getNickNameAndNameString(GameObject gameObject) {
@@ -47,18 +60,6 @@ public class IOUtils {
         }
 
         return stringBuilder.toString();
-    }
-
-    public static void display(String text) {
-        System.out.println(text);
-        System.out.println(""); // Spacing
-    }
-
-    public static String getInputText() {
-        System.out.print("> ");
-        String input = scanner.nextLine();
-        System.out.println(""); // spacing
-        return input;
     }
 
     public static List<String> getInputListFromText(String userInput) {

@@ -1,8 +1,7 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.containerObjects.Container;
-import com.gunruh.textgame.objects.containerObjects.ContainerIMPL;
-import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.List;
@@ -16,6 +15,7 @@ public abstract class GameObject {
     private boolean isPermanentFixture;
     private boolean isDestroyed = false;
     private List<GameObject> parentContainer;
+    private StringBuffer outputBuffer;
 
     // use this to determine whether the object can be taken by the player.
     public boolean isPermanentFixture() {
@@ -65,7 +65,7 @@ public abstract class GameObject {
     }
 
     public void receiveTalkTo(GameObject actingObject) {
-        IOUtils.display(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " does not seem to respond."));
+        IOUtils.display(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this) + " does not seem to respond."));
     }
     
     public void shoot(GameObject receivingObject) {
@@ -78,13 +78,13 @@ public abstract class GameObject {
 
     public void takeDamage(int amount) {
         if (amount == 0) {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes no damage.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes no damage.");
             return;
         }
 
         if (this.health - amount > 0) {
             this.health -= amount;
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage.");
         }
         else {
             destroy(true);
@@ -97,7 +97,7 @@ public abstract class GameObject {
         parentContainer.remove(this);
 
         if (displayDestroyString) {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString());
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString());
         }
     }
 
@@ -106,7 +106,7 @@ public abstract class GameObject {
     }
 
     public boolean receiveInsertInto(GameObject actingObject) {
-        IOUtils.displayWithinAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(this));
+        IOUtils.displayWithinAsterisks(outputBuffer, "Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(this));
         return false;
     }
 
@@ -115,7 +115,7 @@ public abstract class GameObject {
             ((Container) receivingObject).removeItem(this);
         }
         else {
-            IOUtils.displayWithinAsterisks("Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + ".");
+            IOUtils.displayWithinAsterisks(outputBuffer, "Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + ".");
         }
     }
 

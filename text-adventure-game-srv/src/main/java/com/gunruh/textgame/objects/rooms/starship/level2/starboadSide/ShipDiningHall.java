@@ -23,7 +23,7 @@ public class ShipDiningHall extends Room {
 
     @Override
     public Room goWest() {
-        IOUtils.displayWithinAsterisks("You found a secret entrance to the Kitchen!");
+        IOUtils.displayWithinAsterisks(outputBuffer, "You found a secret entrance to the Kitchen!");
         return Kitchen.getInstance();
     }
 }

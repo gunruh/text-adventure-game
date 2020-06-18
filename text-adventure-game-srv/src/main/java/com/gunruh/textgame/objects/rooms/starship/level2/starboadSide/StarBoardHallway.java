@@ -31,11 +31,11 @@ public class StarBoardHallway extends Room {
     @Override
     public Room goSouth() {
         if (Player.getInstance().getItems().contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks("BEEP BEEP BOOYEEP. The door opens.");
+            IOUtils.displayWithinAsterisks(outputBuffer, "BEEP BEEP BOOYEEP. The door opens.");
             return ServiceAirLock.getInstance();
         }
         else {
-            IOUtils.displayWithinAsterisks("BEEP BOO BEEP - You are not allowed without a card.");
+            IOUtils.displayWithinAsterisks(outputBuffer, "BEEP BOO BEEP - You are not allowed without a card.");
             return Room.ROOM_NOT_PRESENT;
         }
     }

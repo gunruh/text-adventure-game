@@ -1,27 +1,26 @@
 package com.gunruh.textgame.objects.containerObjects;
 
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class ContainerIMPL extends GameObject implements Container {
+public abstract class ContainerObject extends GameObject implements Container {
     private int itemLimit;
     private boolean isContainerOpen = false;
     private List<GameObject> items = new ArrayList<GameObject>();
 
-    protected ContainerIMPL(String name, String description, int itemLimit) {
+    protected ContainerObject(String name, String description, int itemLimit) {
         this(name, description, itemLimit, false);
     }
 
-    protected ContainerIMPL(String name, String description, int itemLimit, boolean isPermanentFixture) {
+    protected ContainerObject(String name, String description, int itemLimit, boolean isPermanentFixture) {
         this(name, description, itemLimit, isPermanentFixture, false);
     }
 
-    protected ContainerIMPL(String name, String description, int itemLimit, boolean isPermanentFixture, boolean isContainerOpen) {
+    protected ContainerObject(String name, String description, int itemLimit, boolean isPermanentFixture, boolean isContainerOpen) {
         super(name, description, isPermanentFixture);
         this.itemLimit = itemLimit;
         this.isContainerOpen = isContainerOpen;
@@ -61,15 +60,15 @@ public abstract class ContainerIMPL extends GameObject implements Container {
         if (isContainerOpen()) {
             if (getItemCount() < getItemLimit()) {
                 addItem(actingObject);
-                IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
+                IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
                 isReceiveSuccess = true;
             }
             else {
-                IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " cannot hold any more items.");
+                IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " cannot hold any more items.");
             }
         }
         else {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open.");
         }
 
         return isReceiveSuccess;
@@ -89,7 +88,7 @@ public abstract class ContainerIMPL extends GameObject implements Container {
             }
         }
         else {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open.");
         }
 
         return removedObject;
@@ -98,20 +97,20 @@ public abstract class ContainerIMPL extends GameObject implements Container {
     public void receiveClose() {
         if (isContainerOpen()) {
             setContainerOpen(false);
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now closed.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now closed.");
         }
         else {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already closed.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already closed.");
         }
     }
 
     public void receiveOpen() {
         if (!isContainerOpen()) {
             setContainerOpen(true);
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now open.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now open.");
         }
         else {
-            IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already open.");
+            IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already open.");
         }
     }
 

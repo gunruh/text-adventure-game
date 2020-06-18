@@ -17,7 +17,7 @@ public class Blaster extends GameObject {
 
     @Override
     public void shoot(GameObject receivingObject) {
-        IOUtils.displayWithinAsterisks("A flash of red laser light shoots from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
+        IOUtils.displayWithinAsterisks(outputBuffer, "A flash of red laser light shoots from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
         super.shoot(receivingObject);
     }
 }

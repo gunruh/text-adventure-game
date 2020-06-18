@@ -23,7 +23,7 @@ public class GoldenSpatula extends GameObject {
 	
 	@Override
 	public void shoot(GameObject receivingObject) {
-		IOUtils.displayWithinAsterisks("A corndog is launched from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + " with tremendous speed.");
+		IOUtils.displayWithinAsterisks(outputBuffer, "A corndog is launched from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + " with tremendous speed.");
 		super.shoot(receivingObject);
 	}
 }

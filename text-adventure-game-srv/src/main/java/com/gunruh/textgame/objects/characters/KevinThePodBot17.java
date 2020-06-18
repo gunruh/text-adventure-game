@@ -29,13 +29,13 @@ public class KevinThePodBot17 extends GameObject {
 
     @Override
     public void receiveShoot(GameObject actingObject) {
-        IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject));
+        IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject));
         actingObject.receiveShoot(actingObject);
     }
 
     @Override
     public void receiveTalkTo(GameObject gameObject) {
-        IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
+        IOUtils.display(outputBuffer, IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
                 "\n\"" + getKevinThePodBot17Phrase() + "\"");
     }
 

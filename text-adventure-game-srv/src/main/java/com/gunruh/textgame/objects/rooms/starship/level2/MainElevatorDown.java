@@ -23,13 +23,13 @@ public class MainElevatorDown extends Room {
 
     @Override
     public Room goUp() {
-        IOUtils.displayWithinAsterisks("The elevator cannot go any higher.");
+        IOUtils.displayWithinAsterisks(outputBuffer, "The elevator cannot go any higher.");
         return Room.ROOM_NOT_PRESENT;
     }
 
     @Override
     public Room goDown() {
-        IOUtils.displayWithinAsterisks("The doors close, and you feel lighter as the elevator glides downward. The elevator doors open to the South.");
+        IOUtils.displayWithinAsterisks(outputBuffer, "The doors close, and you feel lighter as the elevator glides downward. The elevator doors open to the South.");
         return MainElevatorUp.getInstance();
     }
 }

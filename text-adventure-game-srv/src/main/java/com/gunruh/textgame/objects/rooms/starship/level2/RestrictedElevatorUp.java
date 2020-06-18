@@ -26,11 +26,11 @@ public class RestrictedElevatorUp extends Room {
     public Room goUp() {
         // Check if key card is in player inventory, or just in the elevator.
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), getItems()).contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks("The doors close, and you feel the elevator lurch upward. The northern doors open again.");
+            IOUtils.displayWithinAsterisks(outputBuffer, "The doors close, and you feel the elevator lurch upward. The northern doors open again.");
             return RestrictedElevatorDown.getInstance();
         }
         else {
-            IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");
+            IOUtils.display(outputBuffer, "Sorry, the key card must be in proximity to use this elevator.");
             return Room.ROOM_NOT_PRESENT;
         }
     }
@@ -38,11 +38,11 @@ public class RestrictedElevatorUp extends Room {
     @Override
     public Room goDown() {
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), getItems()).contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks("The elevator cannot go any lower.");
+            IOUtils.displayWithinAsterisks(outputBuffer, "The elevator cannot go any lower.");
             return Room.ROOM_NOT_PRESENT;
         }
         else {
-            IOUtils.display("Sorry, the key card must be in proximity to use this elevator.");
+            IOUtils.display(outputBuffer, "Sorry, the key card must be in proximity to use this elevator.");
             return Room.ROOM_NOT_PRESENT;
         }
     }
