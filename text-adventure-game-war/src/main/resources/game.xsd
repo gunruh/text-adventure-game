@@ -1,0 +1,72 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="com.gunruh.textgame"
+           targetNamespace="com.gunruh.textgame"
+           elementFormDefault="qualified">
+
+    <xs:element name="startGameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="startGameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:response"/>
+                <xs:element name="gameId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getNextStoryTextRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="gameId" type="xs:string"/>
+                <xs:element name="text" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getNextStoryTextResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="stopGameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="gameId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="stopGameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tns:response"/>
+                <xs:element name="gameId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element name="status" type="tns:status"/>
+            <xs:element name="statusMessage" type="xs:string"/>
+            <xs:element name="text" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUCCESS"/>
+            <xs:enumeration value="FAILURE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
