@@ -3,13 +3,87 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>text-adventure-game</artifactId>
-        <groupId>text-adventure-game</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.gunruh.textgame</groupId>
     <artifactId>text-adventure-game-war</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
+    <!-- spring version properties not used currently, as we bring them in from the spring parent pom. -->
+    <properties>
+        <springframework.version>2.3.1.RELEASE</springframework.version>
+        <wsdl4j.version>1.6.3</wsdl4j.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.gunruh.textgame</groupId>
+            <artifactId>text-adventure-game-srv</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+<!--            <version>${springframework.version}</version>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+<!--            <version>${springframework.version}</version>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+<!--            <version>${springframework.version}</version>-->
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+<!--            <version>${wsdl4j.version}</version>-->
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <source>${project.basedir}/src/main/resources/game.xsd</source>
+                    </sources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
