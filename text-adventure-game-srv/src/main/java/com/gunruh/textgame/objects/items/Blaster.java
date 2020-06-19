@@ -5,7 +5,7 @@ import com.gunruh.textgame.utils.IOUtils;
 
 public class Blaster extends GameObject {
     public Blaster() {
-        super("Blaster", "A laser gun.");
+        super(game, "Blaster", "A laser gun.");
     }
 
     private int effectivenessAsGun = 50;
@@ -17,7 +17,7 @@ public class Blaster extends GameObject {
 
     @Override
     public void shoot(GameObject receivingObject) {
-        IOUtils.displayWithinAsterisks(outputBuffer, "A flash of red laser light shoots from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
+        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("A flash of red laser light shoots from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + ".");
         super.shoot(receivingObject);
     }
 }

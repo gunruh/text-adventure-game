@@ -7,14 +7,14 @@ import com.gunruh.textgame.objects.characters.ShipChef;
 
 public class Kitchen extends Room {
 	private Kitchen() {
-		super("Kitchen", "Smells like corndogs in here, amongst other things." + 
+		super(game, "Kitchen", "Smells like corndogs in here, amongst other things." +
 		      "\nThe double doors on the southwest lead back to the hallway.");
 		addItem(ShipChef.getInstance());
-		addItem(new GameObject("Corn Dog Cooker", "It's a professional grade corndog cooker, with roller wheels.") {});
-		addItem(new GameObject("Big Pan", "A really big cooking pan.") {});
-		addItem(new GameObject("Metal Pot", "Looks useful for cooking a cheesy bake stew.") {});
+		addItem(new GameObject(game, "Corn Dog Cooker", "It's a professional grade corndog cooker, with roller wheels.") {});
+		addItem(new GameObject(game, "Big Pan", "A really big cooking pan.") {});
+		addItem(new GameObject(game, "Metal Pot", "Looks useful for cooking a cheesy bake stew.") {});
 		addItem(GoldenSpatula.getInstance());
-		addItem(new GameObject("Chef's Hat", "A hat used by the finest chefs in the galaxy.") {});
+		addItem(new GameObject(game, "Chef's Hat", "A hat used by the finest chefs in the galaxy.") {});
 	}
 	
 	private static Kitchen INSTANCE = new Kitchen();

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ServiceAirLock extends Room {
     private ServiceAirLock() {
-        super("Service AirLock", "This is the gateway to outer space!" +
+        super(game, "Service AirLock", "This is the gateway to outer space!" +
                 "\nJanitor's such as yourself often come through here to clean the escape pod windows." +
                 "\nThe airlock gateway is on the east side of the room. You'll need your cleaning supplies before going out." +
                 "\nThe door back into the ship is to the north.");
@@ -33,11 +33,11 @@ public class ServiceAirLock extends Room {
     public Room goEast() {
         List<GameObject> playerInventory = Player.getInstance().getItems();
         if (playerInventory.contains(CleaningSprayGun.getInstance()) && playerInventory.contains(RubberSqueegee.getInstance()) && playerInventory.contains(WindowWashingCloth.getInstance())) {
-            IOUtils.displayWithinAsterisks(outputBuffer, "WAAAWOOOOBEE BOOOOP... SWOOOOOOSHHHHH. The airlock sensor reads all three items and opens, sucking you out to space.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("WAAAWOOOOBEE BOOOOP... SWOOOOOOSHHHHH. The airlock sensor reads all three items and opens, sucking you out to space.");
             return SpaceOutsideEscapePods.getInstance();
         }
         else {
-            IOUtils.displayWithinAsterisks(outputBuffer, "wub wub wub. Three low beeps are heard. You need a cleaning-spray gun, a squeegee, and a window-washing cloth in order to go outside.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("wub wub wub. Three low beeps are heard. You need a cleaning-spray gun, a squeegee, and a window-washing cloth in order to go outside.");
             return Room.ROOM_NOT_PRESENT;
         }
     }

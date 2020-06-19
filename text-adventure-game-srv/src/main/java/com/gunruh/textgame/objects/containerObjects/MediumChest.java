@@ -7,8 +7,8 @@ public class MediumChest extends ContainerObject {
 
     private MediumChest() {
         super("Medium Chest", "A medium-sized container for nic-nacks and paddy-whacks.", 10);
-        addItem(new GameObject("Nic-Nack", "Somethin' you found on the floor one day. Probably should get rid of it sometime.") {});
-        addItem(new GameObject("Paddy-Whack", "Real small piece of a crumb.") {});
+        addItem(new GameObject(game, "Nic-Nack", "Somethin' you found on the floor one day. Probably should get rid of it sometime.") {});
+        addItem(new GameObject(game, "Paddy-Whack", "Real small piece of a crumb.") {});
         setContainerOpen(true);
     }
 

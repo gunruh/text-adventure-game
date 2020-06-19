@@ -6,7 +6,7 @@ import com.gunruh.textgame.utils.IOUtils;
 
 public class ShipDiningHall extends Room {
     private ShipDiningHall() {
-        super("Ship Dining Hall", "This is where the passengers eat all their food!" +
+        super(game, "Ship Dining Hall", "This is where the passengers eat all their food!" +
                 "\nThere is one large window on the east side where you can see the vastness of outer space as you eat.");
     }
 
@@ -23,7 +23,7 @@ public class ShipDiningHall extends Room {
 
     @Override
     public Room goWest() {
-        IOUtils.displayWithinAsterisks(outputBuffer, "You found a secret entrance to the Kitchen!");
+        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("You found a secret entrance to the Kitchen!");
         return Kitchen.getInstance();
     }
 }

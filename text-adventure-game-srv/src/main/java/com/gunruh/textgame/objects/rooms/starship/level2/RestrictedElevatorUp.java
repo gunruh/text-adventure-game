@@ -8,7 +8,7 @@ import com.gunruh.textgame.utils.IOUtils;
 
 public class RestrictedElevatorUp extends Room {
     private RestrictedElevatorUp() {
-        super("Restricted Elevator (Level: 2)", "This elevator has magnetic authentication sensors. It will only go up or down if the keycard is nearby. The doors are on the north side.");
+        super(game, "Restricted Elevator (Level: 2)", "This elevator has magnetic authentication sensors. It will only go up or down if the keycard is nearby. The doors are on the north side.");
     }
 
     private static RestrictedElevatorUp INSTANCE = new RestrictedElevatorUp();
@@ -26,11 +26,11 @@ public class RestrictedElevatorUp extends Room {
     public Room goUp() {
         // Check if key card is in player inventory, or just in the elevator.
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), getItems()).contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks(outputBuffer, "The doors close, and you feel the elevator lurch upward. The northern doors open again.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The doors close, and you feel the elevator lurch upward. The northern doors open again.");
             return RestrictedElevatorDown.getInstance();
         }
         else {
-            IOUtils.display(outputBuffer, "Sorry, the key card must be in proximity to use this elevator.");
+            game.getGameOutput().appendln("Sorry, the key card must be in proximity to use this elevator.");
             return Room.ROOM_NOT_PRESENT;
         }
     }
@@ -38,11 +38,11 @@ public class RestrictedElevatorUp extends Room {
     @Override
     public Room goDown() {
         if (IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), getItems()).contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks(outputBuffer, "The elevator cannot go any lower.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The elevator cannot go any lower.");
             return Room.ROOM_NOT_PRESENT;
         }
         else {
-            IOUtils.display(outputBuffer, "Sorry, the key card must be in proximity to use this elevator.");
+            game.getGameOutput().appendln("Sorry, the key card must be in proximity to use this elevator.");
             return Room.ROOM_NOT_PRESENT;
         }
     }

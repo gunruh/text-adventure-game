@@ -14,15 +14,15 @@ public class IOUtils {
 
     private static Random random = new Random(); // Used for random generation.
 
-    public static void displayWithinAsterisks(StringBuffer outputBuffer, String displayText) {
-        display(outputBuffer, "*" + displayText + "*");
+    public static String surroundWithAsterisks(String displayText) {
+        return getDisplayFormattedString("*" + displayText + "*");
     }
     
-    public static void displayWithinDoubleQuotes(StringBuffer outputBuffer, String displayText) {
-    	display(outputBuffer, "\"" + displayText + "\"");
+    public static String surroundWithDoubleQuotes(String displayText) {
+    	return getDisplayFormattedString("\"" + displayText + "\"");
     }
 
-    public static void displayGameObject(StringBuffer outputBuffer, GameObject gameObject) {
+    public static String displayGameObject(GameObject gameObject) {
     	StringBuilder displayBuilder = new StringBuilder();
     	
         displayBuilder.append(getNickNameAndNameString(gameObject));
@@ -33,13 +33,12 @@ public class IOUtils {
 
         displayBuilder.append("\n" + gameObject.getDescription());
         
-        display(outputBuffer, displayBuilder.toString());
+        return getDisplayFormattedString(displayBuilder.toString());
     }
 
-    public static void display(StringBuffer outputBuffer, String text) {
-//        System.out.println(text);
-//        System.out.println(""); // Spacing
-        outputBuffer.append(text);
+    public static String getDisplayFormattedString(String text) {
+//        return text + "\n";
+        return text;
     }
 
     public static String getInputTextFromConsole() {

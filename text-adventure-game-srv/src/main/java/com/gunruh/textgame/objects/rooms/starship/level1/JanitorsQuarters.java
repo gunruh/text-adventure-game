@@ -4,15 +4,14 @@ import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.containerObjects.Dresser;
 import com.gunruh.textgame.objects.containerObjects.LightweightChest;
 import com.gunruh.textgame.objects.rooms.Room;
-import com.gunruh.textgame.utils.IOUtils;
 
 public class JanitorsQuarters extends Room {
     private JanitorsQuarters() {
-        super("Janitor's Quarters",
+        super(game, "Janitor's Quarters",
                 "This place has become your home. It's a humble room, but is a good place to get some rest." +
                         "\nThere's a door on the east side of the room." +
                         "\nTry typing 'Go East' to walk through the east door.");
-        addItem(new GameObject("Bed", "No time for sleep, gotta get to work!", true) {});
+        addItem(new GameObject(game, "Bed", "No time for sleep, gotta get to work!", true) {});
         addItem(Dresser.getInstance());
         addItem(LightweightChest.getInstance());
 
@@ -26,7 +25,7 @@ public class JanitorsQuarters extends Room {
 
     @Override
     public Room goEast() {
-        IOUtils.display(outputBuffer, "Good Job! You went through the door.");
+        game.getGameOutput().appendln("Good Job! You went through the door.");
         return MainLowerHallway.getInstance();
     }
 }

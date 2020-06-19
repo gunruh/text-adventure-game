@@ -4,7 +4,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class EngineRoom extends Room {
     private EngineRoom() {
-        super("Engine Room", "Here you can see the engines that propel the massive ship. There's an entryway to the north.");
+        super(game, "Engine Room", "Here you can see the engines that propel the massive ship. There's an entryway to the north.");
     }
 
     private static EngineRoom INSTANCE = new EngineRoom();

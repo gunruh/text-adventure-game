@@ -1,19 +1,13 @@
 package com.gunruh.textgame.objects.characters;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
-import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class AndersonJr extends GameObject {
-	private AndersonJr() {
-		super("Captain's Son", "The son of the captain. He is still earning his junior flying badge.");
+	public AndersonJr(Game game) {
+		super(game, "Captain's Son", "The son of the captain. He is still earning his junior flying badge.");
 		setNickName("Billy Anderson Jr.");
-	}
-	
-	private static AndersonJr INSTANCE = new AndersonJr();
-	
-	public static AndersonJr getInstance() {
-		return INSTANCE;
 	}
 	
 	@Override
@@ -23,13 +17,13 @@ public class AndersonJr extends GameObject {
 
 	@Override
 	public void receiveShoot(GameObject actingObject) {
-		IOUtils.displayWithinAsterisks(outputBuffer, IOUtils.getNickNameOrNameWithArticle(this) + " jumps out of the way.");
+		game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " jumps out of the way."));
 	}
 	
 	@Override
 	public void receiveTalkTo(GameObject gameObject) {
-		if (Player.getInstance().getCurrentRoom().getItems().contains(Captain.getInstance())) {
-			IOUtils.display(outputBuffer, IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
+		if (game.getPlayer().getCurrentRoom().containsInstanceOf(Captain.class)) {
+			game.getGameOutput().appendln(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
 																		 "\n\"I'm the next in line to be the big Kahoona of this ship." +
 			                                                             "\nSo I'm on my best behavior... at least while my dad is in the room..." + 
 			                                                             "\nWhat's that?" +
@@ -37,7 +31,7 @@ public class AndersonJr extends GameObject {
 																		 "\n...you should ask my dad.\"");
 		}
 		else {
-			IOUtils.display(outputBuffer, IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
+			game.getGameOutput().appendln(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
 					"\n\"Alright, ALRIGHT! YES, I took the cleaning supplies!" +
 					"\nPlease take them - don't tell my dad!" +
 					"\nI'm just going to sit here quietly and look at all these nifty controls...\"");

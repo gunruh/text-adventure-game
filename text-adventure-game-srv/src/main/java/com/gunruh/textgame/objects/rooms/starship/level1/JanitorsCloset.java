@@ -6,11 +6,11 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class JanitorsCloset extends Room {
     private JanitorsCloset() {
-        super("Janitor's Closet", "This room stores the window-cleaning supplies, but a few items seem to have been taken..." +
+        super(game, "Janitor's Closet", "This room stores the window-cleaning supplies, but a few items seem to have been taken..." +
               "\nThe door is on the west side.");
 
         addItem(CleaningSprayGun.getInstance());
-        addItem(new GameObject("Crumpled Note", "Opening the note reveals the text: " +
+        addItem(new GameObject(game, "Crumpled Note", "Opening the note reveals the text: " +
                 "\n\"BiLL wuz HeeRe.\"") {});
     }
 

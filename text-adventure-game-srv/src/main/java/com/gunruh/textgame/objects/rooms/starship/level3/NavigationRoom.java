@@ -8,7 +8,7 @@ import com.gunruh.textgame.objects.characters.Captain;
 
 public class NavigationRoom extends Room {
     private NavigationRoom() {
-        super("Navigation Room", "This room is where the captain steers the ship. There's a door on the south wall.");
+        super(game, "Navigation Room", "This room is where the captain steers the ship. There's a door on the south wall.");
 
         addItem(Captain.getInstance());
         addItem(AndersonJr.getInstance());

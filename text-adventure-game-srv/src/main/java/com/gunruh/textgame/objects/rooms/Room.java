@@ -1,23 +1,23 @@
 package com.gunruh.textgame.objects.rooms;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class Room extends GameObject implements Container {
-    public static final Room ROOM_NOT_PRESENT = new Room(null, null) {};
+    public static final Room ROOM_NOT_PRESENT = new Room(null, null, null) {};
     private boolean isNewPlace = true;
     private int itemLimit = Integer.MAX_VALUE; // rooms can have infinite items by default.
     private boolean itemsVisible = true;
     List<GameObject> availableObjects = new ArrayList<GameObject>();
 
-    public Room(String name, String description) {
-        super(name, description);
+    public Room(Game game, String name, String description) {
+        super(game, name, description);
     }
 
     public Room goNorth() {
@@ -84,7 +84,7 @@ public abstract class Room extends GameObject implements Container {
 
         if (getItems() != null && !getItems().isEmpty()) {
             descriptionBuilder.append("\n");
-            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getSentenceStringFromGameObjectsList(availableObjects)));
+            descriptionBuilder.append(IOUtils.capitalizeFirstLetter(IOUtils.getSentenceStringFromGameObjectsList(getItems())));
             if (getItems().size() == 1) {
                 descriptionBuilder.append(" is here.");
             }
@@ -158,4 +158,14 @@ public abstract class Room extends GameObject implements Container {
         return availableObjects;
     }
 
+    @Override
+    public boolean containsInstanceOf(Class<? extends GameObject> gameObjectClass) {
+        for (GameObject gameObject : availableObjects) {
+            if (gameObject.getClass().equals(gameObjectClass)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

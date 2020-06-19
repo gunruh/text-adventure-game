@@ -8,7 +8,7 @@ import com.gunruh.textgame.utils.IOUtils;
 
 public class StarBoardHallway extends Room {
     private StarBoardHallway() {
-        super("Starboard Hallway", "This hallway runs north-south along the east side of the ship." +
+        super(game, "Starboard Hallway", "This hallway runs north-south along the east side of the ship." +
                 "\nThere are escape pods along the east wall.");
     }
 
@@ -31,11 +31,11 @@ public class StarBoardHallway extends Room {
     @Override
     public Room goSouth() {
         if (Player.getInstance().getItems().contains(KeyCardBlue.getInstance())) {
-            IOUtils.displayWithinAsterisks(outputBuffer, "BEEP BEEP BOOYEEP. The door opens.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("BEEP BEEP BOOYEEP. The door opens.");
             return ServiceAirLock.getInstance();
         }
         else {
-            IOUtils.displayWithinAsterisks(outputBuffer, "BEEP BOO BEEP - You are not allowed without a card.");
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("BEEP BOO BEEP - You are not allowed without a card.");
             return Room.ROOM_NOT_PRESENT;
         }
     }

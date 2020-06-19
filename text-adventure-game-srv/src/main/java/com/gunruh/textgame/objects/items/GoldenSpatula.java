@@ -5,7 +5,7 @@ import com.gunruh.textgame.utils.IOUtils;
 
 public class GoldenSpatula extends GameObject {
 	private GoldenSpatula() {
-		super("Golden Spatula", "A powerful golden spatula, weilded by the Master Corndog chef." + 
+		super(game, "Golden Spatula", "A powerful golden spatula, weilded by the Master Corndog chef." +
 		      "\nThe handle is inscribed: 'Rufus - Keeper of the corndogs'." +
 		      "\nIt appears it can be used as a gun...");
 	}
@@ -23,7 +23,7 @@ public class GoldenSpatula extends GameObject {
 	
 	@Override
 	public void shoot(GameObject receivingObject) {
-		IOUtils.displayWithinAsterisks(outputBuffer, "A corndog is launched from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + " with tremendous speed.");
+		game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("A corndog is launched from the end of " + IOUtils.getNickNameOrNameWithArticle(this) + " with tremendous speed.");
 		super.shoot(receivingObject);
 	}
 }

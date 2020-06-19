@@ -8,15 +8,13 @@ import com.gunruh.textgame.utils.IOUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.gunruh.textgame.utils.IOUtils.display;
-
 public class Player extends GameObject implements Container {
     private List<GameObject> inventory;
     private Room currentRoom;
     private int itemLimit = Integer.MAX_VALUE;
 
     public Player(String name, String description) {
-        super(name, description);
+        super(game, name, description);
         this.inventory = new ArrayList<GameObject>();
         this.currentRoom = Room.ROOM_NOT_PRESENT;
     }
@@ -27,7 +25,7 @@ public class Player extends GameObject implements Container {
         }
         else {
             currentRoom = room;
-            display(outputBuffer, room.getRoomdisplay(outputBuffer, ));
+            game.getGameOutput().appendln(room.getRoomdisplay(outputBuffer, ));
             room.setIsNewPlace(false);
         }
     }
@@ -104,7 +102,7 @@ public class Player extends GameObject implements Container {
     }
 
     @Override
-    public List<GameObject> getItems() {
+    public Collection<GameObject> getItems() {
         return inventory;
     }
 }

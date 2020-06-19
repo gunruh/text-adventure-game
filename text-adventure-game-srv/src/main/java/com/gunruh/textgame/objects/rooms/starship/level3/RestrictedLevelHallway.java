@@ -4,7 +4,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class RestrictedLevelHallway extends Room {
     private RestrictedLevelHallway() {
-        super("Captain's Hallway", "This north-south hallway looks like its used for very important people...");
+        super(game, "Captain's Hallway", "This north-south hallway looks like its used for very important people...");
     }
 
     private static RestrictedLevelHallway INSTANCE = new RestrictedLevelHallway();

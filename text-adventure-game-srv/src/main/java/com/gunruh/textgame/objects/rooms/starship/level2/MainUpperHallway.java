@@ -6,14 +6,14 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainUpperHallway extends Room {
     private MainUpperHallway() {
-        super("Main Upper Hallway",
+        super(game, "Main Upper Hallway",
                 "This is the main north-south hallway on the top floor of the space cruiser." +
                         "\nThe passengers' quarters are along the west wall. One of them has left the door open." + 
                         "\nThe Kitchen's double doors are in the northeast corner." +
                         "\nThere is a corridor leading east.");
 
-        addItem(new GameObject("Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
-        addItem(new GameObject("Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
+        addItem(new GameObject(game, "Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
+        addItem(new GameObject(game, "Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
         addItem(KeyCardBlue.getInstance());
     }
 

@@ -4,7 +4,7 @@ import com.gunruh.textgame.Game;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 
-import static com.gunruh.textgame.utils.IOUtils.display;
+import static com.gunruh.textgame.utils.IOUtils.getDisplayFormattedString;
 import static com.gunruh.textgame.utils.IOUtils.isNullOrEmpty;
 
 public class ConsoleGameRunner {
@@ -15,8 +15,8 @@ public class ConsoleGameRunner {
     }
 
     private void displayStartText() {
-        display(outputBuffer, Constants.SPACE_DUDES_TITLE);
-        display(outputBuffer, Constants.INTRO_TEXT);
+        game.getGameOutput().appendln(Constants.SPACE_DUDES_TITLE);
+        game.getGameOutput().appendln(Constants.INTRO_TEXT);
     }
 
     public void run() {
@@ -37,6 +37,6 @@ public class ConsoleGameRunner {
         }
 
         // Exiting loop
-        display(outputBuffer, "That's all folks.");
+        game.getGameOutput().appendln("That's all folks.");
     }
 }

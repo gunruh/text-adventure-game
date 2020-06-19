@@ -4,7 +4,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainLowerHallway extends Room {
     private MainLowerHallway() {
-        super("Main Hallway",
+        super(game, "Main Hallway",
                 "This is the main hallway on the bottom floor of the space cruiser." +
                         "\nIt runs North and South (with North at the front of the ship)." +
                         "\nThe Janitor's Closet is on the east side of the hall." +

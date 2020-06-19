@@ -1,10 +1,8 @@
 package com.gunruh.textgame.objects.rooms;
 
-import static com.gunruh.textgame.utils.IOUtils.display;
-
 public class RoomB extends Room {
     private RoomB() {
-        super("East Room", "This room feels more eastern than the previous one did.\nThere's a hole which appears to have been blasted open on the west side.");
+        super(game, "East Room", "This room feels more eastern than the previous one did.\nThere's a hole which appears to have been blasted open on the west side.");
     }
 
     public static final RoomB INSTANCE = new RoomB();
@@ -15,7 +13,7 @@ public class RoomB extends Room {
 
     @Override
     public Room goWest() {
-        display(outputBuffer, "You crawled through the blaster hole.");
+        game.getGameOutput().appendln("You crawled through the blaster hole.");
         return RoomA.getInstance();
     }
 

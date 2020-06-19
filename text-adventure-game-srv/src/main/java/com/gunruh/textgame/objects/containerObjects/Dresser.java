@@ -8,8 +8,8 @@ public class Dresser extends ContainerObject {
 
     private Dresser() {
         super("Dresser", "Just a basic dresser. Standard issue for janitors such as yourself.", 3, true);
-        addItem(new GameObject("Old Photograph", "It's a picture of your mom from back home.") {});
-        addItem(new GameObject("Alarm Clock", "It used to sit on top of the dresser, but... eh... too noisy.") {});
+        addItem(new GameObject(game, "Old Photograph", "It's a picture of your mom from back home.") {});
+        addItem(new GameObject(game, "Alarm Clock", "It used to sit on top of the dresser, but... eh... too noisy.") {});
         addItem(KeyCardGreen.getInstance());
     }
 

@@ -24,4 +24,6 @@ public interface Container {
     int getItemCount();
 
     List<GameObject> getItems();
+
+    boolean containsInstanceOf(Class <? extends GameObject> gameObjectClass);
 }
