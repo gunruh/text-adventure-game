@@ -19,7 +19,7 @@ public class IOUtilsTest {
 
     @Before
     public void beforeEachTest() {
-        game = Game.createNewGame();
+        game = Game.createNewGame(false);
     }
 
     @Test

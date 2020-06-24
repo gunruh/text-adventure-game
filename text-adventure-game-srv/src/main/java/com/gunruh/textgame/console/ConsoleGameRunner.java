@@ -1,7 +1,6 @@
 package com.gunruh.textgame.console;
 
 import com.gunruh.textgame.Game;
-import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 
 import static com.gunruh.textgame.utils.IOUtils.isNullOrEmpty;
@@ -13,14 +12,9 @@ public class ConsoleGameRunner {
         this.game = game;
     }
 
-    private void displayStartText() {
-        game.getGameOutput().appendln(Constants.SPACE_DUDES_TITLE);
-        game.getGameOutput().appendln(Constants.INTRO_TEXT);
-        System.out.print(game.getGameOutput().print());
-    }
-
     public void run() {
-        displayStartText();
+        // First print any starting text
+        System.out.println(game.getGameOutput().print());
 
         String input = null;
 
@@ -38,10 +32,10 @@ public class ConsoleGameRunner {
             game.parseInput(input);
 
 
-            System.out.print(game.getGameOutput().print());
+            System.out.println(game.getGameOutput().print());
         }
 
         // Exiting loop
-        game.getGameOutput().appendln("That's all folks.");
+        System.out.println("That's all folks.");
     }
 }
