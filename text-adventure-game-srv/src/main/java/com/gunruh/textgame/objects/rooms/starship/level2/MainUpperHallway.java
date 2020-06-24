@@ -1,11 +1,12 @@
 package com.gunruh.textgame.objects.rooms.starship.level2;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainUpperHallway extends Room {
-    private MainUpperHallway() {
+    public MainUpperHallway(Game game) {
         super(game, "Main Upper Hallway",
                 "This is the main north-south hallway on the top floor of the space cruiser." +
                         "\nThe passengers' quarters are along the west wall. One of them has left the door open." + 
@@ -14,37 +15,31 @@ public class MainUpperHallway extends Room {
 
         addItem(new GameObject(game, "Eye-catching Poster", "It says: \"Bring-Your-Child-To-Work Day is TODAY!\"") {});
         addItem(new GameObject(game, "Handwritten Note", "It says: \"REMEMBER: Free CORN-DOGS after lunch! -Rufus") {});
-        addItem(KeyCardBlue.getInstance());
-    }
-
-    private static final MainUpperHallway INSTANCE = new MainUpperHallway();
-
-    public static MainUpperHallway getInstance() {
-        return INSTANCE;
+        addItem(new KeyCardBlue(game));
     }
 
     @Override
     public Room goNorth() {
-        return MainElevatorDown.getInstance();
+        return game.getRoom(MainElevatorDown.class);
     }
     
     @Override
     public Room goNorthEast() {
-    	return Kitchen.getInstance();
+    	return game.getRoom(Kitchen.class);
     }
 
     @Override
     public Room goEast() {
-        return EastWestCorridor.getInstance();
+        return game.getRoom(EastWestCorridor.class);
     }
 
     @Override
     public Room goSouth() {
-        return RestrictedElevatorUp.getInstance();
+        return game.getRoom(RestrictedElevatorUp.class);
     }
 
     @Override
     public Room goWest() {
-        return PassengersQuarters.getInstance();
+        return game.getRoom(PassengersQuarters.class);
     }
 }

@@ -1,9 +1,10 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.rooms.Room;
 
 public class MainLowerHallway extends Room {
-    private MainLowerHallway() {
+    public MainLowerHallway(Game game) {
         super(game, "Main Hallway",
                 "This is the main hallway on the bottom floor of the space cruiser." +
                         "\nIt runs North and South (with North at the front of the ship)." +
@@ -11,29 +12,23 @@ public class MainLowerHallway extends Room {
                         "\nThe Janitor's Quarters is on the west wall.");
     }
 
-    private static final MainLowerHallway INSTANCE = new MainLowerHallway();
-
-    public static MainLowerHallway getInstance() {
-        return INSTANCE;
-    }
-
     @Override
     public Room goNorth() {
-        return MainElevatorUp.getInstance();
+        return game.getRoom(MainElevatorUp.class);
     }
     
     @Override
     public Room goEast() {
-    	return JanitorsCloset.getInstance();
+    	return game.getRoom(JanitorsCloset.class);
     }
 
     @Override
     public Room goSouth() {
-        return EngineRoom.getInstance();
+        return game.getRoom(EngineRoom.class);
     }
 
     @Override
     public Room goWest() {
-        return JanitorsQuarters.getInstance();
+        return game.getRoom(JanitorsQuarters.class);
     }
 }

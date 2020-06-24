@@ -1,5 +1,6 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.ContainerUtils;
@@ -13,7 +14,7 @@ public class Player extends GameObject implements Container {
     private Room currentRoom;
     private int itemLimit = Integer.MAX_VALUE;
 
-    public Player(String name, String description) {
+    public Player(Game game, String name, String description) {
         super(game, name, description);
         this.inventory = new ArrayList<GameObject>();
         this.currentRoom = Room.ROOM_NOT_PRESENT;
@@ -25,7 +26,7 @@ public class Player extends GameObject implements Container {
         }
         else {
             currentRoom = room;
-            game.getGameOutput().appendln(room.getRoomdisplay(outputBuffer, ));
+            game.getGameOutput().appendln(room.getRoomDisplay());
             room.setIsNewPlace(false);
         }
     }
@@ -102,7 +103,18 @@ public class Player extends GameObject implements Container {
     }
 
     @Override
-    public Collection<GameObject> getItems() {
+    public List<GameObject> getItems() {
         return inventory;
+    }
+
+    @Override
+    public boolean containsInstanceOf(Class<? extends GameObject> gameObjectClass) {
+        for (GameObject gameObject : inventory) {
+            if (gameObject.getClass().equals(gameObjectClass)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

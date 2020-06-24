@@ -11,18 +11,19 @@ import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
 import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.InputMaps;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
+    // TODO Add logger
+
     private final String gameId;
     private final GameOutput gameOutput;
-    private final Player player = new Player("Space Dude", "A man on a mission.");
-    private final Map<String, Room> rooms = new HashMap<String, Room>();
+    private final Player player = new Player(this, "Space Dude", "A man on a mission.");
+    private final List<Room> rooms = new ArrayList<Room>();
 
     private Game() {
         gameId = UUID.randomUUID().toString();
@@ -38,7 +39,7 @@ public class Game {
     }
 
     private void initializeGame() {
-        player.enterRoom(JanitorsQuarters.getInstance());
+        player.enterRoom(getRoom(JanitorsQuarters.class));
     }
 
     public void parseInput(String input) {
@@ -388,5 +389,40 @@ public class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Room getRoom(Class <? extends Room> roomClass) {
+        Room roomObject = Room.ROOM_NOT_PRESENT;
+
+        for (Room room : rooms){
+            if (room.getClass().equals(roomClass)) {
+                roomObject = room;
+                break;
+            }
+        }
+
+        if (roomObject.equals(Room.ROOM_NOT_PRESENT)) {
+            try {
+                // TODO - see if there's a better way to do this - maybe a factory implementation instead of reflection...
+
+                Class<?> clazz = Class.forName(roomClass.getName());
+                Constructor roomConstructor = clazz.getConstructor(Game.class);
+                roomObject = (Room) roomConstructor.newInstance(this);
+
+                rooms.add(roomObject);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return roomObject;
     }
 }

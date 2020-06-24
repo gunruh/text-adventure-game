@@ -1,18 +1,13 @@
 package com.gunruh.textgame.objects.characters;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class ShipChef extends GameObject {
-	private ShipChef() {
+	public ShipChef(Game game) {
 		super(game, "Ship Chef", "This dude cooks all sorts of food. He is wearing a blue ribbon that says 'First Place Corndog Champ'.");
 		setNickName("Rufus");
-	}
-	
-	private static ShipChef INSTANCE = new ShipChef();
-	
-	public static ShipChef getInstance() {
-		return INSTANCE;
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove1stLevel() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
+        ContainerObject box = new ContainerObject(game, "Box", "A small box.", 5) {};
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};
         box.addItem(rock);
 
@@ -30,8 +30,8 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove2ndLevel() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
-        ContainerObject smallBox = new ContainerObject("Small Box", "An even smaller box.", 3) {};
+        ContainerObject box = new ContainerObject(game, "Box", "A small box.", 5) {};
+        ContainerObject smallBox = new ContainerObject(game, "Small Box", "An even smaller box.", 3) {};
         box.addItem(smallBox);
 
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};
@@ -43,11 +43,11 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove3rdLevel() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
-        ContainerObject smallBox = new ContainerObject("Small Box", "An even smaller box.", 3) {};
+        ContainerObject box = new ContainerObject(game, "Box", "A small box.", 5) {};
+        ContainerObject smallBox = new ContainerObject(game,"Small Box", "An even smaller box.", 3) {};
         box.addItem(smallBox);
 
-        ContainerObject reallySmallBox = new ContainerObject("Really Small Box", "The smallest box of them all.", 1) {};
+        ContainerObject reallySmallBox = new ContainerObject(game, "Really Small Box", "The smallest box of them all.", 1) {};
         smallBox.addItem(reallySmallBox);
 
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};
@@ -59,11 +59,11 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove1stLevelAfterContainer() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
-        ContainerObject smallBox = new ContainerObject("Small Box", "An even smaller box.", 3) {};
+        ContainerObject box = new ContainerObject(game,"Box", "A small box.", 5) {};
+        ContainerObject smallBox = new ContainerObject(game,"Small Box", "An even smaller box.", 3) {};
         box.addItem(smallBox);
 
-        ContainerObject reallySmallBox = new ContainerObject("Really Small Box", "The smallest box of them all.", 1) {};
+        ContainerObject reallySmallBox = new ContainerObject(game,"Really Small Box", "The smallest box of them all.", 1) {};
         smallBox.addItem(reallySmallBox);
 
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};
@@ -75,11 +75,11 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove3rdLevel_notFound() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
-        ContainerObject smallBox = new ContainerObject("Small Box", "An even smaller box.", 3) {};
+        ContainerObject box = new ContainerObject(game,"Box", "A small box.", 5) {};
+        ContainerObject smallBox = new ContainerObject(game,"Small Box", "An even smaller box.", 3) {};
         box.addItem(smallBox);
 
-        ContainerObject reallySmallBox = new ContainerObject("Really Small Box", "The smallest box of them all.", 1) {};
+        ContainerObject reallySmallBox = new ContainerObject(game,"Really Small Box", "The smallest box of them all.", 1) {};
         smallBox.addItem(reallySmallBox);
 
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};
@@ -91,11 +91,11 @@ public class ContainerUtilsTest {
 
     @Test
     public void testRecursiveRemove3rdLevel_Container() {
-        ContainerObject box = new ContainerObject("Box", "A small box.", 5) {};
-        ContainerObject smallBox = new ContainerObject("Small Box", "An even smaller box.", 3) {};
+        ContainerObject box = new ContainerObject(game,"Box", "A small box.", 5) {};
+        ContainerObject smallBox = new ContainerObject(game,"Small Box", "An even smaller box.", 3) {};
         box.addItem(smallBox);
 
-        ContainerObject reallySmallBox = new ContainerObject("Really Small Box", "The smallest box of them all.", 1) {};
+        ContainerObject reallySmallBox = new ContainerObject(game,"Really Small Box", "The smallest box of them all.", 1) {};
         smallBox.addItem(reallySmallBox);
 
         GameObject rock = new GameObject(game, "Rock", "A small rock.") {};

@@ -4,7 +4,6 @@ import com.gunruh.textgame.Game;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.IOUtils;
 
-import static com.gunruh.textgame.utils.IOUtils.getDisplayFormattedString;
 import static com.gunruh.textgame.utils.IOUtils.isNullOrEmpty;
 
 public class ConsoleGameRunner {
@@ -17,9 +16,12 @@ public class ConsoleGameRunner {
     private void displayStartText() {
         game.getGameOutput().appendln(Constants.SPACE_DUDES_TITLE);
         game.getGameOutput().appendln(Constants.INTRO_TEXT);
+        System.out.print(game.getGameOutput().print());
     }
 
     public void run() {
+        displayStartText();
+
         String input = null;
 
         while (!"quit".equalsIgnoreCase(input)) {
@@ -33,7 +35,10 @@ public class ConsoleGameRunner {
                 continue;
             }
 
-            // todo - send user input to be parsed by game
+            game.parseInput(input);
+
+
+            System.out.print(game.getGameOutput().print());
         }
 
         // Exiting loop

@@ -1,11 +1,13 @@
 package com.gunruh.textgame.utils;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -13,6 +15,13 @@ import java.util.*;
 import static junit.framework.TestCase.*;
 
 public class IOUtilsTest {
+    Game game;
+
+    @Before
+    public void beforeEachTest() {
+        game = Game.createNewGame();
+    }
+
     @Test
     public void testGetInputTextList() {
         assertEquals("go", IOUtils.getInputListFromText("go west").get(0));
@@ -277,7 +286,7 @@ public class IOUtilsTest {
         GameObject rock = new GameObject(game, "Rock", "A rock for testing.") {};
         Room room = new Room(game, "Room", "A Room for testing") {};
         room.addItem(rock);
-        Player.getInstance().setCurrentRoom(room);
+        game.getPlayer().setCurrentRoom(room);
         rock.takeDamage(100);
         assertFalse(room.getItems().contains(rock));
     }
@@ -285,9 +294,9 @@ public class IOUtilsTest {
     @Test
     public void testDestroyPlayerInventoryObject() {
         GameObject rock = new GameObject(game, "Rock", "A rock for testing.") {};
-        Player.getInstance().addItem(rock);
+        game.getPlayer().addItem(rock);
         rock.takeDamage(100);
-        assertFalse(Player.getInstance().getItems().contains(rock));
+        assertFalse(game.getPlayer().getItems().contains(rock));
     }
 
     @Test

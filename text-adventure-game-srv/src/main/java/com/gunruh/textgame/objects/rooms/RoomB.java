@@ -1,20 +1,16 @@
 package com.gunruh.textgame.objects.rooms;
 
+import com.gunruh.textgame.Game;
+
 public class RoomB extends Room {
-    private RoomB() {
+    public RoomB(Game game) {
         super(game, "East Room", "This room feels more eastern than the previous one did.\nThere's a hole which appears to have been blasted open on the west side.");
-    }
-
-    public static final RoomB INSTANCE = new RoomB();
-
-    public static RoomB getInstance() {
-        return INSTANCE;
     }
 
     @Override
     public Room goWest() {
         game.getGameOutput().appendln("You crawled through the blaster hole.");
-        return RoomA.getInstance();
+        return game.getRoom(RoomA.class);
     }
 
     @Override
