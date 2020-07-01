@@ -1,8 +1,10 @@
 package com.gunruh.textgame.console;
 
 import com.gunruh.textgame.Game;
+import com.gunruh.textgame.objects.Statement;
 import com.gunruh.textgame.utils.IOUtils;
 
+import static com.gunruh.textgame.utils.IOUtils.getStatementFromInputText;
 import static com.gunruh.textgame.utils.IOUtils.isNullOrEmpty;
 
 public class ConsoleGameRunner {
@@ -30,7 +32,6 @@ public class ConsoleGameRunner {
             }
 
             game.parseInput(input);
-
 
             System.out.println(game.getGameOutput().print());
         }

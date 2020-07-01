@@ -171,7 +171,7 @@ public class IOUtils {
         put the blaster into the container (PUT the BLASTER INTO the CONTAINER
         */
 
-        Statement statement = new Statement(null, null, null, null);
+        Statement statement = new Statement(inputText, null, null, null, null);
 
         String previousWord = null;
         String currentWord = null;

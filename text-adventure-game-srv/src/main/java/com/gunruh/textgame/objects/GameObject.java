@@ -72,11 +72,23 @@ public abstract class GameObject {
     }
     
     public void shoot(GameObject receivingObject) {
-    	receivingObject.receiveShoot(this);
+        shoot(receivingObject, null);
+    }
+
+    public void shoot(GameObject receivingObject, String message) {
+        if (receivingObject == this) {
+            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't shoot an object with itself."));
+        }
+        else {
+            if (message != null) {
+                game.getGameOutput().appendln(message);
+            }
+            receivingObject.receiveShoot(this);
+        }
     }
     
     public void receiveShoot(GameObject actingObject) {
-    	this.takeDamage(actingObject.getEffectivenessAsBlaster());
+        this.takeDamage(actingObject.getEffectivenessAsBlaster());
     }
 
     public void takeDamage(int amount) {
