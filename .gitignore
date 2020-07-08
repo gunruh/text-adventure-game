@@ -14,3 +14,7 @@ out/
 
 # VS Code
 .vscode/
+
+# Eclipse
+.classpath
+.project

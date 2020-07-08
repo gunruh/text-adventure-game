@@ -2,7 +2,6 @@
 package com.gunruh.textgame;
 
 import com.gunruh.textgame.enumerations.Action;
-import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.Statement;
@@ -15,7 +14,9 @@ import com.gunruh.textgame.utils.IOUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import static com.gunruh.textgame.utils.IOUtils.*;
 
@@ -28,7 +29,7 @@ public class Game {
     private final List<Room> rooms = new ArrayList<Room>();
 
     private Statement lastStatement = null;
-    private boolean isExpectingClarifiedStatement = false;
+    private ExpectingStatement expectingStatement = new ExpectingStatement();
 
     private Game() {
         gameId = UUID.randomUUID().toString();
@@ -53,7 +54,7 @@ public class Game {
 
     public void parseInput(String input) {
         Statement statement = getStatementFromInputText(input, player.getItems(), player.getCurrentRoom().getItems());
-        if (isExpectingClarifiedStatement) {
+        if (expectingStatement.isExpecting()) {
             statement = enhanceLastStatement(statement);
         }
         parseStatement(statement);
@@ -62,36 +63,36 @@ public class Game {
 
     private Statement enhanceLastStatement(Statement statement) {
         // Populate new data into previous statement.
-        switch (lastStatement.getAction()) {
-            default: {
-                if (!IOUtils.isNullOrEmpty(statement.getInputString())) {
-                    lastStatement.setInputString(statement.getInputString());
-                }
-                // keep lastStatement.Action the same.
+        if (expectingStatement.inputString && !IOUtils.isNullOrEmpty(statement.getInputString())) {
+            lastStatement.setInputString(statement.getInputString());
+        }
 
-                if (statement.getDirection() != null && !statement.getDirection().equals(Direction.NotADirection)) {
-                    lastStatement.setDirection(statement.getDirection());
-                }
+        if (expectingStatement.action && statement.getAction() != null) {
+            lastStatement.setAction(statement.getAction());
+        }
 
-                if (statement.getActingObject() != null && !statement.getActingObject().equals(GameObject.EMPTY_GAME_OBJECT)) {
-                    lastStatement.setActingObject(statement.getActingObject());
-                }
+        if (expectingStatement.direction && statement.getDirection() != null) {
+            lastStatement.setDirection(statement.getDirection());
+        }
 
-                if (statement.getReceivingObject() != null && !statement.getReceivingObject().equals(GameObject.EMPTY_GAME_OBJECT)) {
-                    lastStatement.setReceivingObject(statement.getReceivingObject());
-                }
+        if (expectingStatement.actingObject && statement.getActingObject() != null) {
+            lastStatement.setActingObject(statement.getActingObject());
+        }
 
-                if (!IOUtils.isNullOrEmpty(statement.getRemainingString())) {
-                    lastStatement.setRemainingString(statement.getRemainingString());
-                }
-                else {
-                    lastStatement.setRemainingString(statement.getInputString());
-                }
+        if (expectingStatement.receivingObject && statement.getReceivingObject() != null) {
+            lastStatement.setReceivingObject(statement.getReceivingObject());
+        }
 
-                statement = lastStatement;
-                break;
+        if (expectingStatement.remainingString) {
+            if (!IOUtils.isNullOrEmpty(statement.getRemainingString())) {
+                lastStatement.setRemainingString(statement.getRemainingString());
+            }
+            else if (!IOUtils.isNullOrEmpty(statement.getInputString())) {
+                lastStatement.setRemainingString(statement.getInputString());
             }
         }
+
+        statement = lastStatement;
 
         return statement;
     }
@@ -146,12 +147,12 @@ public class Game {
     }
 
     private void handleMove(Statement statement) {
-        if (isExpectingClarifiedStatement) {
-            isExpectingClarifiedStatement = false;
+        if (expectingStatement.direction) {
+            expectingStatement.direction = false;
         }
         else if (statement.getDirection() == null) {
             getGameOutput().appendln("Which direction?");
-            isExpectingClarifiedStatement = true;
+            expectingStatement.direction = true;
             return;
         }
 
@@ -219,12 +220,12 @@ public class Game {
     }
 
     private void handleSpeak(Statement statement) {
-        if (isExpectingClarifiedStatement) {
-            isExpectingClarifiedStatement = false;
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
         }
         else if (statement.getReceivingObject() == null) {
             getGameOutput().appendln("Talk to who?");
-            isExpectingClarifiedStatement = true;
+            expectingStatement.receivingObject = true;
             return;
         }
 
@@ -254,12 +255,12 @@ public class Game {
             }
         }
 
-        if (isExpectingClarifiedStatement) {
-            isExpectingClarifiedStatement = false;
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
         }
         else if (statement.getReceivingObject() == null) {
             getGameOutput().appendln("What do you want to shoot " + getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
-            isExpectingClarifiedStatement = true;
+            expectingStatement.receivingObject = true;
             return;
         }
 
@@ -273,29 +274,14 @@ public class Game {
     }
 
     private void handleName(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            if (isExpectingClarifiedStatement) {
-                // Was expecting this to be filled, but user didn't type it right, so move on.
-                isExpectingClarifiedStatement = false;
-            }
-            else {
-                getGameOutput().appendln("Name what?");
-                isExpectingClarifiedStatement = true;
-                return;
-            }
-        }
 
-        if (isNullOrEmpty(statement.getRemainingString())) {
-            if (isExpectingClarifiedStatement) {
-                // Was expecting this to be filled, but user didn't type it right, so move on.
-                statement.setRemainingString(statement.getInputString());
-                isExpectingClarifiedStatement = false;
-            }
-            else {
-                getGameOutput().appendln("What did you want to name it?");
-                isExpectingClarifiedStatement = true;
-                return;
-            }
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("Name what?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
@@ -303,10 +289,20 @@ public class Game {
             return;
         }
 
+        if (expectingStatement.remainingString) {
+            expectingStatement.remainingString = false;
+        }
+        else if (isNullOrEmpty(statement.getRemainingString())) {
+            getGameOutput().appendln("What did you want to name it?");
+            expectingStatement.remainingString = true;
+            return;
+        }
+
         if (isNullOrEmpty(statement.getRemainingString())) {
             getGameOutput().appendln("Sorry - I didn't catch that name.");
             return;
         }
+
         statement.getReceivingObject().setNickName(statement.getRemainingString());
         getGameOutput().appendln(IOUtils.surroundWithAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString()));
     }
@@ -322,20 +318,25 @@ public class Game {
 
     private void handleDrop(Statement statement) {
         GameObject itemToDrop = statement.getReceivingObject(); // default to receiving object.
-        Container containerItem = player.getCurrentRoom(); // default to current room.
+        GameObject containerItem = player.getCurrentRoom(); // default to current room.
 
         // check to see if you're dropping this item into another item.
         if (statement.getReceivingObject() != null) {
-            if (statement.getActingObject() != null && statement.getReceivingObject() instanceof Container) {
+            if (statement.getActingObject() != null) {
                 itemToDrop = statement.getActingObject();
-                containerItem = (Container) statement.getReceivingObject();
+                containerItem = statement.getReceivingObject();
             }
         }
 
-        if (itemToDrop == null) {
+        if (expectingStatement.actingObject || expectingStatement.receivingObject) {
+            expectingStatement.actingObject = false;
+            expectingStatement.receivingObject = false;
+        }
+        else if (itemToDrop == null) {
             getGameOutput().appendln("Which object?");
-            String takeInput = getInputTextFromConsole();
-            itemToDrop = findMatchingGameObjectFromList(takeInput, getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems()));
+            expectingStatement.actingObject = true;
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (itemToDrop == null) {
@@ -382,10 +383,15 @@ public class Game {
             }
         }
 
-        if (itemToTake == null) {
+        if (expectingStatement.actingObject || expectingStatement.receivingObject) {
+            expectingStatement.actingObject = false;
+            expectingStatement.receivingObject = false;
+        }
+        else if (itemToTake == null) {
             getGameOutput().appendln("Take what?");
-            String takeInput = getInputTextFromConsole();
-            itemToTake = findMatchingGameObjectFromList(takeInput, getCombinedGameObjectsList(player.getItems(), containerItem.getItems()), false);
+            expectingStatement.actingObject = true;
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (itemToTake == null) {
@@ -412,10 +418,13 @@ public class Game {
     }
 
     private void handleOpen(Statement statement) {
-        if (statement.getReceivingObject() == null) {
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
             getGameOutput().appendln("Open what?");
-            String openInput = getInputTextFromConsole();
-            statement.setReceivingObject(findMatchingGameObjectFromList(openInput, getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
@@ -432,10 +441,13 @@ public class Game {
     }
 
     private void handleClose(Statement statement) {
-        if (statement.getReceivingObject() == null) {
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
             getGameOutput().appendln("Close what?");
-            String closeInput = getInputTextFromConsole();
-            statement.setReceivingObject(findMatchingGameObjectFromList(closeInput, getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
