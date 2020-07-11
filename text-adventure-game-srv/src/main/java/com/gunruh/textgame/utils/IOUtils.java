@@ -14,15 +14,15 @@ public class IOUtils {
 
     private static Random random = new Random(); // Used for random generation.
 
-    public static void displayWithinAsterisks(String displayText) {
-        display("*" + displayText + "*");
+    public static String surroundWithAsterisks(String displayText) {
+        return getDisplayFormattedString("*" + displayText + "*");
     }
     
-    public static void displayWithinDoubleQuotes(String displayText) {
-    	display("\"" + displayText + "\"");
+    public static String surroundWithDoubleQuotes(String displayText) {
+    	return getDisplayFormattedString("\"" + displayText + "\"");
     }
 
-    public static void displayGameObject(GameObject gameObject) {
+    public static String displayGameObject(GameObject gameObject) {
     	StringBuilder displayBuilder = new StringBuilder();
     	
         displayBuilder.append(getNickNameAndNameString(gameObject));
@@ -33,7 +33,19 @@ public class IOUtils {
 
         displayBuilder.append("\n" + gameObject.getDescription());
         
-        display(displayBuilder.toString());
+        return getDisplayFormattedString(displayBuilder.toString());
+    }
+
+    public static String getDisplayFormattedString(String text) {
+//        return text + "\n";
+        return text;
+    }
+
+    public static String getInputTextFromConsole() {
+        System.out.print("> ");
+        String input = scanner.nextLine();
+        System.out.println(""); // spacing
+        return input;
     }
 
     public static String getNickNameAndNameString(GameObject gameObject) {
@@ -47,18 +59,6 @@ public class IOUtils {
         }
 
         return stringBuilder.toString();
-    }
-
-    public static void display(String text) {
-        System.out.println(text);
-        System.out.println(""); // Spacing
-    }
-
-    public static String getInputText() {
-        System.out.print("> ");
-        String input = scanner.nextLine();
-        System.out.println(""); // spacing
-        return input;
     }
 
     public static List<String> getInputListFromText(String userInput) {
@@ -171,7 +171,7 @@ public class IOUtils {
         put the blaster into the container (PUT the BLASTER INTO the CONTAINER
         */
 
-        Statement statement = new Statement(null, null, null, null);
+        Statement statement = new Statement(inputText, null, null, null, null);
 
         String previousWord = null;
         String currentWord = null;

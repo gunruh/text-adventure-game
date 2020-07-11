@@ -1,11 +1,13 @@
 package com.gunruh.textgame.utils;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.Statement;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -13,6 +15,13 @@ import java.util.*;
 import static junit.framework.TestCase.*;
 
 public class IOUtilsTest {
+    Game game;
+
+    @Before
+    public void beforeEachTest() {
+        game = Game.createNewGame(false);
+    }
+
     @Test
     public void testGetInputTextList() {
         assertEquals("go", IOUtils.getInputListFromText("go west").get(0));
@@ -78,7 +87,7 @@ public class IOUtilsTest {
     @Test
     public void testConvertInputListToAction_DefaultLook() {
         String sampleInput = "Blaster.";
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
         Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), null);
 
         assertEquals(Action.Look, statement.getAction());
@@ -88,7 +97,7 @@ public class IOUtilsTest {
     @Test
     public void testConvertInputListToStatement() {
         String sampleInput = "pick up the blaster.";
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
         Statement statement = IOUtils.getStatementFromInputText(sampleInput, new ArrayList<GameObject>(), Collections.singletonList(blaster));
 
         assertEquals(Action.Take, statement.getAction());
@@ -98,7 +107,7 @@ public class IOUtilsTest {
     @Test
     public void testConvertInputListToDirection() {
         String sampleInput = "walk north.";
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
         Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), null);
 
         assertEquals(Action.Move, statement.getAction());
@@ -108,8 +117,8 @@ public class IOUtilsTest {
     @Test
     public void testConvertInputListToActionRightToLeft() {
         String sampleInput = "shoot the rock with the blaster";
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
-        GameObject rock = new GameObject("Rock", "It's Just a rock.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
+        GameObject rock = new GameObject(game, "Rock", "It's Just a rock.") {};
 
         Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), Collections.singletonList(rock));
 
@@ -122,8 +131,8 @@ public class IOUtilsTest {
     @Test
     public void testConvertInputListToActionLeftToRight() {
         String sampleInput = "shoot the blaster at the rock";
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
-        GameObject rock = new GameObject("Rock", "It's Just a rock.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
+        GameObject rock = new GameObject(game, "Rock", "It's Just a rock.") {};
 
         Statement statement = IOUtils.getStatementFromInputText(sampleInput, Collections.singletonList(blaster), Collections.singletonList(rock));
 
@@ -170,10 +179,10 @@ public class IOUtilsTest {
     @Test
     public void testGetItemsText_ThreeItems() {
         // A Blaster nicknamed "Mike"
-        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        GameObject mike = new GameObject(game, "Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
-        GameObject bike = new GameObject("Bike", "A blue bicycle.") {};
-        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+        GameObject bike = new GameObject(game, "Bike", "A blue bicycle.") {};
+        GameObject apple = new GameObject(game, "Apple", "A delicious and nutritious fruit.") {};
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, bike, apple));
 
@@ -183,9 +192,9 @@ public class IOUtilsTest {
     @Test
     public void testGetItemsText_TwoItems() {
         // A Blaster nicknamed "Mike"
-        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        GameObject mike = new GameObject(game, "Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
-        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+        GameObject apple = new GameObject(game, "Apple", "A delicious and nutritious fruit.") {};
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike, apple));
 
@@ -195,7 +204,7 @@ public class IOUtilsTest {
     @Test
     public void testGetItemsText_OneItemWithNickName() {
         // A Blaster nicknamed "Mike"
-        GameObject mike = new GameObject("Blaster", "A laser gun.") {};
+        GameObject mike = new GameObject(game, "Blaster", "A laser gun.") {};
         mike.setNickName("Mike");
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(mike));
@@ -205,7 +214,7 @@ public class IOUtilsTest {
 
     @Test
     public void testGetItemsText_OneItemNoNickname() {
-        GameObject apple = new GameObject("Apple", "A delicious and nutritious fruit.") {};
+        GameObject apple = new GameObject(game, "Apple", "A delicious and nutritious fruit.") {};
 
         List<GameObject> gameObjects = new ArrayList<GameObject>(Arrays.asList(apple));
 
@@ -225,27 +234,27 @@ public class IOUtilsTest {
 
     @Test
     public void testRoomDescriptionMultipleItems() {
-        Room room = new Room("Test Room", "A room to test.") {};
+        Room room = new Room(game, "Test Room", "A room to test.") {};
 
-        room.addItem(new GameObject("blaster", "A blasting device.") {});
-        room.addItem(new GameObject("rock", "Just an old rock.") {});
-        room.addItem(new GameObject("apple", "Tasty fruit.") {});
+        room.addItem(new GameObject(game, "blaster", "A blasting device.") {});
+        room.addItem(new GameObject(game, "rock", "Just an old rock.") {});
+        room.addItem(new GameObject(game, "apple", "Tasty fruit.") {});
 
         assertEquals("A room to test.\nA blaster, a rock, and an apple are here.", room.getDescription());
     }
 
     @Test
     public void testRoomDescriptionSingleItem() {
-        Room room = new Room("Test Room", "A room to test.") {};
+        Room room = new Room(game, "Test Room", "A room to test.") {};
 
-        room.addItem(new GameObject("blaster", "A blasting device.") {});
+        room.addItem(new GameObject(game, "blaster", "A blasting device.") {});
 
         assertEquals("A room to test.\nA blaster is here.", room.getDescription());
     }
 
     @Test
     public void testNameObject() {
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
 
         Statement statement = IOUtils.getStatementFromInputText("Name the blaster Big Steve 2000", Collections.singletonList(blaster), null);
 
@@ -254,7 +263,7 @@ public class IOUtilsTest {
 
     @Test
     public void testNameAlreadyNamedObject() {
-        GameObject blaster = new GameObject("Blaster", "A laser gun.") {};
+        GameObject blaster = new GameObject(game, "Blaster", "A laser gun.") {};
         blaster.setNickName("Big Steve 2000");
 
         Statement statement = IOUtils.getStatementFromInputText("Name Big Steve 2000 Reginald Stevenson III", Collections.singletonList(blaster), null);
@@ -264,30 +273,30 @@ public class IOUtilsTest {
 
     @Test
     public void testGetNickNameOrNameWithArticle() {
-        GameObject anderson = new GameObject("Rock", "A test rock.") {};
+        GameObject anderson = new GameObject(game, "Rock", "A test rock.") {};
         anderson.setNickName("Anderson");
         assertEquals("Anderson", IOUtils.getNickNameOrNameWithArticle(anderson));
 
-        GameObject rock = new GameObject("Rock", "Another test rock.") {};
+        GameObject rock = new GameObject(game, "Rock", "Another test rock.") {};
         assertEquals("the Rock", IOUtils.getNickNameOrNameWithArticle(rock));
     }
 
     @Test
     public void testDestroyRoomObject() {
-        GameObject rock = new GameObject("Rock", "A rock for testing.") {};
-        Room room = new Room("Room", "A Room for testing") {};
+        GameObject rock = new GameObject(game, "Rock", "A rock for testing.") {};
+        Room room = new Room(game, "Room", "A Room for testing") {};
         room.addItem(rock);
-        Player.getInstance().setCurrentRoom(room);
+        game.getPlayer().setCurrentRoom(room);
         rock.takeDamage(100);
         assertFalse(room.getItems().contains(rock));
     }
 
     @Test
     public void testDestroyPlayerInventoryObject() {
-        GameObject rock = new GameObject("Rock", "A rock for testing.") {};
-        Player.getInstance().addItem(rock);
+        GameObject rock = new GameObject(game, "Rock", "A rock for testing.") {};
+        game.getPlayer().addItem(rock);
         rock.takeDamage(100);
-        assertFalse(Player.getInstance().getItems().contains(rock));
+        assertFalse(game.getPlayer().getItems().contains(rock));
     }
 
     @Test

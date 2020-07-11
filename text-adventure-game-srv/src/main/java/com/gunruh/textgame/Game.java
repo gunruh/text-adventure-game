@@ -6,101 +6,158 @@ import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.Statement;
 import com.gunruh.textgame.objects.containerObjects.Container;
-import com.gunruh.textgame.objects.items.Blaster;
-import com.gunruh.textgame.objects.rooms.RoomA;
-import com.gunruh.textgame.objects.rooms.RoomB;
+import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level1.JanitorsQuarters;
 import com.gunruh.textgame.utils.Constants;
 import com.gunruh.textgame.utils.ContainerUtils;
 import com.gunruh.textgame.utils.IOUtils;
-import com.gunruh.textgame.utils.InputMaps;
-import sun.nio.ch.IOUtil;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.gunruh.textgame.utils.IOUtils.*;
 
 public class Game {
-    Player player = Player.getInstance();
+    // TODO Add logger
 
-    public void run() {
-        initializeGame();
+    private final String gameId;
+    private final GameOutput gameOutput;
+    private final Player player = new Player(this, "Space Dude", "A man on a mission.");
+    private final List<Room> rooms = new ArrayList<Room>();
 
-        String input = null;
-        while (!"quit".equalsIgnoreCase(input)) {
-            input = IOUtils.getInputText();
+    private Statement lastStatement = null;
+    private ExpectingStatement expectingStatement = new ExpectingStatement();
 
-            if (isNullOrEmpty(input)) {
-                continue;
+    private Game() {
+        gameId = UUID.randomUUID().toString();
+        gameOutput = new GameOutput();
+    }
+
+    public static Game createNewGame(boolean displayStartText) {
+        Game game = new Game();
+
+        game.initializeGame(displayStartText);
+
+        return game;
+    }
+
+    private void initializeGame(boolean displayStartText) {
+        if (displayStartText) {
+            getGameOutput().appendln(Constants.SPACE_DUDES_TITLE);
+            getGameOutput().appendln(Constants.INTRO_TEXT);
+        }
+        player.enterRoom(getRoom(JanitorsQuarters.class));
+    }
+
+    public void parseInput(String input) {
+        Statement statement = getStatementFromInputText(input, player.getItems(), player.getCurrentRoom().getItems());
+        if (expectingStatement.isExpecting()) {
+            statement = enhanceLastStatement(statement);
+        }
+        parseStatement(statement);
+        lastStatement = statement;
+    }
+
+    private Statement enhanceLastStatement(Statement statement) {
+        // Populate new data into previous statement.
+        if (expectingStatement.inputString && !IOUtils.isNullOrEmpty(statement.getInputString())) {
+            lastStatement.setInputString(statement.getInputString());
+        }
+
+        if (expectingStatement.action && statement.getAction() != null) {
+            lastStatement.setAction(statement.getAction());
+        }
+
+        if (expectingStatement.direction && statement.getDirection() != null) {
+            lastStatement.setDirection(statement.getDirection());
+        }
+
+        if (expectingStatement.actingObject && statement.getActingObject() != null) {
+            lastStatement.setActingObject(statement.getActingObject());
+        }
+
+        if (expectingStatement.receivingObject && statement.getReceivingObject() != null) {
+            lastStatement.setReceivingObject(statement.getReceivingObject());
+        }
+
+        if (expectingStatement.remainingString) {
+            if (!IOUtils.isNullOrEmpty(statement.getRemainingString())) {
+                lastStatement.setRemainingString(statement.getRemainingString());
             }
-
-            if (input.toLowerCase().trim().contains("quit")) {
-                continue;
-            }
-
-            Statement statement = IOUtils.getStatementFromInputText(input, player.getItems(), player.getCurrentRoom().getItems());
-
-            switch (statement.getAction()) {
-                case Take: {
-                    handleTake(statement);
-                    break;
-                }
-                case Drop: {
-                    handleDrop(statement);
-                    break;
-                }
-                case Look: {
-                    handleLook(statement);
-                    break;
-                }
-                case Name: {
-                    handleName(statement);
-                    break;
-                }
-                case Shoot: {
-                    handleShoot(statement);
-                    break;
-                }
-                case Speak: {
-                    handleSpeak(statement);
-                    break;
-                }
-                case Inventory: {
-                    handleInventory(statement);
-                    break;
-                }
-                case Open: {
-                    handleOpen(statement);
-                    break;
-                }
-                case Close: {
-                    handleClose(statement);
-                    break;
-                }
-                case Move: {
-                    handleMove(statement);
-                    break;
-                }
-                default: {
-                    display("I don't know that action.");
-                    break;
-                }
+            else if (!IOUtils.isNullOrEmpty(statement.getInputString())) {
+                lastStatement.setRemainingString(statement.getInputString());
             }
         }
 
-        // Exiting loop
-        display("That's all folks.");
+        statement = lastStatement;
+
+        return statement;
+    }
+
+    public void parseStatement(Statement statement) {
+        switch (statement.getAction()) {
+            case Take: {
+                handleTake(statement);
+                break;
+            }
+            case Drop: {
+                handleDrop(statement);
+                break;
+            }
+            case Look: {
+                handleLook(statement);
+                break;
+            }
+            case Name: {
+                handleName(statement);
+                break;
+            }
+            case Shoot: {
+                handleShoot(statement);
+                break;
+            }
+            case Speak: {
+                handleSpeak(statement);
+                break;
+            }
+            case Inventory: {
+                handleInventory(statement);
+                break;
+            }
+            case Open: {
+                handleOpen(statement);
+                break;
+            }
+            case Close: {
+                handleClose(statement);
+                break;
+            }
+            case Move: {
+                handleMove(statement);
+                break;
+            }
+            default: {
+                getGameOutput().appendln("I don't know that action.");
+                break;
+            }
+        }
     }
 
     private void handleMove(Statement statement) {
-        if (statement.getDirection() == null) {
-            display("Which direction?");
-            String directionInput = IOUtils.getInputText();
-            statement.setDirection(InputMaps.directionMap.get(directionInput));
+        if (expectingStatement.direction) {
+            expectingStatement.direction = false;
+        }
+        else if (statement.getDirection() == null) {
+            getGameOutput().appendln("Which direction?");
+            expectingStatement.direction = true;
+            return;
         }
 
         if (statement.getDirection() == null) {
-            display("Sorry - I don't know that direction.");
+            getGameOutput().appendln("Sorry - I don't know that direction.");
             return;
         }
 
@@ -146,7 +203,7 @@ public class Game {
                 break;
             }
             default: {
-                display("I don't know that direction.");
+                getGameOutput().appendln("I don't know that direction.");
                 break;
             }
         }
@@ -157,20 +214,23 @@ public class Game {
 
         stringBuilder.append("Inventory:\n");
 
-        stringBuilder.append(IOUtils.getListStringFromGameObjectsList(Player.getInstance().getItems(), 0));
+        stringBuilder.append(getListStringFromGameObjectsList(getPlayer().getItems(), 0));
 
-        IOUtils.display(stringBuilder.toString());
+        getGameOutput().appendln(stringBuilder.toString());
     }
 
     private void handleSpeak(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            display("Talk to who?");
-            String whoInput = getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(whoInput, getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("Talk to who?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry - I didn't understand who you wanted to talk to.");
+            getGameOutput().appendln("Sorry - I didn't understand who you wanted to talk to.");
             return;
         }
 
@@ -185,9 +245,9 @@ public class Game {
         }
 
         if (statement.getActingObject() == null) {
-            GameObject bestMatchBlaster = IOUtils.getGameObjectWithHighestEffectiveness(Player.getInstance().getItems(), Action.Shoot, statement.getReceivingObject());
+            GameObject bestMatchBlaster = getGameObjectWithHighestEffectiveness(getPlayer().getItems(), Action.Shoot, statement.getReceivingObject());
             if (bestMatchBlaster == null) {
-                display("You don't have anything to use as a blaster.");
+                getGameOutput().appendln("You don't have anything to use as a blaster.");
                 return;
             }
             else {
@@ -195,21 +255,17 @@ public class Game {
             }
         }
 
-        if (statement.getReceivingObject() == null) {
-            display("What do you want to shoot " + IOUtils.getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
-            String searchText = IOUtils.getInputText();
-            GameObject receivingObject = IOUtils.findMatchingGameObjectFromList(searchText, IOUtils.getCombinedGameObjectsList(Player.getInstance().getItems(), Player.getInstance().getCurrentRoom().getItems()));
-            if (receivingObject == statement.getActingObject()) {
-                display("You can't shoot an object with itself.");
-                return;
-            }
-            else {
-                statement.setReceivingObject(receivingObject);
-            }
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("What do you want to shoot " + getNickNameOrNameWithArticle(statement.getActingObject()) + " at?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry, I couldn't determine your target.");
+            getGameOutput().appendln("Sorry, I couldn't determine your target.");
             return;
         }
 
@@ -218,59 +274,73 @@ public class Game {
     }
 
     private void handleName(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            display("Name what?");
-            String nameInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(nameInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("Name what?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry - I can't find that object.");
+            getGameOutput().appendln("Sorry - I can't find that object.");
+            return;
+        }
+
+        if (expectingStatement.remainingString) {
+            expectingStatement.remainingString = false;
+        }
+        else if (isNullOrEmpty(statement.getRemainingString())) {
+            getGameOutput().appendln("What did you want to name it?");
+            expectingStatement.remainingString = true;
             return;
         }
 
         if (isNullOrEmpty(statement.getRemainingString())) {
-            display("What did you want to name it?");
-            statement.setRemainingString(getInputText());
-        }
-
-        if (isNullOrEmpty(statement.getRemainingString())) {
-            display("Sorry - I didn't catch that name.");
+            getGameOutput().appendln("Sorry - I didn't catch that name.");
             return;
         }
+
         statement.getReceivingObject().setNickName(statement.getRemainingString());
-        displayWithinAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString());
+        getGameOutput().appendln(IOUtils.surroundWithAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString()));
     }
 
     private void handleLook(Statement statement) {
         if (statement.getReceivingObject() != null) {
-            displayGameObject(statement.getReceivingObject());
+            getGameOutput().appendln(displayGameObject(statement.getReceivingObject()));
         }
         else {
-            displayGameObject(player.getCurrentRoom());
+            getGameOutput().appendln(displayGameObject(player.getCurrentRoom()));
         }
     }
 
     private void handleDrop(Statement statement) {
         GameObject itemToDrop = statement.getReceivingObject(); // default to receiving object.
-        Container containerItem = player.getCurrentRoom(); // default to current room.
+        GameObject containerItem = player.getCurrentRoom(); // default to current room.
 
         // check to see if you're dropping this item into another item.
         if (statement.getReceivingObject() != null) {
-            if (statement.getActingObject() != null && statement.getReceivingObject() instanceof Container) {
+            if (statement.getActingObject() != null) {
                 itemToDrop = statement.getActingObject();
-                containerItem = (Container) statement.getReceivingObject();
+                containerItem = statement.getReceivingObject();
             }
         }
 
-        if (itemToDrop == null) {
-            display("Which object?");
-            String takeInput = IOUtils.getInputText();
-            itemToDrop = findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems()));
+        if (expectingStatement.actingObject || expectingStatement.receivingObject) {
+            expectingStatement.actingObject = false;
+            expectingStatement.receivingObject = false;
+        }
+        else if (itemToDrop == null) {
+            getGameOutput().appendln("Which object?");
+            expectingStatement.actingObject = true;
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (itemToDrop == null) {
-            display("Sorry - I can't find that object.");
+            getGameOutput().appendln("Sorry - I can't find that object.");
             return;
         }
 
@@ -279,10 +349,10 @@ public class Game {
             GameObject removedObject = ContainerUtils.recursiveRemove(player, itemToDrop);
             if (removedObject != GameObject.EMPTY_GAME_OBJECT) {
                 player.getCurrentRoom().addItem(removedObject);
-                displayWithinAsterisks("Drops " + IOUtils.getNickNameOrNameWithArticle(removedObject) + ".");
+                getGameOutput().appendln(IOUtils.surroundWithAsterisks("Drops " + getNickNameOrNameWithArticle(removedObject) + "."));
             }
             else {
-                display("You don't have that.");
+                getGameOutput().appendln("You don't have that.");
             }
         }
         else {
@@ -296,7 +366,7 @@ public class Game {
                 }
             }
             else {
-                displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(itemToDrop)) + " cannot be moved.");
+                getGameOutput().appendln(IOUtils.surroundWithAsterisks(capitalizeFirstLetter(getNickNameOrNameWithArticle(itemToDrop)) + " cannot be moved."));
             }
         }
     }
@@ -313,44 +383,52 @@ public class Game {
             }
         }
 
-        if (itemToTake == null) {
-            display("Take what?");
-            String takeInput = IOUtils.getInputText();
-            itemToTake = findMatchingGameObjectFromList(takeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), containerItem.getItems()), false);
+        if (expectingStatement.actingObject || expectingStatement.receivingObject) {
+            expectingStatement.actingObject = false;
+            expectingStatement.receivingObject = false;
+        }
+        else if (itemToTake == null) {
+            getGameOutput().appendln("Take what?");
+            expectingStatement.actingObject = true;
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (itemToTake == null) {
-            display("Sorry - I can't find that object.");
+            getGameOutput().appendln("Sorry - I can't find that object.");
             return;
         }
 
         if (itemToTake.isPermanentFixture()) {
-            display("Unfortunately you can't take this item with you.");
+            getGameOutput().appendln("Unfortunately you can't take this item with you.");
             return;
         }
 
-        if (Player.getInstance().getItems().contains(itemToTake)) {
-            display("You already have " + IOUtils.getNickNameOrNameWithArticle(itemToTake));
+        if (getPlayer().getItems().contains(itemToTake)) {
+            getGameOutput().appendln("You already have " + getNickNameOrNameWithArticle(itemToTake));
             return;
         }
 
         boolean successfulRemoved = itemToTake.getParentContainer().remove(itemToTake);
         if (!successfulRemoved) {
-            displayWithinAsterisks("Error taking object... could not remove from parent container.");
+            getGameOutput().appendln(IOUtils.surroundWithAsterisks("Error taking object... could not remove from parent container."));
         }
-        Player.getInstance().addItem(itemToTake);
-        displayWithinAsterisks("Picks up " + IOUtils.getNickNameOrNameWithArticle(itemToTake));
+        getPlayer().addItem(itemToTake);
+        getGameOutput().appendln(IOUtils.surroundWithAsterisks("Picks up " + getNickNameOrNameWithArticle(itemToTake)));
     }
 
     private void handleOpen(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            IOUtils.display("Open what?");
-            String openInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(openInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("Open what?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry - I can't find that object.");
+            getGameOutput().appendln("Sorry - I can't find that object.");
             return;
         }
 
@@ -358,19 +436,22 @@ public class Game {
             ((Container) statement.getReceivingObject()).receiveOpen();
         }
         else {
-            IOUtils.displayWithinAsterisks("You can't open " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+            getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't open " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
         }
     }
 
     private void handleClose(Statement statement) {
-        if (statement.getReceivingObject() == null) {
-            IOUtils.display("Close what?");
-            String closeInput = IOUtils.getInputText();
-            statement.setReceivingObject(findMatchingGameObjectFromList(closeInput, IOUtils.getCombinedGameObjectsList(player.getItems(), player.getCurrentRoom().getItems())));
+        if (expectingStatement.receivingObject) {
+            expectingStatement.receivingObject = false;
+        }
+        else if (statement.getReceivingObject() == null) {
+            getGameOutput().appendln("Close what?");
+            expectingStatement.receivingObject = true;
+            return;
         }
 
         if (statement.getReceivingObject() == null) {
-            display("Sorry - I can't find that object.");
+            getGameOutput().appendln("Sorry - I can't find that object.");
             return;
         }
 
@@ -378,20 +459,50 @@ public class Game {
             ((Container) statement.getReceivingObject()).receiveClose();
         }
         else {
-            IOUtils.displayWithinAsterisks("You can't close " + IOUtils.getNickNameOrNameWithArticle(statement.getReceivingObject()));
+            getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't close " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
         }
     }
 
-    private void initializeGame() {
-        // Initialize Room Objects
-        RoomA.getInstance().addItem(new Blaster());
-        RoomB.getInstance().addItem(new GameObject("Troll", "Big, smelly, hometown of \"cave\".") {});
-        RoomB.getInstance().addItem(new GameObject("Rock", "Just your average cave rock.") {});
-        RoomB.getInstance().addItem(new GameObject("Sock", "Wonder who left this here...") {});
-        RoomB.getInstance().addItem(new GameObject("Clock", "It is unclear whether the time is correct.") {});
+    public GameOutput getGameOutput() {
+        return gameOutput;
+    }
 
-        display(Constants.SPACE_DUDES_TITLE);
-        display(Constants.INTRO_TEXT);
-        player.enterRoom(JanitorsQuarters.getInstance());
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Room getRoom(Class <? extends Room> roomClass) {
+        Room roomObject = Room.ROOM_NOT_PRESENT;
+
+        for (Room room : rooms){
+            if (room.getClass().equals(roomClass)) {
+                roomObject = room;
+                break;
+            }
+        }
+
+        if (roomObject.equals(Room.ROOM_NOT_PRESENT)) {
+            try {
+                // TODO - see if there's a better way to do this - maybe a factory implementation instead of reflection...
+
+                Class<?> clazz = Class.forName(roomClass.getName());
+                Constructor roomConstructor = clazz.getConstructor(Game.class);
+                roomObject = (Room) roomConstructor.newInstance(this);
+
+                rooms.add(roomObject);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return roomObject;
     }
 }

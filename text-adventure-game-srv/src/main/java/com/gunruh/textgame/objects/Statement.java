@@ -4,19 +4,17 @@ import com.gunruh.textgame.enumerations.Action;
 import com.gunruh.textgame.enumerations.Direction;
 
 public class Statement {
-    public static final Statement EMPTY_STATEMENT = new Statement(null, null, null);
+    public static final Statement EMPTY_STATEMENT = new Statement(null, null, null, null, null);
 
+    private String inputString;
     private Action action;
     private GameObject actingObject;
     private GameObject receivingObject;
     private Direction direction;
     private String remainingString;
 
-    public Statement(GameObject actingObject, Action action, GameObject receivingObject) {
-        this(actingObject, action, receivingObject, null);
-    }
-
-    public Statement(GameObject actingObject, Action action, GameObject receivingObject, Direction direction) {
+    public Statement(String inputString, GameObject actingObject, Action action, GameObject receivingObject, Direction direction) {
+        this.inputString = inputString;
         this.actingObject = actingObject;
         this.action = action != null ? action : Action.UNKNOWN_ACTION;
         this.receivingObject = receivingObject;
@@ -62,5 +60,13 @@ public class Statement {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public String getInputString() {
+        return inputString;
+    }
+
+    public void setInputString(String inputString) {
+        this.inputString = inputString;
     }
 }

@@ -1,21 +1,15 @@
 package com.gunruh.textgame.objects.rooms;
 
-import com.gunruh.textgame.utils.IOUtils;
+import com.gunruh.textgame.Game;
 
 public class RoomA extends Room {
-    private RoomA() {
-        super("The Main Place", "You're in a place - there's a hole in the east wall. You could probably crawl through...");
-    }
-
-    private static final RoomA INSTANCE = new RoomA();
-
-    public static RoomA getInstance() {
-        return INSTANCE;
+    public RoomA(Game game) {
+        super(game, "The Main Place", "You're in a place - there's a hole in the east wall. You could probably crawl through...");
     }
 
     @Override
     public Room goEast() {
-        IOUtils.display("You crawled through the hole - good job.");
-        return RoomB.getInstance();
+        game.getGameOutput().appendln("You crawled through the hole - good job.");
+        return game.getRoom(RoomB.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.gunruh.textgame.objects;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.containerObjects.Container;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.ContainerUtils;
@@ -8,21 +9,13 @@ import com.gunruh.textgame.utils.IOUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.gunruh.textgame.utils.IOUtils.display;
-
 public class Player extends GameObject implements Container {
-    private static Player INSTANCE = new Player("Space Dude", "A man on a mission.");
-
-    public static Player getInstance() {
-        return INSTANCE;
-    }
-
     private List<GameObject> inventory;
     private Room currentRoom;
     private int itemLimit = Integer.MAX_VALUE;
 
-    private Player(String name, String description) {
-        super(name, description);
+    public Player(Game game, String name, String description) {
+        super(game, name, description);
         this.inventory = new ArrayList<GameObject>();
         this.currentRoom = Room.ROOM_NOT_PRESENT;
     }
@@ -33,7 +26,7 @@ public class Player extends GameObject implements Container {
         }
         else {
             currentRoom = room;
-            display(room.getRoomDisplay());
+            game.getGameOutput().appendln(room.getRoomDisplay());
             room.setIsNewPlace(false);
         }
     }
@@ -112,5 +105,16 @@ public class Player extends GameObject implements Container {
     @Override
     public List<GameObject> getItems() {
         return inventory;
+    }
+
+    @Override
+    public boolean containsInstanceOf(Class<? extends GameObject> gameObjectClass) {
+        for (GameObject gameObject : inventory) {
+            if (gameObject.getClass().equals(gameObjectClass)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -1,9 +1,13 @@
 package com.gunruh.textgame;
 
+import com.gunruh.textgame.console.ConsoleGameRunner;
+
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game();
+        Game game = Game.createNewGame(true);
 
-        game.run();
+        ConsoleGameRunner consoleGameRunner = new ConsoleGameRunner(game);
+
+        consoleGameRunner.run();
     }
 }

@@ -1,13 +1,9 @@
 package com.gunruh.textgame.objects.rooms;
 
+import com.gunruh.textgame.Game;
+
 public class RoomTemplate extends Room {
-    private RoomTemplate() {
-        super("Name", "Description");
-    }
-
-    private static final RoomTemplate INSTANCE = new RoomTemplate();
-
-    public static RoomTemplate getInstance() {
-        return INSTANCE;
+    public RoomTemplate(Game game) {
+        super(game, "Name", "Description");
     }
 }

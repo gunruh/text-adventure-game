@@ -1,34 +1,29 @@
 package com.gunruh.textgame.objects.rooms.starship.level1;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level2.MainElevatorDown;
 import com.gunruh.textgame.utils.IOUtils;
 
 public class MainElevatorUp extends Room {
-    private MainElevatorUp() {
-        super("Main Elevator (Level: 1)", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should). The doors are on the south side.");
-    }
-
-    private static MainElevatorUp INSTANCE = new MainElevatorUp();
-
-    public static MainElevatorUp getInstance() {
-        return INSTANCE;
+    public MainElevatorUp(Game game) {
+        super(game, "Main Elevator (Level: 1)", "The central elevator at the heart of the ship. It goes Up and Down (as all good elevators should). The doors are on the south side.");
     }
 
     @Override
     public Room goSouth() {
-        return MainLowerHallway.getInstance();
+        return game.getRoom(MainLowerHallway.class);
     }
 
     @Override
     public Room goUp() {
-        IOUtils.displayWithinAsterisks("The doors close and you feel heavier as the elevator glides upward. The elevator doors open to the South.");
-        return MainElevatorDown.getInstance();
+        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The doors close and you feel heavier as the elevator glides upward. The elevator doors open to the South."));
+        return game.getRoom(MainElevatorDown.class);
     }
 
     @Override
     public Room goDown() {
-        IOUtils.displayWithinAsterisks("The elevator cannot go any lower.");
+        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The elevator cannot go any lower."));
         return Room.ROOM_NOT_PRESENT;
     }
 }

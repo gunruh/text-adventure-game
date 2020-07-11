@@ -1,5 +1,6 @@
 package com.gunruh.textgame.objects.characters;
 
+import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.GameObject;
 import com.gunruh.textgame.utils.IOUtils;
 
@@ -7,17 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class KevinThePodBot17 extends GameObject {
-    private KevinThePodBot17() {
-        super("Kevin Pod-Bot #17", "A rolling cylindrical robot designed to assist with life on the escape pod." +
+    public KevinThePodBot17(Game game) {
+        super(game, "Kevin Pod-Bot #17", "A rolling cylindrical robot designed to assist with life on the escape pod." +
                 "\nKevin can respond to speech commands." +
                 "\nKevin is docked with the pod, and is in 'Sleep/Charge' mode.");
         setNickName("Kevin");
-    }
-
-    private static KevinThePodBot17 INSTANCE = new KevinThePodBot17();
-
-    public static KevinThePodBot17 getInstance() {
-        return INSTANCE;
     }
 
     private int speechCount = 0;
@@ -29,13 +24,13 @@ public class KevinThePodBot17 extends GameObject {
 
     @Override
     public void receiveShoot(GameObject actingObject) {
-        IOUtils.displayWithinAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject));
+        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject)));
         actingObject.receiveShoot(actingObject);
     }
 
     @Override
     public void receiveTalkTo(GameObject gameObject) {
-        IOUtils.display(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
+        game.getGameOutput().appendln(IOUtils.getNickNameOrNameWithArticle(this) + " says:" +
                 "\n\"" + getKevinThePodBot17Phrase() + "\"");
     }
 
