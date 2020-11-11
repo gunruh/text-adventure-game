@@ -30,7 +30,7 @@ public class IOUtils {
         if (!(gameObject instanceof Room) && gameObject.getHealth() < 100) {
             displayBuilder.append(" (Health: " + gameObject.getHealth() + "%)");
         }
-
+        displayBuilder.append("\n");
         displayBuilder.append("\n" + gameObject.getDescription());
         
         return getDisplayFormattedString(displayBuilder.toString());
@@ -586,5 +586,15 @@ public class IOUtils {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static String getDivider(int count) {
+        StringBuilder dividerBuilder = new StringBuilder("\n");
+
+        for (int i = 0; i < count; i++) {
+            dividerBuilder.append("* ");
+        }
+
+        return dividerBuilder.toString();
     }
 }

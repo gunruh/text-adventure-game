@@ -19,6 +19,7 @@
         <module>text-adventure-game-srv</module>
         <module>text-adventure-game-war</module>
     </modules>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

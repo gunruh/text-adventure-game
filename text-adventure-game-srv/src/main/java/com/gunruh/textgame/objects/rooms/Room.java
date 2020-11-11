@@ -71,7 +71,7 @@ public abstract class Room extends GameObject implements Container {
     }
 
     public String getRoomDisplay() {
-        return getName() + (isNewPlace? "\n" + getDescription() : "");
+        return getName() + (isNewPlace? "\n\n" + getDescription() : "");
     }
 
     public boolean isNewPlace() {
