@@ -47,6 +47,7 @@ public class Game {
     private void initializeGame(boolean displayStartText) {
         if (displayStartText) {
             getGameOutput().appendln(Constants.SPACE_DUDES_TITLE);
+            getGameOutput().append("\n"); // Add another line.
             getGameOutput().appendln(Constants.INTRO_TEXT);
         }
         player.enterRoom(getRoom(JanitorsQuarters.class));

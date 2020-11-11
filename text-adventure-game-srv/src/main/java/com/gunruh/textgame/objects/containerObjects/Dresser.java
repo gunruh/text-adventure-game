@@ -11,7 +11,7 @@ public class Dresser extends ContainerObject {
         addItem(new GameObject(game, "Alarm Clock", "It used to sit on top of the dresser, but... eh... too noisy.") {});
         addItem(new KeyCardGreen(game));
         ContainerObject lonelyLeftSock = new ContainerObject(game, "Lonely Left Sock", "The little fella is missing his friend.", 1, false) {};
-        lonelyLeftSock.addItem(new GameObject(game, "Space Raisin", "Seems to be friendly, though no one knows where it came from.") {});
+        lonelyLeftSock.addItem(new GameObject(game, "Space Raisin", "Seems friendly, though no one knows where it came from.") {});
         addItem(lonelyLeftSock);
     }
 }

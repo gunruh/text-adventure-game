@@ -309,4 +309,11 @@ public class IOUtilsTest {
         assertEquals("apple", IOUtils.normalizeInput("an apple ", true));
         assertEquals("apple", IOUtils.normalizeInput("a apple  ", true));
     }
+
+    @Test
+    public void shouldPrintDivider() {
+        assertEquals("* ", IOUtils.getDivider(1));
+        assertEquals("* * ", IOUtils.getDivider(2));
+        assertEquals("* * * ", IOUtils.getDivider(3));
+    }
 }
