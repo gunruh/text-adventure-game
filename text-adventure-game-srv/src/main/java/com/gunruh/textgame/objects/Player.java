@@ -26,7 +26,7 @@ public class Player extends GameObject implements Container {
         }
         else {
             currentRoom = room;
-            game.getGameOutput().appendln("\n" + room.getRoomDisplay());
+            game.getGameOutput().appendln(room.getRoomDisplay());
             room.setIsNewPlace(false);
         }
     }

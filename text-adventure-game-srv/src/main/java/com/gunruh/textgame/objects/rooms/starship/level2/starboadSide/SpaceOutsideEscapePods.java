@@ -12,7 +12,7 @@ public class SpaceOutsideEscapePods extends Room {
 
     @Override
     public Room goWest() {
-        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The Airlock doors open, and you are pulled in by a tractor beam."));
+        game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("The Airlock doors open, and you are pulled in by a tractor beam."));
         return game.getRoom(ServiceAirLock.class);
     }
 }

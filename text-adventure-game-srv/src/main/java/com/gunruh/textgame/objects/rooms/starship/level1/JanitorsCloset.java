@@ -7,7 +7,7 @@ import com.gunruh.textgame.objects.rooms.Room;
 
 public class JanitorsCloset extends Room {
     public JanitorsCloset(Game game) {
-        super(game, "Janitor's Closet", "This room stores the window-cleaning supplies, but a few items seem to have been taken..." +
+        super(game, "Janitor's Closet", "This room stores the window-cleaning supplies,\nbut a few items seem to have been taken..." +
               "\nThe door is on the west side.");
 
         addItem(new CleaningSprayGun(game));

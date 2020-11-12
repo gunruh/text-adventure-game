@@ -17,7 +17,7 @@ public class AndersonJr extends GameObject {
 
 	@Override
 	public void receiveShoot(GameObject actingObject) {
-		game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.getNickNameOrNameWithArticle(this) + " jumps out of the way."));
+		game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.getNickNameOrNameWithArticle(this) + " jumps out of the way."));
 	}
 	
 	@Override

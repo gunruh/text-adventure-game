@@ -1,7 +1,6 @@
 package com.gunruh.textgame.objects.rooms.starship.level2.starboadSide;
 
 import com.gunruh.textgame.Game;
-import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level2.EastWestCorridor;
@@ -26,11 +25,11 @@ public class StarBoardHallway extends Room {
     @Override
     public Room goSouth() {
         if (game.getPlayer().containsInstanceOf(KeyCardBlue.class)) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("BEEP BEEP BOOYEEP. The door opens."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("BEEP BEEP BOOYEEP. The door opens."));
             return game.getRoom(ServiceAirLock.class);
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("BEEP BOO BEEP - You are not allowed without a card."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("BEEP BOO BEEP - You are not allowed without a card."));
             return Room.ROOM_NOT_PRESENT;
         }
     }

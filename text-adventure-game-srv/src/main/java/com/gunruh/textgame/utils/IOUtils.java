@@ -14,8 +14,8 @@ public class IOUtils {
 
     private static Random random = new Random(); // Used for random generation.
 
-    public static String surroundWithAsterisks(String displayText) {
-        return getDisplayFormattedString("*" + displayText + "*");
+    public static String prefixWithAsterisk(String displayText) {
+        return getDisplayFormattedString("* " + displayText);
     }
     
     public static String surroundWithDoubleQuotes(String displayText) {
