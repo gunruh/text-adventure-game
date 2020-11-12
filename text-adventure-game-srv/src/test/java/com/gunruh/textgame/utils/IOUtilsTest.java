@@ -312,8 +312,8 @@ public class IOUtilsTest {
 
     @Test
     public void shouldPrintDivider() {
-        assertEquals("* ", IOUtils.getDivider(1));
-        assertEquals("* * ", IOUtils.getDivider(2));
-        assertEquals("* * * ", IOUtils.getDivider(3));
+        assertEquals("\n* ", IOUtils.getDivider(1));
+        assertEquals("\n* * ", IOUtils.getDivider(2));
+        assertEquals("\n* * * ", IOUtils.getDivider(3));
     }
 }
