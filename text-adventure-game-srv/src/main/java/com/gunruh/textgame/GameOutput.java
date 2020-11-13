@@ -1,5 +1,7 @@
 package com.gunruh.textgame;
 
+import com.gunruh.textgame.utils.IOUtils;
+
 public class GameOutput {
     StringBuffer outputBuffer;
 
@@ -12,11 +14,11 @@ public class GameOutput {
     }
 
     public void append(String string) {
-        outputBuffer.append(string);
+        outputBuffer.append(IOUtils.controlWidth(string));
     }
 
     public void appendln(String string) {
-        outputBuffer.append(string).append("\n");
+        outputBuffer.append(IOUtils.controlWidth(string)).append("\n");
     }
 
     public String print() {

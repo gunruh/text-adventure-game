@@ -316,4 +316,43 @@ public class IOUtilsTest {
         assertEquals("\n* * ", IOUtils.getDivider(2));
         assertEquals("\n* * * ", IOUtils.getDivider(3));
     }
+
+    @Test
+    public void shouldSplitIntoLinesOfDesiredWidth() {
+        // test for width 50.
+//        assertEquals(
+//                "1234567 10 234567 20 234567 30 234567 40 234567 50\n 1234567 10 234567 20 234567 30 234567 40 234567\n 50",
+//                IOUtils.controlWidth(
+//                        "1234567 10 234567 20 234567 30 234567 40 234567 50 1234567 10 234567 20 234567 30 234567 40 234567 50")
+//        );
+
+        int numberOfWords = 10;
+        int numberOfCharsPerWord = 9;
+        String text = getLongRandomString(numberOfWords, numberOfCharsPerWord);
+        System.out.println("test text:\n" + text);
+        assertEquals(numberOfWords * numberOfCharsPerWord + (numberOfWords - 1), text.length());
+
+        String controlledWidthText = IOUtils.controlWidth(text);
+        System.out.println("controlled width text:\n" + controlledWidthText);
+
+        String[] lines = controlledWidthText.split("\n");
+        for (String line : lines) {
+            assertTrue(line.length() <= Constants.ESTIMATED_SCREEN_WIDTH);
+        }
+    }
+
+    private String getLongRandomString(int words, int wordLength) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < words; i++) {
+            for (int j = 0; j < wordLength; j++) {
+                stringBuilder.append("a");
+            }
+            if (i + 1 < words) {
+                stringBuilder.append(" ");
+            }
+        }
+
+        return stringBuilder.toString();
+    }
 }
