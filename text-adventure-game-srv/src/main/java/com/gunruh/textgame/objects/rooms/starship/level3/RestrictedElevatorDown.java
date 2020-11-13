@@ -1,13 +1,10 @@
 package com.gunruh.textgame.objects.rooms.starship.level3;
 
 import com.gunruh.textgame.Game;
-import com.gunruh.textgame.objects.Player;
 import com.gunruh.textgame.objects.items.KeyCardBlue;
 import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.objects.rooms.starship.level2.RestrictedElevatorUp;
 import com.gunruh.textgame.utils.IOUtils;
-
-import javax.swing.text.JTextComponent;
 
 public class RestrictedElevatorDown extends Room {
     public RestrictedElevatorDown(Game game) {
@@ -24,7 +21,7 @@ public class RestrictedElevatorDown extends Room {
     public Room goDown() {
         // Check if key card is in player inventory, or just in the elevator.
         if (game.getPlayer().containsInstanceOf(KeyCardBlue.class) || this.containsInstanceOf(KeyCardBlue.class)) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The doors close, and you feel the elevator lurch downward. The northern doors open again."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("The doors close, and you feel the elevator lurch downward. The northern doors open again."));
             return game.getRoom(RestrictedElevatorUp.class);
         }
         else {
@@ -36,7 +33,7 @@ public class RestrictedElevatorDown extends Room {
     @Override
     public Room goUp() {
         if (game.getPlayer().containsInstanceOf(KeyCardBlue.class) || this.containsInstanceOf(KeyCardBlue.class)) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("The elevator cannot go any higher."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("The elevator cannot go any higher."));
             return Room.ROOM_NOT_PRESENT;
         }
         else {

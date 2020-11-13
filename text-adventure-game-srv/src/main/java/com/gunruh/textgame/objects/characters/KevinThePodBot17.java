@@ -24,7 +24,7 @@ public class KevinThePodBot17 extends GameObject {
 
     @Override
     public void receiveShoot(GameObject actingObject) {
-        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject)));
+        game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + "'s metallic casing reflects the blast back at " + IOUtils.getNickNameOrNameWithArticle(actingObject)));
         actingObject.receiveShoot(actingObject);
     }
 

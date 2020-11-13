@@ -305,7 +305,7 @@ public class Game {
         }
 
         statement.getReceivingObject().setNickName(statement.getRemainingString());
-        getGameOutput().appendln(IOUtils.surroundWithAsterisks("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString()));
+        getGameOutput().appendln(IOUtils.prefixWithAsterisk("The " + statement.getReceivingObject().getName() + "'s name is " + statement.getRemainingString()));
     }
 
     private void handleLook(Statement statement) {
@@ -350,7 +350,7 @@ public class Game {
             GameObject removedObject = ContainerUtils.recursiveRemove(player, itemToDrop);
             if (removedObject != GameObject.EMPTY_GAME_OBJECT) {
                 player.getCurrentRoom().addItem(removedObject);
-                getGameOutput().appendln(IOUtils.surroundWithAsterisks("Drops " + getNickNameOrNameWithArticle(removedObject) + "."));
+                getGameOutput().appendln(IOUtils.prefixWithAsterisk("Drops " + getNickNameOrNameWithArticle(removedObject) + "."));
             }
             else {
                 getGameOutput().appendln("You don't have that.");
@@ -367,7 +367,7 @@ public class Game {
                 }
             }
             else {
-                getGameOutput().appendln(IOUtils.surroundWithAsterisks(capitalizeFirstLetter(getNickNameOrNameWithArticle(itemToDrop)) + " cannot be moved."));
+                getGameOutput().appendln(IOUtils.prefixWithAsterisk(capitalizeFirstLetter(getNickNameOrNameWithArticle(itemToDrop)) + " cannot be moved."));
             }
         }
     }
@@ -412,10 +412,10 @@ public class Game {
 
         boolean successfulRemoved = itemToTake.getParentContainer().remove(itemToTake);
         if (!successfulRemoved) {
-            getGameOutput().appendln(IOUtils.surroundWithAsterisks("Error taking object... could not remove from parent container."));
+            getGameOutput().appendln(IOUtils.prefixWithAsterisk("Error taking object... could not remove from parent container."));
         }
         getPlayer().addItem(itemToTake);
-        getGameOutput().appendln(IOUtils.surroundWithAsterisks("Picks up " + getNickNameOrNameWithArticle(itemToTake)));
+        getGameOutput().appendln(IOUtils.prefixWithAsterisk("Picks up " + getNickNameOrNameWithArticle(itemToTake)));
     }
 
     private void handleOpen(Statement statement) {
@@ -437,7 +437,7 @@ public class Game {
             ((Container) statement.getReceivingObject()).receiveOpen();
         }
         else {
-            getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't open " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
+            getGameOutput().appendln(IOUtils.prefixWithAsterisk("You can't open " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
         }
     }
 
@@ -460,7 +460,7 @@ public class Game {
             ((Container) statement.getReceivingObject()).receiveClose();
         }
         else {
-            getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't close " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
+            getGameOutput().appendln(IOUtils.prefixWithAsterisk("You can't close " + getNickNameOrNameWithArticle(statement.getReceivingObject())));
         }
     }
 

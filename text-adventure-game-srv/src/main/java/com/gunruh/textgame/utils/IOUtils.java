@@ -14,8 +14,8 @@ public class IOUtils {
 
     private static Random random = new Random(); // Used for random generation.
 
-    public static String surroundWithAsterisks(String displayText) {
-        return getDisplayFormattedString("*" + displayText + "*");
+    public static String prefixWithAsterisk(String displayText) {
+        return getDisplayFormattedString("* " + displayText);
     }
     
     public static String surroundWithDoubleQuotes(String displayText) {
@@ -597,4 +597,39 @@ public class IOUtils {
 
         return dividerBuilder.toString();
     }
+
+
+
+    public static String controlWidth(String inputText) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        String[] words = inputText.split("(?=[ \n])");
+
+        StringBuilder lineBuffer = new StringBuilder();
+        Iterator<String> wordIterator = Arrays.stream(words).iterator();
+
+        while (wordIterator.hasNext()) {
+            String word = wordIterator.next();
+
+            if (word.startsWith("\n")) {
+                stringBuilder.append(lineBuffer);
+                lineBuffer.setLength(0); // clear;
+            }
+
+            else if (lineBuffer.length() + word.length() > Constants.ESTIMATED_SCREEN_WIDTH) {
+                stringBuilder.append(lineBuffer);
+                lineBuffer.setLength(0); // clear
+                stringBuilder.append("\n");
+            }
+
+            lineBuffer.append(word);
+        }
+
+        // flush lineBuffer
+        stringBuilder.append(lineBuffer);
+
+        return stringBuilder.toString();
+    }
+
+
 }

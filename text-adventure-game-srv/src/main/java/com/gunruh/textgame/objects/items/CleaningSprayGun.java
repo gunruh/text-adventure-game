@@ -16,6 +16,6 @@ public class CleaningSprayGun extends GameObject {
 
     @Override
     public void shoot(GameObject receivingObject) {
-        super.shoot(receivingObject, IOUtils.surroundWithAsterisks("A vaporous cloud of cleaning-solution is expelled from the nozzle."));
+        super.shoot(receivingObject, IOUtils.prefixWithAsterisk("A vaporous cloud of cleaning-solution is expelled from the nozzle."));
     }
 }

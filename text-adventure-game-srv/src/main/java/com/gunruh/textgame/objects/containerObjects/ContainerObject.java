@@ -61,15 +61,15 @@ public abstract class ContainerObject extends GameObject implements Container {
         if (isContainerOpen()) {
             if (getItemCount() < getItemLimit()) {
                 addItem(actingObject);
-                game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + "."));
+                game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(actingObject)) + " was put inside " + IOUtils.getNickNameOrNameWithArticle(this) + "."));
                 isReceiveSuccess = true;
             }
             else {
-                game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " cannot hold any more items."));
+                game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " cannot hold any more items."));
             }
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open."));
         }
 
         return isReceiveSuccess;
@@ -89,7 +89,7 @@ public abstract class ContainerObject extends GameObject implements Container {
             }
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is not open."));
         }
 
         return removedObject;
@@ -98,20 +98,20 @@ public abstract class ContainerObject extends GameObject implements Container {
     public void receiveClose() {
         if (isContainerOpen()) {
             setContainerOpen(false);
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now closed."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now closed."));
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already closed."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already closed."));
         }
     }
 
     public void receiveOpen() {
         if (!isContainerOpen()) {
             setContainerOpen(true);
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now open."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is now open."));
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already open."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " is already open."));
         }
     }
 

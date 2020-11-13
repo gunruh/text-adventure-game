@@ -2,7 +2,6 @@ package com.gunruh.textgame.objects;
 
 import com.gunruh.textgame.Game;
 import com.gunruh.textgame.objects.containerObjects.Container;
-import com.gunruh.textgame.objects.rooms.Room;
 import com.gunruh.textgame.utils.IOUtils;
 
 import java.util.List;
@@ -77,7 +76,7 @@ public abstract class GameObject {
 
     public void shoot(GameObject receivingObject, String message) {
         if (receivingObject == this) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("You can't shoot an object with itself."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("You can't shoot an object with itself."));
         }
         else {
             if (message != null) {
@@ -93,13 +92,13 @@ public abstract class GameObject {
 
     public void takeDamage(int amount) {
         if (amount == 0) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes no damage."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes no damage."));
             return;
         }
 
         if (this.health - amount > 0) {
             this.health -= amount;
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " takes damage."));
         }
         else {
             destroy(true);
@@ -112,7 +111,7 @@ public abstract class GameObject {
         parentContainer.remove(this);
 
         if (displayDestroyString) {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString()));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk(IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(this)) + " has been destroyed. " + IOUtils.getRandomDestroyString()));
         }
     }
 
@@ -121,7 +120,7 @@ public abstract class GameObject {
     }
 
     public boolean receiveInsertInto(GameObject actingObject) {
-        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(this)));
+        game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("Items cannot be placed inside " + IOUtils.getNickNameOrNameWithArticle(this)));
         return false;
     }
 
@@ -130,7 +129,7 @@ public abstract class GameObject {
             ((Container) receivingObject).removeItem(this);
         }
         else {
-            game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + "."));
+            game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("Nothing can be taken from inside " + IOUtils.capitalizeFirstLetter(IOUtils.getNickNameOrNameWithArticle(receivingObject)) + ". Everything in there is still a part of " + IOUtils.getNickNameOrNameWithArticle(receivingObject) + "."));
         }
     }
 

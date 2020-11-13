@@ -18,7 +18,7 @@ public class ShipDiningHall extends Room {
 
     @Override
     public Room goWest() {
-        game.getGameOutput().appendln(IOUtils.surroundWithAsterisks("You found a secret entrance to the Kitchen!"));
+        game.getGameOutput().appendln(IOUtils.prefixWithAsterisk("You found a secret entrance to the Kitchen!"));
         return game.getRoom(Kitchen.class);
     }
 }

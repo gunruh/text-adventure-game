@@ -4,7 +4,7 @@ import com.gunruh.textgame.Game;
 
 public class RoomB extends Room {
     public RoomB(Game game) {
-        super(game, "East Room", "This room feels more eastern than the previous one did.\nThere's a hole which appears to have been blasted open on the west side.");
+        super(game, "East Room", "This room feels more eastern than the previous one did.\nThere's a hole in the wall on the west side.");
     }
 
     @Override
